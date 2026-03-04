@@ -188,7 +188,7 @@ export function Cta() {
               <div className="text-center">
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 rounded-lg bg-cta px-10 py-4 text-sm font-semibold text-cta-foreground shadow-md shadow-cta/20 transition-all hover:brightness-110"
+                  className="inline-flex cursor-pointer items-center gap-2 rounded-lg bg-cta px-10 py-4 text-sm font-semibold text-cta-foreground shadow-md shadow-cta/20 transition-all hover:brightness-110"
                 >
                   無料相談を申し込む
                   <ArrowRight className="h-4 w-4" />
