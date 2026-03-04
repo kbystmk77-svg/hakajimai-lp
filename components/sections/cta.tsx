@@ -22,7 +22,7 @@ export function Cta() {
       <div className="mx-auto max-w-3xl px-6 py-20 md:py-28">
         <div className="text-center">
           <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl text-balance">
-            まずはお話をお聞かせくださいください
+            まずはお話をお聞かせください
           </h2>
           <div className="mx-auto mt-3 h-0.5 w-12 rounded-full bg-primary" />
           <p className="mt-5 text-sm leading-relaxed text-foreground/70 md:text-base">
