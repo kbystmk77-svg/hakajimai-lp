@@ -47,7 +47,7 @@ export function Pricing() {
               書類整理・進行管理・寺院や霊園との調整など、
               すべての代行業務を含みます。
             </p>
-            <p className="mt-auto pt-3 text-sm font-medium text-foreground">12万円</p>
+            <p className="mt-auto pt-3 text-sm font-medium text-foreground">13.2万円</p>
           </div>
 
           {/* Card 3: 移転先サポート */}
@@ -67,7 +67,7 @@ export function Pricing() {
               永代供養墓・散骨先など、ご希望に合った供養先の
               ご紹介・手配を行います。
             </p>
-            <p className="mt-auto pt-3 text-sm font-medium text-foreground">+3万円</p>
+            <p className="mt-auto pt-3 text-sm font-medium text-foreground">+3.3万円</p>
           </div>
         </div>
 
