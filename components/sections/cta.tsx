@@ -1,8 +1,22 @@
 "use client"
 
 import { ArrowRight } from "lucide-react"
+import { type FormEvent, useState } from "react"
 
 export function Cta() {
+  const [methodError, setMethodError] = useState(false)
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    const form = e.currentTarget
+    const checked = form.querySelectorAll<HTMLInputElement>('input[name="methods"]:checked')
+    if (checked.length === 0) {
+      e.preventDefault()
+      setMethodError(true)
+      return
+    }
+    setMethodError(false)
+  }
+
   return (
     <section id="contact">
       <div className="mx-auto max-w-3xl px-6 py-20 md:py-28">
@@ -30,7 +44,7 @@ export function Cta() {
               以下のフォームにご記入ください。担当者よりご連絡いたします。
             </p>
 
-            <form className="mt-8 flex flex-col gap-6" action="/api/contact" method="POST">
+            <form className="mt-8 flex flex-col gap-6" action="/api/contact" method="POST" onSubmit={handleSubmit}>
               <div className="grid gap-6 sm:grid-cols-2">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="name" className="text-sm font-medium text-foreground">
@@ -136,7 +150,7 @@ export function Cta() {
               </div>
               <div className="flex flex-col gap-3">
                 <span className="text-sm font-medium text-foreground">
-                  希望のご相談方法（複数選択可）
+                  希望のご相談方法（複数選択可） <span className="text-red-500">*</span>
                 </span>
                 <div className="flex flex-wrap gap-x-6 gap-y-3">
                   {["オンライン面談", "電話", "メール"].map((method) => (
@@ -146,21 +160,26 @@ export function Cta() {
                         name="methods"
                         value={method}
                         className="h-4 w-4 rounded border-border text-primary accent-primary"
+                        onChange={() => setMethodError(false)}
                       />
                       <span className="text-sm text-foreground">{method}</span>
                     </label>
                   ))}
                 </div>
+                {methodError && (
+                  <p className="text-xs text-red-500">1つ以上選択してください。</p>
+                )}
               </div>
 
               <div className="flex flex-col gap-2">
                 <label htmlFor="message" className="text-sm font-medium text-foreground">
-                  ご相談内容
+                  ご相談内容 <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   rows={5}
+                  required
                   placeholder="墓じまいについてのお悩みやご質問があればお聞かせください。"
                   className="resize-none rounded-lg border border-border bg-background px-4 py-3 text-sm leading-relaxed text-foreground placeholder:text-foreground/40 outline-none ring-primary/30 focus:border-primary focus:ring-2 transition-all"
                 />
