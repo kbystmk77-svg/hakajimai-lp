@@ -30,7 +30,7 @@ export function Cta() {
               以下のフォームにご記入ください。担当者よりご連絡いたします。
             </p>
 
-            <form className="mt-8 flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="mt-8 flex flex-col gap-6" action="/api/contact" method="POST">
               <div className="grid gap-6 sm:grid-cols-2">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="name" className="text-sm font-medium text-foreground">
@@ -38,6 +38,7 @@ export function Cta() {
                   </label>
                   <input
                     id="name"
+                    name="name"
                     type="text"
                     required
                     placeholder="山田 太郎"
@@ -50,6 +51,7 @@ export function Cta() {
                   </label>
                   <input
                     id="phone"
+                    name="phone"
                     type="tel"
                     required
                     placeholder="090-1234-5678"
@@ -64,13 +66,33 @@ export function Cta() {
                 </label>
                 <input
                   id="email"
+                  name="email"
                   type="email"
                   required
                   placeholder="example@email.com"
                   className="rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-foreground/40 outline-none ring-primary/30 focus:border-primary focus:ring-2 transition-all"
                 />
               </div>
-
+              <div className="flex flex-col gap-2">
+                <label htmlFor="prefecture" className="text-sm font-medium text-foreground">
+                  お墓の所在地（都道府県） <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="prefecture"
+                  name="prefecture"
+                  required
+                  className="rounded-lg border border-border bg-background px-4 py-3 text-sm text-foreground outline-none ring-primary/30 focus:border-primary focus:ring-2 transition-all"
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    選択してください
+                  </option>
+                  <option value="東京都">東京都</option>
+                  <option value="神奈川県">神奈川県</option>
+                  <option value="埼玉県">埼玉県</option>
+                  <option value="千葉県">千葉県</option>
+                </select>
+              </div>
               <div className="flex flex-col gap-3">
                 <span className="text-sm font-medium text-foreground">
                   希望のご相談方法（複数選択可）
@@ -80,7 +102,7 @@ export function Cta() {
                     <label key={method} className="flex items-center gap-2 cursor-pointer">
                       <input
                         type="checkbox"
-                        name="contact_method"
+                        name="methods"
                         value={method}
                         className="h-4 w-4 rounded border-border text-primary accent-primary"
                       />
@@ -96,6 +118,7 @@ export function Cta() {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   rows={5}
                   placeholder="墓じまいについてのお悩みやご質問があればお聞かせください。"
                   className="resize-none rounded-lg border border-border bg-background px-4 py-3 text-sm leading-relaxed text-foreground placeholder:text-foreground/40 outline-none ring-primary/30 focus:border-primary focus:ring-2 transition-all"
