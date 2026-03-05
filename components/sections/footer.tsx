@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export function Footer() {
   return (
     <footer className="border-t border-border bg-background">
@@ -12,12 +14,12 @@ export function Footer() {
             </span>
           </div>
           <nav className="flex flex-wrap justify-center gap-6">
-            <a
-              href="#"
+            <Link
+              href="/privacy"
               className="text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               プライバシーポリシー
-            </a>
+            </Link>
             <a
               href="#"
               className="text-xs text-muted-foreground transition-colors hover:text-foreground"
