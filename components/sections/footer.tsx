@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export function Footer() {
   return (
     <footer className="border-t border-border bg-background">
@@ -12,24 +14,24 @@ export function Footer() {
             </span>
           </div>
           <nav className="flex flex-wrap justify-center gap-6">
-            <a
-              href="#"
+            <Link
+              href="/privacy"
               className="text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               プライバシーポリシー
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/tokushoho"
               className="text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               特定商取引法に基づく表記
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="/company"
               className="text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               会社概要
-            </a>
+            </Link>
           </nav>
         </div>
         <div className="mt-8 border-t border-border pt-6 text-center">
