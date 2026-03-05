@@ -11,7 +11,7 @@ import { DeveloperVoice } from "@/components/sections/developer-voice"
 import { Faq } from "@/components/sections/faq"
 import { Cta } from "@/components/sections/cta"
 import { Footer } from "@/components/sections/footer"
-import { LineShareButton } from "@/components/line-share-button"
+import { ShareFamilyButton } from "@/components/share-family-button"
 
 /*
  * Design approach:
@@ -87,7 +87,7 @@ export default function Page() {
         {/* 3. Position (white) → arch → sage */}
         <BottomShape fill={COLORS.sage} shape="arch">
           <Position />
-          <LineShareButton />
+          <ShareFamilyButton locationTag="after_position" />
         </BottomShape>
 
         {/* 4. Comparison (sage) → curve → white */}
@@ -114,7 +114,7 @@ export default function Page() {
           <div id="service">
             <Service />
           </div>
-          <LineShareButton />
+          <ShareFamilyButton locationTag="after_service" />
         </BottomShape>
 
         {/* 8. Pricing (dot-green) → arch → slate */}
@@ -148,7 +148,7 @@ export default function Page() {
         {/* 11. CTA (linen) */}
         <div className="bg-linen">
           <Cta />
-          <LineShareButton />
+          <ShareFamilyButton locationTag="after_cta" />
         </div>
       </main>
       <Footer />
