@@ -20,12 +20,12 @@ export function Footer() {
             >
               プライバシーポリシー
             </Link>
-            <a
-              href="#"
+            <Link
+              href="/tokushoho"
               className="text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               特定商取引法に基づく表記
-            </a>
+            </Link>
             <Link
               href="/company"
               className="text-xs text-muted-foreground transition-colors hover:text-foreground"
