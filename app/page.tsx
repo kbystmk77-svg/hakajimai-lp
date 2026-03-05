@@ -11,6 +11,7 @@ import { DeveloperVoice } from "@/components/sections/developer-voice"
 import { Faq } from "@/components/sections/faq"
 import { Cta } from "@/components/sections/cta"
 import { Footer } from "@/components/sections/footer"
+import { LineShareButton } from "@/components/line-share-button"
 
 /*
  * Design approach:
@@ -86,6 +87,7 @@ export default function Page() {
         {/* 3. Position (white) → arch → sage */}
         <BottomShape fill={COLORS.sage} shape="arch">
           <Position />
+          <LineShareButton />
         </BottomShape>
 
         {/* 4. Comparison (sage) → curve → white */}
@@ -112,6 +114,7 @@ export default function Page() {
           <div id="service">
             <Service />
           </div>
+          <LineShareButton />
         </BottomShape>
 
         {/* 8. Pricing (dot-green) → arch → slate */}
@@ -145,6 +148,7 @@ export default function Page() {
         {/* 11. CTA (linen) */}
         <div className="bg-linen">
           <Cta />
+          <LineShareButton />
         </div>
       </main>
       <Footer />
