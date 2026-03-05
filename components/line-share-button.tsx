@@ -17,7 +17,7 @@ export function LineShareButton() {
   }
 
   return (
-    <div className="flex justify-center py-6 md:hidden">
+    <div className="relative z-10 flex justify-center py-6 md:hidden">
       <a
         href="#"
         target="_blank"

@@ -87,9 +87,8 @@ export default function Page() {
         {/* 3. Position (white) → arch → sage */}
         <BottomShape fill={COLORS.sage} shape="arch">
           <Position />
+          <LineShareButton />
         </BottomShape>
-
-        <LineShareButton />
 
         {/* 4. Comparison (sage) → curve → white */}
         <BottomShape fill={COLORS.white} shape="curve">
@@ -115,9 +114,8 @@ export default function Page() {
           <div id="service">
             <Service />
           </div>
+          <LineShareButton />
         </BottomShape>
-
-        <LineShareButton />
 
         {/* 8. Pricing (dot-green) → arch → slate */}
         <BottomShape fill={COLORS.slate} shape="arch">
@@ -150,9 +148,8 @@ export default function Page() {
         {/* 11. CTA (linen) */}
         <div className="bg-linen">
           <Cta />
+          <LineShareButton />
         </div>
-
-        <LineShareButton />
       </main>
       <Footer />
     </div>
