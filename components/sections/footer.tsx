@@ -26,12 +26,12 @@ export function Footer() {
             >
               特定商取引法に基づく表記
             </a>
-            <a
-              href="#"
+            <Link
+              href="/company"
               className="text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               会社概要
-            </a>
+            </Link>
           </nav>
         </div>
         <div className="mt-8 border-t border-border pt-6 text-center">
