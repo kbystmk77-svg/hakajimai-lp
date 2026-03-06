@@ -23,39 +23,50 @@ export function TableOfContents({ toc }: TableOfContentsProps) {
     if (element) {
       const top = element.getBoundingClientRect().top + window.scrollY - 100
       window.scrollTo({ top, behavior: "smooth" })
-      setActiveId(id)
+
+      requestAnimationFrame(() => {
+        setActiveId(id)
+      })
     }
   }, [])
 
   useEffect(() => {
-    if (typeof window === "undefined") return
+    if (typeof window === "undefined" || toc.length === 0) return
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id)
-          }
-        })
-      },
-      { rootMargin: "-80px 0px -80% 0px" }
-    )
+    const updateActiveId = () => {
+      const offset = 140
+      let currentId = ""
 
-    // Use setTimeout to ensure DOM is ready
-    const timeoutId = setTimeout(() => {
-      toc.forEach((item) => {
-        try {
-          const element = document.getElementById(item.id)
-          if (element) observer.observe(element)
-        } catch (e) {
-          // Ignore errors for invalid selectors
+      for (const item of toc) {
+        const element = document.getElementById(item.id)
+        if (!element) continue
+
+        const top = element.getBoundingClientRect().top
+        if (top <= offset) {
+          currentId = item.id
+        } else {
+          break
         }
-      })
+      }
+
+      if (!currentId) {
+        const firstExisting = toc.find((item) => document.getElementById(item.id))
+        currentId = firstExisting?.id || ""
+      }
+
+      setActiveId(currentId)
+    }
+
+    const timeoutId = setTimeout(() => {
+      updateActiveId()
+      window.addEventListener("scroll", updateActiveId, { passive: true })
+      window.addEventListener("resize", updateActiveId)
     }, 100)
 
     return () => {
       clearTimeout(timeoutId)
-      observer.disconnect()
+      window.removeEventListener("scroll", updateActiveId)
+      window.removeEventListener("resize", updateActiveId)
     }
   }, [toc])
 
@@ -85,15 +96,13 @@ export function TableOfContents({ toc }: TableOfContentsProps) {
             {toc.map((item, index) => (
               <li key={item.id}>
                 <a
-                  href={`#${encodeURIComponent(item.id)}`}
+                  href={`#${item.id}`}
                   onClick={(e) => { handleClick(e, item.id); setIsOpen(false) }}
-                  className={`flex items-start gap-2 rounded-lg px-3 py-2 text-sm transition-colors ${
-                    item.level === 3 ? "ml-4" : ""
-                  } ${
-                    activeId === item.id
+                  className={`flex items-start gap-2 rounded-lg px-3 py-2 text-sm transition-colors ${item.level === 3 ? "ml-4" : ""
+                    } ${activeId === item.id
                       ? "bg-primary/10 text-primary font-medium"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  }`}
+                    }`}
                 >
                   <span className="text-xs text-muted-foreground mt-0.5">
                     {item.level === 2 ? `${index + 1}.` : "・"}
@@ -122,15 +131,13 @@ export function TableOfContents({ toc }: TableOfContentsProps) {
             return (
               <li key={item.id}>
                 <a
-                  href={`#${encodeURIComponent(item.id)}`}
+                  href={`#${item.id}`}
                   onClick={(e) => handleClick(e, item.id)}
-                  className={`flex items-start gap-2 rounded-lg px-3 py-2 text-sm transition-all ${
-                    item.level === 3 ? "ml-3 text-xs" : ""
-                  } ${
-                    activeId === item.id
+                  className={`flex items-start gap-2 rounded-lg px-3 py-2 text-sm transition-all ${item.level === 3 ? "ml-3 text-xs" : ""
+                    } ${activeId === item.id
                       ? "bg-primary/10 text-primary font-medium"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                  }`}
+                    }`}
                 >
                   <span className="shrink-0 mt-px">
                     {item.level === 2 ? (
