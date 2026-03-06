@@ -5,18 +5,21 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { getArticleBySlug, getRelatedArticles, getArticlesByTag } from "@/lib/microcms"
 import type { Metadata } from "next"
+import { SimpleHeader } from "@/components/sections/simple-header"
+import { Footer } from "@/components/sections/footer"
+import { GuideCta } from "@/components/guide/guide-cta"
+import { Calendar, RefreshCw } from "lucide-react"
 
 type PageProps = {
   params: Promise<{ slug: string }>
 }
 
 function slugify(text: string) {
+  // HTMLタグを除去し、トリムして、そのまま使用（日本語対応）
   return text
-    .toLowerCase()
-    .trim()
     .replace(/<\/?[^>]+>/g, "")
-    .replace(/[^\p{L}\p{N}]+/gu, "-")
-    .replace(/^-+|-+$/g, "")
+    .trim()
+    .replace(/\s+/g, "-")
 }
 
 function buildTocAndHtml(html: string) {
@@ -30,17 +33,16 @@ function buildTocAndHtml(html: string) {
       const text = inner.replace(/<[^>]+>/g, "").trim()
       if (!text) return match
 
-      let base = slugify(text) || "section"
+      const base = slugify(text) || "section"
       const n = (used.get(base) ?? 0) + 1
       used.set(base, n)
       const id = n === 1 ? base : `${base}-${n}`
 
       toc.push({ id, text, level })
 
-      // 既に id があれば上書きしない
-      if (/\sid\s*=/.test(attrs)) return match
+      const cleanedAttrs = attrs.replace(/\sid\s*=\s*(['"]).*?\1/gi, "")
 
-      return `<h${level}${attrs} id="${id}">${inner}</h${level}>`
+      return `<h${level}${cleanedAttrs} id="${id}">${inner}</h${level}>`
     }
   )
 
@@ -51,6 +53,14 @@ function normalizeAuthor(author: any) {
   if (!author) return null
   if (Array.isArray(author)) return author[0] ?? null
   return author
+}
+
+function formatDate(dateString: string): string {
+  const date = new Date(dateString)
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  return `${year}年${month}月${day}日`
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -129,32 +139,282 @@ export default async function ArticlePage({ params }: PageProps) {
       : []
 
   return (
-    <main className="max-w-3xl mx-auto py-16">
-      {/* パンくず（categoryがある前提） */}
-      {article.category?.slug && (
-        <nav className="text-sm text-gray-500 mb-4">
-          <Link href="/">ホーム</Link> /{" "}
-          <Link href={`/category/${article.category.slug}`}>
-            {article.category.name}
-          </Link>
-        </nav>
-      )}
+    <div className="min-h-screen bg-background">
+      <SimpleHeader />
 
-      {article?.thumbnail?.url && (
-        <div className="relative w-full aspect-[16/9] bg-gray-100 border rounded-xl overflow-hidden mb-6">
-          <Image
-            src={article.thumbnail.url}
-            alt={article?.thumbnail?.alt || article?.title || ""}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 768px"
-            priority={false}
-          />
+      {/* Hero Section */}
+      <section className="relative bg-muted/40 border-b border-border">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 py-10 sm:py-14">
+          <div className="flex flex-col lg:flex-row gap-8 items-start">
+            {/* Text Content */}
+            <div className="flex-1">
+              {/* Category Badge */}
+              {article.category?.name && (
+                <Link
+                  href={`/category/${article.category.slug}`}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary mb-4 hover:bg-primary/20 transition-colors"
+                >
+                  {article.category.name}
+                </Link>
+              )}
+
+              {/* Title */}
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight text-balance">
+                {article.title}
+              </h1>
+
+              {/* Description */}
+              {article.description && (
+                <p className="mt-4 text-base text-muted-foreground leading-relaxed">
+                  {article.description}
+                </p>
+              )}
+
+              {/* Meta Info */}
+              <div className="flex flex-wrap items-center gap-4 mt-6 text-sm text-muted-foreground">
+                {article.publishedAt && (
+                  <div className="flex items-center gap-1.5">
+                    <Calendar className="h-4 w-4" />
+                    <span>公開：{formatDate(article.publishedAt)}</span>
+                  </div>
+                )}
+                {article.updatedAt && (
+                  <div className="flex items-center gap-1.5">
+                    <RefreshCw className="h-4 w-4" />
+                    <span>更新：{formatDate(article.updatedAt)}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Thumbnail */}
+            {article?.thumbnail?.url && (
+              <div className="w-full lg:w-80 shrink-0">
+                <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-border shadow-sm">
+                  <Image
+                    src={article.thumbnail.url}
+                    alt={article?.thumbnail?.alt || article?.title || ""}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 320px"
+                    priority
+                  />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-      )}
+      </section>
 
-      <h1 className="text-3xl font-bold mb-3">{article.title}</h1>
+      <main className="relative">
+        {/* Breadcrumb */}
+        <div className="bg-background border-b border-border">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 py-3">
+            <nav className="text-sm text-muted-foreground">
+              <Link href="/" className="hover:text-foreground transition-colors">
+                ホーム
+              </Link>
+              {article.category?.slug && (
+                <>
+                  <span className="mx-2">/</span>
+                  <Link
+                    href={`/category/${article.category.slug}`}
+                    className="hover:text-foreground transition-colors"
+                  >
+                    {article.category.name}
+                  </Link>
+                </>
+              )}
+              <span className="mx-2">/</span>
+              <span className="text-foreground font-medium line-clamp-1">{article.title}</span>
+            </nav>
+          </div>
+        </div>
 
+        {/* Main Content Area */}
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 py-8 lg:py-12">
+          {/* Tags */}
+          {article.tag?.length > 0 && (
+            <div className="flex flex-wrap items-center gap-2 mb-8">
+              <span className="text-sm text-muted-foreground">タグ：</span>
+              {article.tag.map((t: any) => (
+                <Link
+                  key={t.id}
+                  href={`/tag/${t.slug}`}
+                  className="inline-flex items-center rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                >
+                  #{t.name}
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* Author Box */}
+          {author && (
+            <section className="mb-10 rounded-2xl border border-border bg-card p-5 sm:p-6 shadow-sm">
+              <div className="flex items-start gap-4">
+                {author?.image?.url && (
+                  <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-primary/20 bg-muted">
+                    <Image
+                      src={author.image.url}
+                      alt={author?.name || "著者"}
+                      fill
+                      className="object-cover"
+                      sizes="64px"
+                    />
+                  </div>
+                )}
+                <div className="min-w-0 flex-1">
+                  <div className="text-xs font-medium text-primary mb-1">
+                    この記事を書いた人
+                  </div>
+                  {author?.name && (
+                    <div className="text-lg font-bold text-foreground">{author.name}</div>
+                  )}
+                  {author?.role && (
+                    <div className="text-sm text-muted-foreground mt-0.5">{author.role}</div>
+                  )}
+                  {author?.bio && (
+                    <p className="text-sm text-muted-foreground leading-relaxed mt-3">
+                      {author.bio}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* TOC */}
+          {toc.length > 0 && (
+            <section className="mb-10 rounded-xl border border-border bg-muted/30 p-5 sm:p-6">
+              <div className="flex items-center gap-2 font-bold text-foreground mb-4">
+                <svg className="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
+                </svg>
+                目次
+              </div>
+              <ul className="space-y-2 text-sm">
+                {toc.map((item) => (
+                  <li key={item.id} className={item.level === 3 ? "ml-4" : ""}>
+                    <a
+                      href={`#${item.id}`}
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {item.text}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {/* Article Body */}
+          <article className="article-content">
+            <div
+              className="prose-guide"
+              dangerouslySetInnerHTML={{ __html: html }}
+            />
+          </article>
+
+          {/* Mid-article CTA */}
+          <GuideCta variant="inline" />
+
+          {/* Related Articles */}
+          {related.length > 0 && (
+            <section className="mt-14">
+              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+                <svg className="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                </svg>
+                関連記事
+              </h2>
+              <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {related.map((r: any) => (
+                  <li key={r.id}>
+                    <Link
+                      href={`/articles/${r.slug}`}
+                      className="group block overflow-hidden rounded-xl border border-border bg-card transition-all hover:shadow-md hover:border-primary/30"
+                    >
+                      <div className="relative aspect-[16/9] bg-muted">
+                        {r?.thumbnail?.url ? (
+                          <Image
+                            src={r.thumbnail.url}
+                            alt={r?.thumbnail?.alt || r?.title || ""}
+                            fill
+                            className="object-cover transition-transform group-hover:scale-105"
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center text-muted-foreground text-sm">
+                            No Image
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-4">
+                        <div className="text-sm font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors">
+                          {r.title}
+                        </div>
+                        {r.publishedAt && (
+                          <div className="text-xs text-muted-foreground mt-2">
+                            {formatDate(r.publishedAt)}
+                          </div>
+                        )}
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+
+          {/* Tag Articles */}
+          {tagArticles.length > 0 && (
+            <section className="mt-14">
+              <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+                <svg className="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                </svg>
+                「#{article.tag[0].name}」の記事
+              </h2>
+              <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {tagArticles.map((r: any) => (
+                  <li key={r.id}>
+                    <Link
+                      href={`/articles/${r.slug}`}
+                      className="group block overflow-hidden rounded-xl border border-border bg-card transition-all hover:shadow-md hover:border-primary/30"
+                    >
+                      <div className="relative aspect-[16/9] bg-muted">
+                        {r?.thumbnail?.url ? (
+                          <Image
+                            src={r.thumbnail.url}
+                            alt={r?.thumbnail?.alt || r?.title || ""}
+                            fill
+                            className="object-cover transition-transform group-hover:scale-105"
+                          />
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center text-muted-foreground text-sm">
+                            No Image
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-4">
+                        <div className="text-sm font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors">
+                          {r.title}
+                        </div>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </div>
+
+        {/* Bottom CTA */}
+        <GuideCta variant="full" />
+      </main>
+
+      {/* Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -167,225 +427,14 @@ export default async function ArticlePage({ params }: PageProps) {
             datePublished: article.publishedAt,
             dateModified: article.updatedAt || article.publishedAt,
             author: author?.name
-              ? {
-                  "@type": "Person",
-                  name: author.name,
-                }
-              : {
-                  "@type": "Organization",
-                  name: "墓じまいパートナーズ",
-                },
-            publisher: {
-              "@type": "Organization",
-              name: "墓じまいパートナーズ",
-            },
+              ? { "@type": "Person", name: author.name }
+              : { "@type": "Organization", name: "墓じまいパートナーズ" },
+            publisher: { "@type": "Organization", name: "墓じまいパートナーズ" },
           }),
         }}
       />
 
-      <div className="text-sm text-gray-500 mb-6">
-        {article.publishedAt && (
-          <span>
-            公開日：
-            {new Date(article.publishedAt).toLocaleDateString()}
-          </span>
-        )}
-        {article.updatedAt && (
-          <span className="ml-4">
-            更新日：
-            {new Date(article.updatedAt).toLocaleDateString()}
-          </span>
-        )}
-        {article.tag?.length > 0 && (
-          <span className="ml-4">
-            タグ：
-            {article.tag.map((t: any) => (
-              <Link
-                key={t.id}
-                href={`/tag/${t.slug}`}
-                className="ml-2 underline"
-              >
-                #{t.name}
-              </Link>
-            ))}
-          </span>
-        )}
-      </div>
-
-      {author && (
-        <section className="mb-8 p-5 border rounded-xl bg-white">
-          <div className="flex items-start gap-4">
-            {author?.image?.url && (
-              <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gray-100 shrink-0">
-                <Image
-                  src={author.image.url}
-                  alt={author?.name || "著者"}
-                  fill
-                  className="object-cover"
-                  sizes="64px"
-                />
-              </div>
-            )}
-
-            <div className="min-w-0">
-              <div className="text-sm text-gray-500 mb-1">この記事を書いた人</div>
-              {author?.name && (
-                <div className="text-lg font-bold leading-tight">{author.name}</div>
-              )}
-              {author?.role && (
-                <div className="text-sm text-gray-600 mt-1">{author.role}</div>
-              )}
-              {author?.bio && (
-                <p className="text-sm text-gray-700 leading-relaxed mt-3">
-                  {author.bio}
-                </p>
-              )}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {article.description && (
-        <p className="mb-8 text-lg leading-relaxed">{article.description}</p>
-      )}
-
-      {/* 目次（TOC） */}
-      {toc.length > 0 && (
-        <section className="mb-10 p-5 border rounded-lg bg-gray-50">
-          <div className="font-bold mb-3">目次</div>
-          <ul className="space-y-2 text-sm">
-            {toc.map((item) => (
-              <li key={item.id} className={item.level === 3 ? "ml-4" : ""}>
-                <a href={`#${item.id}`} className="underline">
-                  {item.text}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {/* 本文（見出しにid付与済みHTML） */}
-      <div
-        className="prose max-w-none"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-
-      {/* 関連記事 */}
-      {related.length > 0 && (
-        <section className="mt-14">
-          <h2 className="text-xl font-bold mb-4">関連記事</h2>
-
-          <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {related.map((r: any) => {
-              const thumbUrl = r?.thumbnail?.url
-              const thumbAlt = r?.thumbnail?.alt || r?.title || ""
-
-              return (
-                <li key={r.id}>
-                  <Link
-                    href={`/articles/${r.slug}`}
-                    className="block border rounded-xl overflow-hidden hover:bg-gray-50 transition"
-                  >
-                    <div className="relative w-full aspect-[16/9] bg-gray-100 border-b">
-                      {thumbUrl ? (
-                        <Image
-                          src={thumbUrl}
-                          alt={thumbAlt}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
-                          No Image
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="p-5">
-                      <div className="text-lg font-semibold leading-snug">
-                        {r.title}
-                      </div>
-
-                      {r.description && (
-                        <p className="text-sm text-gray-600 mt-2 line-clamp-2">
-                          {r.description}
-                        </p>
-                      )}
-
-                      <div className="text-xs text-gray-500 mt-3">
-                        {r.publishedAt
-                          ? new Date(r.publishedAt).toLocaleDateString()
-                          : ""}
-                      </div>
-                    </div>
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </section>
-      )}
-
-      {tagArticles.length > 0 && (
-        <section className="mt-14">
-          <h2 className="text-xl font-bold mb-4">
-            「#{article.tag[0].name}」の記事
-          </h2>
-
-          <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {tagArticles.map((r: any) => {
-              const thumbUrl = r?.thumbnail?.url
-              const thumbAlt = r?.thumbnail?.alt || r?.title || ""
-
-              return (
-                <li key={r.id}>
-                  <Link
-                    href={`/articles/${r.slug}`}
-                    className="block border rounded-xl overflow-hidden hover:bg-gray-50 transition"
-                  >
-                    <div className="relative w-full aspect-[16/9] bg-gray-100 border-b">
-                      {thumbUrl ? (
-                        <Image
-                          src={thumbUrl}
-                          alt={thumbAlt}
-                          fill
-                          className="object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
-                          No Image
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="p-5">
-                      <div className="text-lg font-semibold leading-snug">
-                        {r.title}
-                      </div>
-                    </div>
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </section>
-      )}
-
-      {/* CTA */}
-      <section className="mt-16 p-6 border rounded-lg bg-gray-50">
-        <h2 className="text-xl font-bold mb-2">墓じまい無料相談</h2>
-        <p className="mb-4">
-          費用や手続きの進め方など、まずは状況を整理するところから一緒にやります。
-        </p>
-        <Link
-          href="/"
-          className="inline-block px-6 py-3 bg-blue-600 text-white rounded"
-        >
-          無料相談はこちら
-        </Link>
-      </section>
-    </main>
+      <Footer />
+    </div>
   )
 }
