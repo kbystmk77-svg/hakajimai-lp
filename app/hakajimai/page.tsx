@@ -6,6 +6,9 @@ import { getArticleBySlug, getRelatedArticles, getArticlesByTag } from "@/lib/mi
 import type { Metadata } from "next"
 import { SimpleHeader } from "@/components/sections/simple-header"
 import { Footer } from "@/components/sections/footer"
+import { TableOfContents } from "@/components/guide/table-of-contents"
+import { GuideHero } from "@/components/guide/guide-hero"
+import { GuideCta } from "@/components/guide/guide-cta"
 
 function slugify(text: string) {
   return text
@@ -34,7 +37,6 @@ function buildTocAndHtml(html: string) {
 
       toc.push({ id, text, level })
 
-      // 既に id があれば上書きしない
       if (/\sid\s*=/.test(attrs)) return match
 
       return `<h${level}${attrs} id="${id}">${inner}</h${level}>`
@@ -69,13 +71,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       type: "article",
       url: "/hakajimai",
-      images: imageUrl
-        ? [
-            {
-              url: imageUrl,
-            },
-          ]
-        : undefined,
+      images: imageUrl ? [{ url: imageUrl }] : undefined,
     },
     twitter: {
       card: imageUrl ? "summary_large_image" : "summary",
@@ -111,77 +107,280 @@ export default async function HakajimaiPage() {
   return (
     <div className="min-h-screen bg-background">
       <SimpleHeader />
-      <main className="max-w-6xl mx-auto px-6 py-16">
-        <nav className="text-sm text-gray-500 mb-6">
-        <Link href="/" className="hover:underline">
-            ホーム
-        </Link>
-        <span className="mx-2">/</span>
-        <span>墓じまい完全ガイド</span>
-        </nav>
-      <section className="mb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-          <div className="lg:col-span-7">
-            <div className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-900 mb-4">
-              墓じまい完全ガイド
-            </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight tracking-tight text-slate-900 mb-5">
-              {article.title}
-            </h1>
+      {/* Hero Section */}
+      <GuideHero
+        title={article.title}
+        description={article.description}
+        thumbnailUrl={article?.thumbnail?.url}
+        thumbnailAlt={article?.thumbnail?.alt || article?.title || ""}
+        publishedAt={article.publishedAt}
+        updatedAt={article.updatedAt}
+      />
 
-            {article.description && (
-              <p className="text-base sm:text-lg leading-8 text-slate-600 mb-6">
-                {article.description}
-              </p>
-            )}
-
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500">
-              {article.publishedAt && (
-                <span>
-                  公開日：
-                  {new Date(article.publishedAt).toLocaleDateString()}
-                </span>
-              )}
-              {article.updatedAt && (
-                <span>
-                  更新日：
-                  {new Date(article.updatedAt).toLocaleDateString()}
-                </span>
-              )}
-            </div>
+      <main className="relative">
+        {/* Breadcrumb */}
+        <div className="bg-muted/30 border-b border-border">
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-3">
+            <nav className="text-sm text-muted-foreground">
+              <Link href="/" className="hover:text-foreground transition-colors">
+                ホーム
+              </Link>
+              <span className="mx-2">/</span>
+              <span className="text-foreground font-medium">墓じまい完全ガイド</span>
+            </nav>
           </div>
+        </div>
 
-          <div className="lg:col-span-5">
-            {article?.thumbnail?.url && (
-              <div className="relative w-full aspect-[16/10] bg-slate-100 border border-slate-200 rounded-2xl overflow-hidden shadow-sm">
-                <Image
-                  src={article.thumbnail.url}
-                  alt={article?.thumbnail?.alt || article?.title || ""}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  priority={false}
-                />
+        {/* Main Content Area */}
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 lg:py-12">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+            {/* Article Content */}
+            <div className="flex-1 min-w-0">
+              {/* What you'll learn box */}
+              <section className="mb-10 rounded-2xl border-2 border-primary/20 bg-primary/5 p-6 sm:p-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h2 className="text-lg font-bold text-foreground">このガイドでわかること</h2>
+                </div>
+                <ul className="grid sm:grid-cols-2 gap-3 text-sm">
+                  {[
+                    "墓じまいとは何か",
+                    "墓じまいの基本的な流れ",
+                    "墓じまいにかかる費用の目安",
+                    "墓じまい後の供養方法",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <svg className="h-5 w-5 text-cta shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span className="text-foreground">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+
+              {/* Mobile TOC */}
+              <div className="lg:hidden mb-8">
+                <TableOfContents toc={toc} />
               </div>
-            )}
+
+              {/* Flow Steps */}
+              <section className="mb-12">
+                <h2 className="text-xl sm:text-2xl font-bold mb-6 flex items-center gap-3">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cta text-cta-foreground text-sm font-bold">
+                    5
+                  </span>
+                  墓じまいの基本ステップ
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 sm:gap-2">
+                  {[
+                    { step: "親族の合意", icon: "👨‍👩‍👧‍👦" },
+                    { step: "お寺へ相談", icon: "🏛️" },
+                    { step: "改葬許可申請", icon: "📄" },
+                    { step: "遺骨取り出し", icon: "🙏" },
+                    { step: "新しい供養先へ", icon: "✨" },
+                  ].map((item, i) => (
+                    <div key={i} className="relative">
+                      <div className="flex sm:flex-col items-center gap-3 sm:gap-2 rounded-xl border border-border bg-card p-4 sm:p-3 sm:text-center transition-shadow hover:shadow-md">
+                        <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-muted text-lg sm:text-xl">
+                          {item.icon}
+                        </div>
+                        <div className="flex-1 sm:flex-initial">
+                          <div className="text-xs text-muted-foreground mb-0.5 sm:mb-1">
+                            STEP {i + 1}
+                          </div>
+                          <div className="text-sm font-semibold text-foreground">
+                            {item.step}
+                          </div>
+                        </div>
+                      </div>
+                      {i < 4 && (
+                        <div className="hidden sm:block absolute top-1/2 -right-2 transform -translate-y-1/2 text-muted-foreground z-10">
+                          <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* Tags */}
+              {article.tag?.length > 0 && (
+                <div className="flex flex-wrap items-center gap-2 mb-8">
+                  <span className="text-sm text-muted-foreground">タグ：</span>
+                  {article.tag.map((t: any) => (
+                    <Link
+                      key={t.id}
+                      href={`/tag/${t.slug}`}
+                      className="inline-flex items-center rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                    >
+                      #{t.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+
+              {/* Author Box */}
+              {author && (
+                <section className="mb-10 rounded-2xl border border-border bg-card p-5 sm:p-6 shadow-sm">
+                  <div className="flex items-start gap-4">
+                    {author?.image?.url && (
+                      <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-primary/20 bg-muted">
+                        <Image
+                          src={author.image.url}
+                          alt={author?.name || "著者"}
+                          fill
+                          className="object-cover"
+                          sizes="64px"
+                        />
+                      </div>
+                    )}
+                    <div className="min-w-0 flex-1">
+                      <div className="text-xs font-medium text-primary mb-1">
+                        このガイドを監修・執筆した人
+                      </div>
+                      {author?.name && (
+                        <div className="text-lg font-bold text-foreground">{author.name}</div>
+                      )}
+                      {author?.role && (
+                        <div className="text-sm text-muted-foreground mt-0.5">{author.role}</div>
+                      )}
+                      {author?.bio && (
+                        <p className="text-sm text-muted-foreground leading-relaxed mt-3">
+                          {author.bio}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </section>
+              )}
+
+              {/* Article Body */}
+              <article className="guide-content">
+                <div
+                  className="prose-guide"
+                  dangerouslySetInnerHTML={{ __html: html }}
+                />
+              </article>
+
+              {/* Mid-article CTA */}
+              <GuideCta variant="inline" />
+
+              {/* Related Articles */}
+              {related.length > 0 && (
+                <section className="mt-14">
+                  <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+                    <svg className="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                    </svg>
+                    関連記事
+                  </h2>
+                  <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {related.map((r: any) => (
+                      <li key={r.id}>
+                        <Link
+                          href={`/articles/${r.slug}`}
+                          className="group block overflow-hidden rounded-xl border border-border bg-card transition-all hover:shadow-md hover:border-primary/30"
+                        >
+                          <div className="relative aspect-[16/9] bg-muted">
+                            {r?.thumbnail?.url ? (
+                              <Image
+                                src={r.thumbnail.url}
+                                alt={r?.thumbnail?.alt || r?.title || ""}
+                                fill
+                                className="object-cover transition-transform group-hover:scale-105"
+                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                              />
+                            ) : (
+                              <div className="flex h-full w-full items-center justify-center text-muted-foreground text-sm">
+                                No Image
+                              </div>
+                            )}
+                          </div>
+                          <div className="p-4">
+                            <div className="text-sm font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors">
+                              {r.title}
+                            </div>
+                            {r.publishedAt && (
+                              <div className="text-xs text-muted-foreground mt-2">
+                                {new Date(r.publishedAt).toLocaleDateString()}
+                              </div>
+                            )}
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+
+              {/* Tag Articles */}
+              {tagArticles.length > 0 && (
+                <section className="mt-14">
+                  <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+                    <svg className="h-5 w-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                    </svg>
+                    「#{article.tag[0].name}」の記事
+                  </h2>
+                  <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {tagArticles.map((r: any) => (
+                      <li key={r.id}>
+                        <Link
+                          href={`/articles/${r.slug}`}
+                          className="group block overflow-hidden rounded-xl border border-border bg-card transition-all hover:shadow-md hover:border-primary/30"
+                        >
+                          <div className="relative aspect-[16/9] bg-muted">
+                            {r?.thumbnail?.url ? (
+                              <Image
+                                src={r.thumbnail.url}
+                                alt={r?.thumbnail?.alt || r?.title || ""}
+                                fill
+                                className="object-cover transition-transform group-hover:scale-105"
+                              />
+                            ) : (
+                              <div className="flex h-full w-full items-center justify-center text-muted-foreground text-sm">
+                                No Image
+                              </div>
+                            )}
+                          </div>
+                          <div className="p-4">
+                            <div className="text-sm font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors">
+                              {r.title}
+                            </div>
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              )}
+            </div>
+
+            {/* Desktop Sidebar TOC */}
+            <aside className="hidden lg:block w-64 shrink-0">
+              <div className="sticky top-24">
+                <TableOfContents toc={toc} />
+
+                {/* Sidebar CTA */}
+                <GuideCta variant="sidebar" />
+              </div>
+            </aside>
           </div>
         </div>
-      </section>
 
-      <section className="mb-10 p-6 border border-blue-100 rounded-2xl bg-blue-50">
-        <div className="font-bold mb-3 text-blue-900">
-          このページでわかること
-        </div>
+        {/* Bottom CTA */}
+        <GuideCta variant="full" />
+      </main>
 
-        <ul className="list-disc ml-6 space-y-1.5 text-sm text-slate-700">
-          <li>墓じまいとは何か</li>
-          <li>墓じまいの基本的な流れ</li>
-          <li>墓じまいにかかる費用の目安</li>
-          <li>墓じまい後の供養方法</li>
-        </ul>
-      </section>
-
+      {/* Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -194,392 +393,40 @@ export default async function HakajimaiPage() {
             datePublished: article.publishedAt,
             dateModified: article.updatedAt || article.publishedAt,
             author: author?.name
-              ? {
-                  "@type": "Person",
-                  name: author.name,
-                }
-              : {
-                  "@type": "Organization",
-                  name: "墓じまいパートナーズ",
+              ? { "@type": "Person", name: author.name }
+              : { "@type": "Organization", name: "墓じまいパートナーズ" },
+            publisher: { "@type": "Organization", name: "墓じまいパートナーズ" },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "墓じまいとは何ですか？",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "墓じまいとは、現在あるお墓を整理し、遺骨を別の場所へ移して供養することを指します。",
                 },
-            publisher: {
-              "@type": "Organization",
-              name: "墓じまいパートナーズ",
-            },
+              },
+              {
+                "@type": "Question",
+                name: "墓じまいの費用はいくらくらいですか？",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "墓石撤去費用や供養費用などを含め、一般的には20万円〜50万円程度になるケースが多いです。",
+                },
+              },
+            ],
           }),
         }}
       />
 
-        <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: [
-                {
-                "@type": "Question",
-                name: "墓じまいとは何ですか？",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "墓じまいとは、現在あるお墓を整理し、遺骨を別の場所へ移して供養することを指します。",
-                },
-                },
-                {
-                "@type": "Question",
-                name: "墓じまいの費用はいくらくらいですか？",
-                acceptedAnswer: {
-                    "@type": "Answer",
-                    text: "墓石撤去費用や供養費用などを含め、一般的には20万円〜50万円程度になるケースが多いです。",
-                },
-                },
-            ],
-            }),
-        }}
-        />
-
-      {article.tag?.length > 0 && (
-        <div className="text-sm text-slate-500 mb-6">
-          <span className="mr-2">タグ：</span>
-          {article.tag.map((t: any) => (
-            <Link
-              key={t.id}
-              href={`/tag/${t.slug}`}
-              className="mr-2 inline-flex items-center rounded-full border border-slate-200 px-3 py-1 hover:bg-slate-50 transition"
-            >
-              #{t.name}
-            </Link>
-          ))}
-        </div>
-      )}
-
-      {author && (
-        <section className="mb-8 p-5 border border-slate-200 rounded-2xl bg-white shadow-sm">
-          <div className="flex items-start gap-4">
-            {author?.image?.url && (
-              <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gray-100 shrink-0">
-                <Image
-                  src={author.image.url}
-                  alt={author?.name || "著者"}
-                  fill
-                  className="object-cover"
-                  sizes="64px"
-                />
-              </div>
-            )}
-
-            <div className="min-w-0">
-              <div className="text-sm text-slate-500 mb-1">このガイドを監修・執筆した人</div>
-              {author?.name && (
-                <div className="text-lg font-bold leading-tight text-slate-900">{author.name}</div>
-              )}
-              {author?.role && (
-                <div className="text-sm text-slate-600 mt-1">{author.role}</div>
-              )}
-              {author?.bio && (
-                <p className="text-sm text-slate-700 leading-7 mt-3">
-                  {author.bio}
-                </p>
-              )}
-            </div>
-          </div>
-        </section>
-      )}
-
-
-    <section className="my-12">
-    <h2 className="text-2xl font-bold mb-6">
-        墓じまいの基本的な流れ
-    </h2>
-
-    <div className="grid md:grid-cols-5 gap-4 text-center">
-        {[
-        "親族の合意",
-        "お寺へ相談",
-        "改葬許可申請",
-        "遺骨取り出し",
-        "新しい供養先へ納骨",
-        ].map((step, i) => (
-        <div
-            key={i}
-            className="border rounded-lg p-4 bg-white"
-        >
-            <div className="text-sm text-gray-500 mb-1">
-            STEP {i + 1}
-            </div>
-            <div className="font-semibold">{step}</div>
-        </div>
-        ))}
-    </div>
-    </section>
-
-
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_260px] gap-12">
-
-    {/* スマホ目次 */}
-    {toc.length > 0 && (
-    <details className="lg:hidden mb-8 rounded-2xl border border-slate-200 bg-slate-50 p-5">
-        <summary className="cursor-pointer font-bold text-slate-900">
-        目次
-        </summary>
-
-        <ul className="mt-4 space-y-2.5 text-sm leading-6 text-slate-700">
-        {toc.map((item) => (
-            <li key={item.id} className={item.level === 3 ? "ml-4" : ""}>
-            <a href={`#${item.id}`} className="hover:underline">
-                {item.text}
-            </a>
-            </li>
-        ))}
-        </ul>
-    </details>
-    )}
-
-    <article>
-        <div
-        className="max-w-none text-[17px] leading-8 text-slate-800
-        [&_h1]:text-3xl
-        [&_h1]:font-bold
-        [&_h1]:leading-tight
-        [&_h1]:mt-12
-        [&_h1]:mb-6
-        [&_h2]:text-2xl
-        [&_h2]:font-bold
-        [&_h2]:leading-tight
-        [&_h2]:mt-14
-        [&_h2]:mb-6
-        [&_h2]:pb-3
-        [&_h2]:border-b
-        [&_h2]:border-slate-200
-        [&_h3]:text-xl
-        [&_h3]:font-semibold
-        [&_h3]:leading-tight
-        [&_h3]:mt-10
-        [&_h3]:mb-4
-        [&_h4]:text-lg
-        [&_h4]:font-semibold
-        [&_h4]:leading-tight
-        [&_h4]:mt-8
-        [&_h4]:mb-3
-        [&_p]:my-6
-        [&_p]:leading-8
-        [&_ul]:my-6
-        [&_ul]:pl-6
-        [&_ul]:list-disc
-        [&_ol]:my-6
-        [&_ol]:pl-6
-        [&_ol]:list-decimal
-        [&_li]:my-2
-        [&_li]:leading-8
-        [&_a]:text-blue-600
-        [&_a]:underline-offset-4
-        hover:[&_a]:underline
-        [&_strong]:font-semibold
-        [&_strong]:text-slate-900
-        [&_em]:italic
-        [&_blockquote]:my-8
-        [&_blockquote]:rounded-r-2xl
-        [&_blockquote]:border-l-4
-        [&_blockquote]:border-blue-300
-        [&_blockquote]:bg-blue-50
-        [&_blockquote]:px-5
-        [&_blockquote]:py-4
-        [&_blockquote]:text-slate-700
-        [&_blockquote_p]:my-0
-        [&_hr]:my-10
-        [&_hr]:border-0
-        [&_hr]:border-t
-        [&_hr]:border-slate-200
-        [&_figure]:my-8
-        [&_figure]:mx-0
-        [&_figcaption]:mt-3
-        [&_figcaption]:text-sm
-        [&_figcaption]:leading-6
-        [&_figcaption]:text-slate-500
-        [&_img]:my-8
-        [&_img]:rounded-2xl
-        [&_img]:border
-        [&_img]:border-slate-200
-        [&_img]:shadow-sm
-        [&_table]:my-8
-        [&_table]:w-full
-        [&_table]:border-collapse
-        [&_table]:overflow-hidden
-        [&_table]:rounded-2xl
-        [&_table]:border
-        [&_table]:border-slate-200
-        [&_thead]:bg-slate-50
-        [&_tr]:border-b
-        [&_tr]:border-slate-200
-        [&_th]:px-4
-        [&_th]:py-3
-        [&_th]:text-left
-        [&_th]:text-sm
-        [&_th]:font-semibold
-        [&_th]:text-slate-900
-        [&_td]:px-4
-        [&_td]:py-3
-        [&_td]:text-sm
-        [&_td]:leading-7
-        [&_pre]:my-8
-        [&_pre]:overflow-x-auto
-        [&_pre]:rounded-2xl
-        [&_pre]:bg-slate-900
-        [&_pre]:px-5
-        [&_pre]:py-4
-        [&_pre]:text-sm
-        [&_pre]:leading-7
-        [&_pre]:text-slate-100
-        [&_pre_code]:bg-transparent
-        [&_pre_code]:p-0
-        [&_pre_code]:text-inherit
-        [&_code]:rounded
-        [&_code]:bg-slate-100
-        [&_code]:px-1.5
-        [&_code]:py-0.5
-        [&_code]:text-[0.95em]
-        [&_code]:text-slate-800
-        [&_iframe]:my-8
-        [&_iframe]:w-full
-        [&_iframe]:rounded-2xl"
-        dangerouslySetInnerHTML={{ __html: html }}
-        />
-    </article>
-
-    {toc.length > 0 && (
-        <aside className="hidden lg:block">
-        <div className="sticky top-24 max-h-[calc(100vh-6rem)] overflow-y-auto rounded-2xl border border-slate-200 bg-slate-50 p-5">
-            <div className="font-bold mb-3">目次</div>
-
-            <ul className="space-y-2 text-sm">
-            {toc.map((item) => (
-                <li key={item.id} className={item.level === 3 ? "ml-4" : ""}>
-                <a href={`#${item.id}`} className="hover:underline">
-                    {item.text}
-                </a>
-                </li>
-            ))}
-            </ul>
-        </div>
-        </aside>
-    )}
-
-    </div>
-
-      {related.length > 0 && (
-        <section className="mt-14">
-          <h2 className="text-xl font-bold mb-4">関連記事</h2>
-
-          <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {related.map((r: any) => {
-              const thumbUrl = r?.thumbnail?.url
-              const thumbAlt = r?.thumbnail?.alt || r?.title || ""
-
-              return (
-                <li key={r.id}>
-                  <Link
-                    href={`/articles/${r.slug}`}
-                    className="block border rounded-xl overflow-hidden hover:bg-gray-50 transition"
-                  >
-                    <div className="relative w-full aspect-[16/9] bg-gray-100 border-b">
-                      {thumbUrl ? (
-                        <Image
-                          src={thumbUrl}
-                          alt={thumbAlt}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
-                          No Image
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="p-5">
-                      <div className="text-lg font-semibold leading-snug">
-                        {r.title}
-                      </div>
-
-                      {r.description && (
-                        <p className="text-sm text-gray-600 mt-2 line-clamp-2">
-                          {r.description}
-                        </p>
-                      )}
-
-                      <div className="text-xs text-gray-500 mt-3">
-                        {r.publishedAt
-                          ? new Date(r.publishedAt).toLocaleDateString()
-                          : ""}
-                      </div>
-                    </div>
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </section>
-      )}
-
-      {tagArticles.length > 0 && (
-        <section className="mt-14">
-          <h2 className="text-xl font-bold mb-4">
-            「#{article.tag[0].name}」の記事
-          </h2>
-
-          <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {tagArticles.map((r: any) => {
-              const thumbUrl = r?.thumbnail?.url
-              const thumbAlt = r?.thumbnail?.alt || r?.title || ""
-
-              return (
-                <li key={r.id}>
-                  <Link
-                    href={`/articles/${r.slug}`}
-                    className="block border rounded-xl overflow-hidden hover:bg-gray-50 transition"
-                  >
-                    <div className="relative w-full aspect-[16/9] bg-gray-100 border-b">
-                      {thumbUrl ? (
-                        <Image
-                          src={thumbUrl}
-                          alt={thumbAlt}
-                          fill
-                          className="object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
-                          No Image
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="p-5">
-                      <div className="text-lg font-semibold leading-snug">
-                        {r.title}
-                      </div>
-                    </div>
-                  </Link>
-                </li>
-              )
-            })}
-          </ul>
-        </section>
-      )}
-
-      <section className="mt-16 p-8 border rounded-xl bg-blue-50">
-        <h2 className="text-xl font-bold mb-2">墓じまい無料相談</h2>
-        <p className="mb-4">
-          費用や手続きの進め方など、まずは状況を整理するところから一緒にやります。
-        </p>
-        <Link
-          href="/"
-          className="inline-block px-6 py-3 bg-blue-600 text-white rounded"
-        >
-          無料相談はこちら
-        </Link>
-      </section>
-    </main>
       <Footer />
     </div>
   )
