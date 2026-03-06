@@ -7,7 +7,7 @@ import { getArticleBySlug, getRelatedArticles, getArticlesByTag } from "@/lib/mi
 import type { Metadata } from "next"
 import { SimpleHeader } from "@/components/sections/simple-header"
 import { Footer } from "@/components/sections/footer"
-import { GuideCta } from "@/components/guide/guide-cta"
+import { ArticleCta } from "@/components/guide/article-cta"
 import { Calendar, RefreshCw } from "lucide-react"
 
 type PageProps = {
@@ -345,7 +345,7 @@ export default async function ArticlePage({ params }: PageProps) {
           </article>
 
           {/* Mid-article CTA */}
-          <GuideCta variant="inline" />
+          <ArticleCta variant="inline" />
 
           {/* Related Articles */}
           {related.length > 0 && (
@@ -439,7 +439,7 @@ export default async function ArticlePage({ params }: PageProps) {
         </div>
 
         {/* Bottom CTA */}
-        <GuideCta variant="full" />
+        <ArticleCta variant="full" />
       </main>
 
       {/* Structured Data */}
