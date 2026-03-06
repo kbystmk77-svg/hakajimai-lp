@@ -142,40 +142,46 @@ export default async function ArticlePage({ params }: PageProps) {
     <div className="min-h-screen bg-background">
       <SimpleHeader />
 
-      {/* Hero Section */}
-      <section className="relative bg-muted/40 border-b border-border">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 py-10 sm:py-14">
-          <div className="flex flex-col lg:flex-row gap-8 items-start">
-            {/* Text Content */}
-            <div className="flex-1">
+      {/* Hero Section - Full-width thumbnail style */}
+      {article?.thumbnail?.url && (
+        <section className="relative">
+          {/* Full-width Thumbnail */}
+          <div className="relative h-48 sm:h-64 lg:h-80 w-full">
+            <Image
+              src={article.thumbnail.url}
+              alt={article?.thumbnail?.alt || article?.title || ""}
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+          </div>
+          
+          {/* Content overlay */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <div className="mx-auto max-w-4xl px-4 sm:px-6 pb-6 sm:pb-8">
               {/* Category Badge */}
               {article.category?.name && (
                 <Link
                   href={`/category/${article.category.slug}`}
-                  className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary mb-4 hover:bg-primary/20 transition-colors"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-primary mb-3 hover:bg-white transition-colors"
                 >
                   {article.category.name}
                 </Link>
               )}
 
               {/* Title */}
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground leading-tight text-balance">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white leading-tight text-balance drop-shadow-md">
                 {article.title}
               </h1>
 
-              {/* Description */}
-              {article.description && (
-                <p className="mt-4 text-base text-muted-foreground leading-relaxed">
-                  {article.description}
-                </p>
-              )}
-
               {/* Meta Info */}
-              <div className="flex flex-wrap items-center gap-4 mt-6 text-sm text-muted-foreground">
+              <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-white/80">
                 {article.publishedAt && (
                   <div className="flex items-center gap-1.5">
                     <Calendar className="h-4 w-4" />
-                    <span>公開：{formatDate(article.publishedAt)}</span>
+                    <span>{formatDate(article.publishedAt)}</span>
                   </div>
                 )}
                 {article.updatedAt && (
@@ -186,25 +192,47 @@ export default async function ArticlePage({ params }: PageProps) {
                 )}
               </div>
             </div>
-
-            {/* Thumbnail */}
-            {article?.thumbnail?.url && (
-              <div className="w-full lg:w-80 shrink-0">
-                <div className="relative aspect-[16/10] rounded-xl overflow-hidden border border-border shadow-sm">
-                  <Image
-                    src={article.thumbnail.url}
-                    alt={article?.thumbnail?.alt || article?.title || ""}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 320px"
-                    priority
-                  />
-                </div>
-              </div>
-            )}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
+
+      {/* Hero Section - No thumbnail fallback */}
+      {!article?.thumbnail?.url && (
+        <section className="bg-background border-b border-border">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 py-8 sm:py-10">
+            {/* Category Badge */}
+            {article.category?.name && (
+              <Link
+                href={`/category/${article.category.slug}`}
+                className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary mb-3 hover:bg-primary/20 transition-colors"
+              >
+                {article.category.name}
+              </Link>
+            )}
+
+            {/* Title */}
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-foreground leading-tight text-balance">
+              {article.title}
+            </h1>
+
+            {/* Meta Info */}
+            <div className="flex flex-wrap items-center gap-4 mt-4 text-sm text-muted-foreground">
+              {article.publishedAt && (
+                <div className="flex items-center gap-1.5">
+                  <Calendar className="h-4 w-4" />
+                  <span>公開：{formatDate(article.publishedAt)}</span>
+                </div>
+              )}
+              {article.updatedAt && (
+                <div className="flex items-center gap-1.5">
+                  <RefreshCw className="h-4 w-4" />
+                  <span>更新：{formatDate(article.updatedAt)}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
 
       <main className="relative">
         {/* Breadcrumb */}
