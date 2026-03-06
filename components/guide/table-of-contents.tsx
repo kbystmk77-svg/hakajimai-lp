@@ -98,15 +98,12 @@ export function TableOfContents({ toc }: TableOfContentsProps) {
                 <a
                   href={`#${item.id}`}
                   onClick={(e) => { handleClick(e, item.id); setIsOpen(false) }}
-                  className={`flex items-start gap-2 rounded-lg px-3 py-2 text-sm transition-colors ${item.level === 3 ? "ml-4" : ""
+                  className={`block rounded-lg px-3 py-2 text-sm transition-colors ${item.level === 3 ? "ml-4" : ""
                     } ${activeId === item.id
                       ? "bg-primary/10 text-primary font-medium"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                     }`}
                 >
-                  <span className="text-xs text-muted-foreground mt-0.5">
-                    {item.level === 2 ? `${index + 1}.` : "・"}
-                  </span>
                   <span className="line-clamp-2">{item.text}</span>
                 </a>
               </li>
@@ -126,35 +123,21 @@ export function TableOfContents({ toc }: TableOfContentsProps) {
       </div>
       <nav className="max-h-[60vh] overflow-y-auto p-3">
         <ul className="space-y-0.5">
-          {toc.map((item, index) => {
-            const h2Index = toc.filter((t, i) => i <= toc.indexOf(item) && t.level === 2).length
-            return (
-              <li key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  onClick={(e) => handleClick(e, item.id)}
-                  className={`flex items-start gap-2 rounded-lg px-3 py-2 text-sm transition-all ${item.level === 3 ? "ml-3 text-xs" : ""
-                    } ${activeId === item.id
-                      ? "bg-primary/10 text-primary font-medium"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                    }`}
-                >
-                  <span className="shrink-0 mt-px">
-                    {item.level === 2 ? (
-                      <span className="inline-flex h-5 w-5 items-center justify-center rounded bg-primary/10 text-xs font-medium text-primary">
-                        {h2Index}
-                      </span>
-                    ) : (
-                      <span className="inline-flex h-4 w-4 items-center justify-center text-muted-foreground">
-                        ・
-                      </span>
-                    )}
-                  </span>
-                  <span className="line-clamp-2 leading-snug">{item.text}</span>
-                </a>
-              </li>
-            )
-          })}
+          {toc.map((item) => (
+            <li key={item.id}>
+              <a
+                href={`#${item.id}`}
+                onClick={(e) => handleClick(e, item.id)}
+                className={`block rounded-lg px-3 py-2 text-sm transition-all ${item.level === 3 ? "ml-4 text-xs" : ""
+                  } ${activeId === item.id
+                    ? "bg-primary/10 text-primary font-medium"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  }`}
+              >
+                <span className="line-clamp-2 leading-snug">{item.text}</span>
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
     </div>
