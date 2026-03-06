@@ -148,23 +148,23 @@ export default function Page() {
         {/* 11. Guide Link (linen) */}
         <div className="bg-linen">
           <section className="mx-auto max-w-3xl px-6 py-12">
-            <div className="rounded-2xl border border-border bg-card p-6 sm:p-8 flex flex-col items-center gap-4 text-center">
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                <svg className="h-8 w-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="rounded-2xl border border-border bg-card p-5 sm:p-6 flex flex-col sm:flex-row items-center gap-4 sm:gap-5">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                <svg className="h-6 w-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
-              <div>
-                <h3 className="text-lg sm:text-xl font-bold text-foreground mb-2">
+              <div className="flex-1 text-center sm:text-left">
+                <h3 className="text-base font-bold text-foreground mb-1">
                   墓じまい完全ガイド
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-sm text-muted-foreground">
                   墓じまいの意味や改葬との違いといった基本的な知識から、実際の流れ、費用の目安、墓じまい後の供養方法までをわかりやすく解説します。
                 </p>
               </div>
               <a
                 href="/hakajimai"
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-all hover:opacity-90 hover:shadow-md whitespace-nowrap"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground transition-all hover:opacity-90 hover:shadow-md whitespace-nowrap"
               >
                 ガイドを読む
                 <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
