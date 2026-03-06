@@ -170,35 +170,41 @@ export default async function HakajimaiPage() {
 
               {/* Flow Steps */}
               <section className="mb-12">
-                <h2 className="text-xl sm:text-2xl font-bold mb-6 flex items-center gap-3">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-cta text-cta-foreground text-sm font-bold">
-                    5
-                  </span>
+                <h2 className="text-xl sm:text-2xl font-bold mb-6">
                   墓じまいの基本ステップ
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 sm:gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {[
-                    { step: "親族の合意", icon: "👨‍👩‍👧‍👦" },
-                    { step: "お寺へ相談", icon: "🏛️" },
-                    { step: "改葬許可申請", icon: "📄" },
-                    { step: "遺骨取り出し", icon: "🙏" },
-                    { step: "新しい供養先へ", icon: "✨" },
+                    { step: "親族の合意" },
+                    { step: "お寺への相談" },
+                    { step: "新たな供養先の決定" },
+                    { step: "石材店に見積・契約" },
+                    { step: "行政手続" },
+                    { step: "閉眼供養" },
+                    { step: "遺骨の取出し・墓石の撤去" },
+                    { step: "新しい供養先に納骨" },
                   ].map((item, i) => (
                     <div key={i} className="relative">
-                      <div className="flex sm:flex-col items-center gap-3 sm:gap-2 rounded-xl border border-border bg-card p-4 sm:p-3 sm:text-center transition-shadow hover:shadow-md">
-                        <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-full bg-muted text-lg sm:text-xl">
-                          {item.icon}
+                      <div className="flex flex-col items-center rounded-xl border border-border bg-card p-3 sm:p-4 text-center transition-shadow hover:shadow-md h-full">
+                        {/* Placeholder Image */}
+                        <div className="w-full aspect-[4/3] rounded-lg bg-muted mb-3 flex items-center justify-center overflow-hidden">
+                          <Image
+                            src="/placeholder.svg?height=120&width=160"
+                            alt={item.step}
+                            width={160}
+                            height={120}
+                            className="object-cover w-full h-full"
+                          />
                         </div>
-                        <div className="flex-1 sm:flex-initial">
-                          <div className="text-xs text-muted-foreground mb-0.5 sm:mb-1">
-                            STEP {i + 1}
-                          </div>
-                          <div className="text-sm font-semibold text-foreground">
-                            {item.step}
-                          </div>
+                        <div className="text-xs text-primary font-semibold mb-1">
+                          STEP {i + 1}
+                        </div>
+                        <div className="text-sm font-semibold text-foreground leading-tight">
+                          {item.step}
                         </div>
                       </div>
-                      {i < 4 && (
+                      {/* Arrow for desktop - show after every item except last and every 4th */}
+                      {i < 7 && i !== 3 && (
                         <div className="hidden sm:block absolute top-1/2 -right-2 transform -translate-y-1/2 text-muted-foreground z-10">
                           <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
