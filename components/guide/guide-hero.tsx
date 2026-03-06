@@ -27,18 +27,10 @@ export function GuideHero({
   updatedAt,
 }: GuideHeroProps) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-primary/5 via-primary/3 to-background">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-30">
-        <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <defs>
-            <pattern id="guide-grid" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <circle cx="1" cy="1" r="1" fill="currentColor" className="text-primary/20" />
-            </pattern>
-          </defs>
-          <rect fill="url(#guide-grid)" width="100" height="100" />
-        </svg>
-      </div>
+    <section className="relative overflow-hidden bg-gradient-to-br from-slate-100 via-slate-50 to-white">
+      {/* Subtle gradient circles */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-cta/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3" />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
