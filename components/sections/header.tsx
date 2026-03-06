@@ -4,13 +4,6 @@ import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { smoothScrollTo } from "@/lib/smooth-scroll"
 
-const navLinks = [
-  { label: "ご利用までの流れ", href: "#flow" },
-  { label: "サービス内容", href: "#service" },
-  { label: "料金", href: "#pricing" },
-  { label: "よくある質問", href: "#faq" },
-]
-
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -26,16 +19,6 @@ export function Header() {
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => smoothScrollTo(e, link.href)}
-              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </a>
-          ))}
           <a
             href="#contact"
             onClick={(e) => smoothScrollTo(e, "#contact")}
@@ -64,16 +47,6 @@ export function Header() {
       {isOpen && (
         <nav className="border-t border-border bg-background px-6 pb-6 pt-4 md:hidden">
           <div className="flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                onClick={(e) => { smoothScrollTo(e, link.href); setIsOpen(false) }}
-              >
-                {link.label}
-              </a>
-            ))}
             <a
               href="#contact"
               className="mt-2 inline-flex items-center justify-center rounded-lg bg-cta px-5 py-2.5 text-sm font-medium text-cta-foreground transition-opacity hover:opacity-90"
