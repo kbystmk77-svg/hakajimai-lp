@@ -11,12 +11,11 @@ import { GuideHero } from "@/components/guide/guide-hero"
 import { GuideCta } from "@/components/guide/guide-cta"
 
 function slugify(text: string) {
+  // HTMLタグを除去し、トリムして、そのまま使用（日本語対応）
   return text
-    .toLowerCase()
-    .trim()
     .replace(/<\/?[^>]+>/g, "")
-    .replace(/[^\p{L}\p{N}]+/gu, "-")
-    .replace(/^-+|-+$/g, "")
+    .trim()
+    .replace(/\s+/g, "-")  // スペースをハイフンに
 }
 
 function buildTocAndHtml(html: string) {
@@ -83,9 +82,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HakajimaiPage() {
-  console.log("[v0] HakajimaiPage rendering")
   const article = await getArticleBySlug("hakajimai")
-  console.log("[v0] Article fetched:", article?.title)
   const author = normalizeAuthor(article.author)
 
   const { toc, html } = buildTocAndHtml(article.body || "")
