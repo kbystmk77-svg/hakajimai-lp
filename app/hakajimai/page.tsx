@@ -110,7 +110,7 @@ export default async function HakajimaiPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header showNavLinks={false} />
       <main className="max-w-6xl mx-auto px-6 py-16">
         <nav className="text-sm text-gray-500 mb-6">
         <Link href="/" className="hover:underline">
