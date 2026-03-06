@@ -8,6 +8,7 @@ import type { Metadata } from "next"
 import { SimpleHeader } from "@/components/sections/simple-header"
 import { Footer } from "@/components/sections/footer"
 import { ArticleCta } from "@/components/guide/article-cta"
+import { GuideCta } from "@/components/guide/guide-cta"
 import { Calendar, RefreshCw } from "lucide-react"
 
 type PageProps = {
@@ -439,7 +440,7 @@ export default async function ArticlePage({ params }: PageProps) {
         </div>
 
         {/* Bottom CTA */}
-        <ArticleCta variant="full" />
+        <GuideCta variant="full" />
       </main>
 
       {/* Structured Data */}
