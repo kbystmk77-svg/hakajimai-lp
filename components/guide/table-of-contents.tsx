@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { ChevronDown, ChevronUp, List } from "lucide-react"
 
 interface TocItem {
@@ -17,7 +17,19 @@ export function TableOfContents({ toc }: TableOfContentsProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [activeId, setActiveId] = useState<string>("")
 
+  const handleClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault()
+    const element = document.getElementById(id)
+    if (element) {
+      const top = element.getBoundingClientRect().top + window.scrollY - 100
+      window.scrollTo({ top, behavior: "smooth" })
+      setActiveId(id)
+    }
+  }, [])
+
   useEffect(() => {
+    if (typeof window === "undefined") return
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -29,12 +41,22 @@ export function TableOfContents({ toc }: TableOfContentsProps) {
       { rootMargin: "-80px 0px -80% 0px" }
     )
 
-    toc.forEach((item) => {
-      const element = document.getElementById(item.id)
-      if (element) observer.observe(element)
-    })
+    // Use setTimeout to ensure DOM is ready
+    const timeoutId = setTimeout(() => {
+      toc.forEach((item) => {
+        try {
+          const element = document.getElementById(item.id)
+          if (element) observer.observe(element)
+        } catch (e) {
+          // Ignore errors for invalid selectors
+        }
+      })
+    }, 100)
 
-    return () => observer.disconnect()
+    return () => {
+      clearTimeout(timeoutId)
+      observer.disconnect()
+    }
   }, [toc])
 
   if (toc.length === 0) return null
@@ -63,8 +85,8 @@ export function TableOfContents({ toc }: TableOfContentsProps) {
             {toc.map((item, index) => (
               <li key={item.id}>
                 <a
-                  href={`#${item.id}`}
-                  onClick={() => setIsOpen(false)}
+                  href={`#${encodeURIComponent(item.id)}`}
+                  onClick={(e) => { handleClick(e, item.id); setIsOpen(false) }}
                   className={`flex items-start gap-2 rounded-lg px-3 py-2 text-sm transition-colors ${
                     item.level === 3 ? "ml-4" : ""
                   } ${
@@ -100,7 +122,8 @@ export function TableOfContents({ toc }: TableOfContentsProps) {
             return (
               <li key={item.id}>
                 <a
-                  href={`#${item.id}`}
+                  href={`#${encodeURIComponent(item.id)}`}
+                  onClick={(e) => handleClick(e, item.id)}
                   className={`flex items-start gap-2 rounded-lg px-3 py-2 text-sm transition-all ${
                     item.level === 3 ? "ml-3 text-xs" : ""
                   } ${

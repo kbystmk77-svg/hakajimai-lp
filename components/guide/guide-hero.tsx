@@ -10,6 +10,14 @@ interface GuideHeroProps {
   updatedAt?: string
 }
 
+function formatDate(dateString: string): string {
+  const date = new Date(dateString)
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  return `${year}年${month}月${day}日`
+}
+
 export function GuideHero({
   title,
   description,
@@ -61,13 +69,13 @@ export function GuideHero({
               {publishedAt && (
                 <div className="flex items-center gap-1.5">
                   <Calendar className="h-4 w-4" />
-                  <span>公開：{new Date(publishedAt).toLocaleDateString("ja-JP")}</span>
+                  <span>公開：{formatDate(publishedAt)}</span>
                 </div>
               )}
               {updatedAt && (
                 <div className="flex items-center gap-1.5">
                   <RefreshCw className="h-4 w-4" />
-                  <span>更新：{new Date(updatedAt).toLocaleDateString("ja-JP")}</span>
+                  <span>更新：{formatDate(updatedAt)}</span>
                 </div>
               )}
             </div>
