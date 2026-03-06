@@ -27,23 +27,8 @@ export function GuideHero({
   updatedAt,
 }: GuideHeroProps) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-slate-50 to-background">
-      {/* Subtle diagonal lines pattern */}
-      <div className="absolute inset-0 opacity-[0.03]">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="diagonal-lines" patternUnits="userSpaceOnUse" width="40" height="40" patternTransform="rotate(45)">
-              <line x1="0" y1="0" x2="0" y2="40" stroke="currentColor" strokeWidth="1" className="text-foreground" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#diagonal-lines)" />
-        </svg>
-      </div>
-      
-      {/* Top accent line */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
+    <section className="relative bg-muted/40 border-b border-border">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Text Content */}
           <div className="text-center lg:text-left">
@@ -109,15 +94,6 @@ export function GuideHero({
         </div>
       </div>
 
-      {/* Bottom Wave */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 60" fill="none" className="w-full h-auto">
-          <path
-            d="M0 60V30C240 50 480 10 720 30C960 50 1200 10 1440 30V60H0Z"
-            className="fill-background"
-          />
-        </svg>
-      </div>
     </section>
   )
 }
