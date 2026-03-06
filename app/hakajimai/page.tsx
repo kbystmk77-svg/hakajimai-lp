@@ -4,7 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { getArticleBySlug, getRelatedArticles, getArticlesByTag } from "@/lib/microcms"
 import type { Metadata } from "next"
-import { Header } from "@/components/sections/header"
+import { SimpleHeader } from "@/components/sections/simple-header"
 import { Footer } from "@/components/sections/footer"
 
 function slugify(text: string) {
@@ -110,7 +110,7 @@ export default async function HakajimaiPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header showNavLinks={false} />
+      <SimpleHeader />
       <main className="max-w-6xl mx-auto px-6 py-16">
         <nav className="text-sm text-gray-500 mb-6">
         <Link href="/" className="hover:underline">
