@@ -29,16 +29,16 @@ function buildTocAndHtml(html: string) {
       const text = inner.replace(/<[^>]+>/g, "").trim()
       if (!text) return match
 
-      let base = slugify(text) || "section"
+      const base = slugify(text) || "section"
       const n = (used.get(base) ?? 0) + 1
       used.set(base, n)
       const id = n === 1 ? base : `${base}-${n}`
 
       toc.push({ id, text, level })
 
-      if (/\sid\s*=/.test(attrs)) return match
+      const cleanedAttrs = attrs.replace(/\sid\s*=\s*(['"]).*?\1/gi, "")
 
-      return `<h${level}${attrs} id="${id}">${inner}</h${level}>`
+      return `<h${level}${cleanedAttrs} id="${id}">${inner}</h${level}>`
     }
   )
 
@@ -90,17 +90,17 @@ export default async function HakajimaiPage() {
   const related =
     article?.category?.id
       ? await getRelatedArticles({
-          categoryId: article.category.id,
-          excludeId: article.id,
-          limit: 3,
-        })
+        categoryId: article.category.id,
+        excludeId: article.id,
+        limit: 3,
+      })
       : []
 
   const tagArticles =
     article?.tag?.length > 0
       ? (await getArticlesByTag(article.tag[0].slug)).contents
-          .filter((a: any) => a.id !== article.id)
-          .slice(0, 3)
+        .filter((a: any) => a.id !== article.id)
+        .slice(0, 3)
       : []
 
   return (
