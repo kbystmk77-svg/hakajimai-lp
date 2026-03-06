@@ -15,6 +15,12 @@ export function Footer() {
           </div>
           <nav className="flex flex-wrap justify-center gap-6">
             <Link
+              href="/hakajimai"
+              className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+            >
+              墓じまい完全ガイド
+            </Link>
+            <Link
               href="/privacy"
               className="text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
