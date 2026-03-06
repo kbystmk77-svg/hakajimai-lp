@@ -200,7 +200,8 @@
 }
 
 .prose-guide ol {
-  @apply my-6 space-y-2 list-none counter-reset-[guide-counter];
+  @apply my-6 space-y-2 list-none;
+  counter-reset: guide-counter;
 }
 
 .prose-guide ol li {
@@ -293,9 +294,4 @@
   @apply my-8 w-full rounded-xl;
 }
 
-/* Counter reset utility */
-@layer utilities {
-  .counter-reset-\[guide-counter\] {
-    counter-reset: guide-counter;
-  }
-}
+
