@@ -83,7 +83,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function HakajimaiPage() {
+  console.log("[v0] HakajimaiPage rendering")
   const article = await getArticleBySlug("hakajimai")
+  console.log("[v0] Article fetched:", article?.title)
   const author = normalizeAuthor(article.author)
 
   const { toc, html } = buildTocAndHtml(article.body || "")
