@@ -11,9 +11,32 @@ const notoSansJP = Noto_Sans_JP({
 })
 
 export const metadata: Metadata = {
-  title: '墓じまいパートナーズ | 立会不要で安心墓じまい。お寺への連絡からお墓の整理までフルサポート',
+  metadataBase: process.env.NEXT_PUBLIC_SITE_URL
+    ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
+    : undefined,
+  title: {
+    default:
+      '墓じまいパートナーズ | 立会不要で安心墓じまい。お寺への連絡からお墓の整理までフルサポート',
+    template: '%s | 墓じまいパートナーズ',
+  },
   description:
     '墓じまいをご検討中の方へ。自身で対応するのは難しいけど、お寺と良好な関係のまま墓じまいをしたい。そんなご家族のお手伝いをいたします。立会不要・全国対応可能。まずは無料相談から。',
+  openGraph: {
+    siteName: '墓じまいパートナーズ',
+    type: 'website',
+    locale: 'ja_JP',
+    images: [
+      {
+        url: '/og-default.jpg',
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    images: ['/og-default.jpg'],
+  },
 }
 
 export const viewport: Viewport = {

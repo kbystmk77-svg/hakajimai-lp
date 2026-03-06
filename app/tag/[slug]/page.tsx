@@ -1,16 +1,29 @@
-//app\articles\page.tsx
-
+// app/tag/[slug]/page.tsx
 import Image from "next/image"
 import Link from "next/link"
-import { getArticles } from "@/lib/microcms"
+import { getArticlesByTag } from "@/lib/microcms"
 
-export default async function ArticlesPage() {
-  const data = await getArticles()
-  const articles = (data.contents || []).filter((article: any) => article.slug !== "hakajimai")
+type PageProps = {
+  params: Promise<{ slug: string }>
+}
+
+export default async function TagPage({ params }: PageProps) {
+  const { slug } = await params
+  const data = await getArticlesByTag(slug)
+
+  const tagName = data.tag?.name || slug
+  const articles = data.contents || []
 
   return (
     <main className="max-w-5xl mx-auto py-16 px-4">
-      <h1 className="text-3xl font-bold mb-8">記事一覧</h1>
+      <header className="mb-10">
+        <h1 className="text-3xl font-bold mb-3">#{tagName}</h1>
+        <p className="text-gray-600">「{tagName}」に関する記事一覧です。</p>
+      </header>
+
+      {articles.length === 0 && (
+        <p className="text-gray-500">記事がまだありません。</p>
+      )}
 
       <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {articles.map((article: any) => {
@@ -30,8 +43,7 @@ export default async function ArticlesPage() {
                       alt={thumbAlt}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 640px) 100vw, 50vw"
-                      priority={false}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">

@@ -1,16 +1,42 @@
-//app\articles\page.tsx
-
+// app/category/[slug]/page.tsx
 import Image from "next/image"
 import Link from "next/link"
-import { getArticles } from "@/lib/microcms"
+import { getArticlesByCategory } from "@/lib/microcms"
+import type { Metadata } from "next"
 
-export default async function ArticlesPage() {
-  const data = await getArticles()
+type PageProps = {
+  params: Promise<{ slug: string }>
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params
+  const data = await getArticlesByCategory(slug)
+
+  const categoryName = data.category?.name || "カテゴリー"
+
+  return {
+    title: `${categoryName}の記事一覧 | 墓じまいパートナーズ`,
+    description: `${categoryName}に関する記事一覧です。墓じまいの手続き・費用・供養方法などをわかりやすく解説します。`,
+  }
+}
+
+export default async function CategoryPage({ params }: PageProps) {
+  const { slug } = await params
+  const data = await getArticlesByCategory(slug)
+
+  const categoryName = data.category?.name || "カテゴリー"
   const articles = (data.contents || []).filter((article: any) => article.slug !== "hakajimai")
 
   return (
     <main className="max-w-5xl mx-auto py-16 px-4">
-      <h1 className="text-3xl font-bold mb-8">記事一覧</h1>
+      <header className="mb-10">
+        <h1 className="text-3xl font-bold mb-3">{categoryName}</h1>
+        <p className="text-gray-600">{categoryName}に関する記事一覧です。</p>
+      </header>
+
+      {articles.length === 0 && (
+        <p className="text-gray-500">記事がまだありません。</p>
+      )}
 
       <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {articles.map((article: any) => {
@@ -30,8 +56,7 @@ export default async function ArticlesPage() {
                       alt={thumbAlt}
                       fill
                       className="object-cover"
-                      sizes="(max-width: 640px) 100vw, 50vw"
-                      priority={false}
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
