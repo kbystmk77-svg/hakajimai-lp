@@ -50,7 +50,7 @@ export default function ThanksPage() {
             </p>
 
             <p className="mt-2 text-sm text-muted-foreground">
-              通常、1~2営業日以内にご連絡いたします。
+              通常、1~2営業日（土日祝日お休み）以内にご連絡いたします。
             </p>
 
             <div className="mt-10">
