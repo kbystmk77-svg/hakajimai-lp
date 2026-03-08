@@ -41,7 +41,7 @@ export function Cta() {
               無料相談フォーム
             </h3>
             <p className="mt-1 text-sm text-foreground/60">
-              以下のフォームにご記入ください。<br>通常1～2営業日（土日祝日休み）以内にご連絡します。</br>
+              以下のフォームにご記入ください。通常1～2営業日（土日祝日休み）以内にご連絡します。
             </p>
 
             <form className="mt-8 flex flex-col gap-6" action="/api/contact" method="POST" onSubmit={handleSubmit}>
