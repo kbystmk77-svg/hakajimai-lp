@@ -82,7 +82,7 @@ export function TableOfContents({ toc }: TableOfContentsProps) {
         <div className="flex items-center gap-2">
           <List className="h-4 w-4 text-primary" />
           <span className="font-semibold text-foreground">目次</span>
-          <span className="text-xs text-muted-foreground">({toc.length}項目)</span>
+          <span className="text-xs text-muted-foreground">({toc.filter(i => i.level === 2).length}項目)</span>
         </div>
         {isOpen ? (
           <ChevronUp className="h-4 w-4 text-muted-foreground" />
@@ -93,16 +93,16 @@ export function TableOfContents({ toc }: TableOfContentsProps) {
       {isOpen && (
         <nav className="border-t border-border px-4 pb-4">
           <ul className="space-y-1 pt-3">
-            {toc.map((item, index) => (
+            {toc.filter(item => item.level === 2).map((item) => (
               <li key={item.id}>
                 <a
                   href={`#${item.id}`}
                   onClick={(e) => { handleClick(e, item.id); setIsOpen(false) }}
-                  className={`block rounded-lg px-3 py-2 text-sm transition-colors ${item.level === 3 ? "ml-4" : ""
-                    } ${activeId === item.id
+                  className={`block rounded-lg px-3 py-2 text-sm transition-colors ${
+                    activeId === item.id
                       ? "bg-primary/10 text-primary font-medium"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                    }`}
+                  }`}
                 >
                   <span className="line-clamp-2">{item.text}</span>
                 </a>
