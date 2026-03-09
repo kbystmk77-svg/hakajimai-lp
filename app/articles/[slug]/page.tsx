@@ -8,6 +8,7 @@ import type { Metadata } from "next"
 import { SimpleHeader } from "@/components/sections/simple-header"
 import { Footer } from "@/components/sections/footer"
 import { ArticleCta } from "@/components/guide/article-cta"
+import { TableOfContents } from "@/components/guide/table-of-contents"
 import { GuideCta } from "@/components/guide/guide-cta"
 import { Calendar, RefreshCw, Tag } from "lucide-react"
 
@@ -291,20 +292,9 @@ export default async function ArticlePage({ params }: PageProps) {
               )}
 
               {/* Mobile: TOC */}
-              {toc.length > 0 && (
-                <section className="lg:hidden mb-8 rounded-xl border border-border bg-muted/30 p-4">
-                  <div className="font-bold text-sm text-foreground mb-3">目次</div>
-                  <ul className="space-y-2 text-sm">
-                    {toc.map((item) => (
-                      <li key={item.id} className={item.level === 3 ? "ml-4" : ""}>
-                        <a href={`#${item.id}`} className="text-muted-foreground hover:text-primary transition-colors">
-                          {item.text}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              )}
+              <div className="mb-8">
+                <TableOfContents toc={toc} />
+              </div>
 
               {/* Article Body */}
               <article>
