@@ -288,6 +288,14 @@ export default async function ArticlePage({ params }: PageProps) {
                       {author?.bio && <p className="text-sm text-muted-foreground leading-relaxed mt-2">{author.bio}</p>}
                     </div>
                   </div>
+                  <div className="flex flex-wrap gap-4 mt-3 pt-3 border-t border-border text-xs text-muted-foreground">
+                    {article.publishedAt && (
+                      <div className="flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5 shrink-0" /><span>公開：{new Date(article.publishedAt).toLocaleDateString("ja-JP")}</span></div>
+                    )}
+                    {article.updatedAt && (
+                      <div className="flex items-center gap-1.5"><RefreshCw className="h-3.5 w-3.5 shrink-0" /><span>更新：{new Date(article.updatedAt).toLocaleDateString("ja-JP")}</span></div>
+                    )}
+                  </div>
                 </section>
               )}
 
