@@ -292,7 +292,7 @@ export default async function ArticlePage({ params }: PageProps) {
               )}
 
               {/* Mobile: TOC */}
-              <div className="mb-8">
+              <div className="lg:hidden mb-8">
                 <TableOfContents toc={toc} />
               </div>
 
