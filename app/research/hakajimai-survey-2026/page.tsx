@@ -33,7 +33,7 @@ export default function HakajimaiSurvey2026Page() {
         <SurveyHero />
         <SurveySummary />
         <SurveyPhotoBreak
-          src="/images/research/eyecatch.png"
+          src="/images/research/family-grave-visit.png"
           alt="墓参りをする家族"
         />
         <SurveyReasons />
