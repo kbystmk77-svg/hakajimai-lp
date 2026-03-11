@@ -25,7 +25,7 @@ export function SurveyCost() {
         {/* Section Header */}
         <div className="mb-10 text-center">
           <h2 className="text-2xl font-bold text-foreground md:text-3xl">
-            墓じまい費用
+            墓じまい費用の総額
           </h2>
           <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-[#1e3a5f]" />
           <p className="mt-4 text-sm text-muted-foreground">
