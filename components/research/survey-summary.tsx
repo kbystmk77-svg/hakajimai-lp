@@ -74,12 +74,12 @@ export function SurveySummary() {
               </div>
 
               {/* Answer - Most prominent */}
-              <p className="mb-3 text-lg font-bold text-foreground leading-snug">
+              <p className="mb-3 text-xl font-bold text-[#1e3a5f] leading-snug md:text-2xl">
                 {card.answer}
               </p>
 
-              {/* Percentage */}
-              <p className="mt-auto text-3xl font-bold text-[#1e3a5f]">
+              {/* Percentage - Smaller, secondary */}
+              <p className="mt-auto text-base font-semibold text-muted-foreground">
                 {card.percentage}
               </p>
             </div>
