@@ -39,11 +39,11 @@ export default function HakajimaiSurvey2026Page() {
         <SurveyReasons />
         <SurveyCost />
         <SurveyRidanryo />
-        <SurveyDifficulties />
         <SurveyPhotoBreak
-          src="/images/research/hakajimai-after-nature.jpg"
-          alt="樹木葬墓地の風景"
+          src="/images/research/hakajimai-consultation.png"
+          alt="墓じまいについて相談する夫婦"
         />
+        <SurveyDifficulties />
         <SurveyDestination />
         <SurveySummaryText />
         <SurveyCta />

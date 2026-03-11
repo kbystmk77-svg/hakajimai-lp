@@ -1,3 +1,5 @@
+"use client"
+
 import { MapPin, Wallet, Building2, MessageSquare } from "lucide-react"
 import type { LucideIcon } from "lucide-react"
 
@@ -133,51 +135,29 @@ export function SurveySummary() {
             調査項目
           </h3>
           <div className="flex flex-wrap justify-center gap-2">
-            <a
-              href="#reasons"
-              className="group inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-medium text-[#1e3a5f] shadow-sm ring-1 ring-[#1e3a5f]/10 transition-all hover:bg-[#1e3a5f] hover:text-white hover:shadow-md"
-            >
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1e3a5f]/10 text-xs font-bold group-hover:bg-white/20">
-                1
-              </span>
-              墓じまいの理由
-            </a>
-            <a
-              href="#cost"
-              className="group inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-medium text-[#1e3a5f] shadow-sm ring-1 ring-[#1e3a5f]/10 transition-all hover:bg-[#1e3a5f] hover:text-white hover:shadow-md"
-            >
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1e3a5f]/10 text-xs font-bold group-hover:bg-white/20">
-                2
-              </span>
-              費用の総額
-            </a>
-            <a
-              href="#ridanryo"
-              className="group inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-medium text-[#1e3a5f] shadow-sm ring-1 ring-[#1e3a5f]/10 transition-all hover:bg-[#1e3a5f] hover:text-white hover:shadow-md"
-            >
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1e3a5f]/10 text-xs font-bold group-hover:bg-white/20">
-                3
-              </span>
-              離檀料
-            </a>
-            <a
-              href="#difficulties"
-              className="group inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-medium text-[#1e3a5f] shadow-sm ring-1 ring-[#1e3a5f]/10 transition-all hover:bg-[#1e3a5f] hover:text-white hover:shadow-md"
-            >
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1e3a5f]/10 text-xs font-bold group-hover:bg-white/20">
-                4
-              </span>
-              大変だったこと
-            </a>
-            <a
-              href="#destination"
-              className="group inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-medium text-[#1e3a5f] shadow-sm ring-1 ring-[#1e3a5f]/10 transition-all hover:bg-[#1e3a5f] hover:text-white hover:shadow-md"
-            >
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1e3a5f]/10 text-xs font-bold group-hover:bg-white/20">
-                5
-              </span>
-              供養先
-            </a>
+            {[
+              { id: "reasons", num: 1, label: "墓じまいの理由" },
+              { id: "cost", num: 2, label: "費用の総額" },
+              { id: "ridanryo", num: 3, label: "離檀料" },
+              { id: "difficulties", num: 4, label: "大変だったこと" },
+              { id: "destination", num: 5, label: "供養先" },
+            ].map((item) => (
+              <button
+                key={item.id}
+                onClick={() => {
+                  const el = document.getElementById(item.id)
+                  if (el) {
+                    el.scrollIntoView({ behavior: "smooth", block: "start" })
+                  }
+                }}
+                className="group inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-medium text-[#1e3a5f] shadow-sm ring-1 ring-[#1e3a5f]/10 transition-all hover:bg-[#1e3a5f] hover:text-white hover:shadow-md"
+              >
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1e3a5f]/10 text-xs font-bold group-hover:bg-white/20">
+                  {item.num}
+                </span>
+                {item.label}
+              </button>
+            ))}
           </div>
         </div>
       </div>
