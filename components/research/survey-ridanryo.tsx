@@ -22,20 +22,20 @@ export function SurveyRidanryo() {
   const colors = ["#8bb8e8", "#1e3a5f", "#3d6a8f", "#5d9ad5", "#b3d4f0"]
 
   return (
-    <section className="bg-[#1e3a5f] py-16 md:py-20">
+    <section className="bg-[#1e3a5f]/10 py-16 md:py-20">
       <div className="mx-auto max-w-4xl px-6">
         {/* Section Header */}
         <div className="mb-10 text-center">
-          <h2 className="text-2xl font-bold text-white md:text-3xl">
+          <h2 className="text-2xl font-bold text-foreground md:text-3xl">
             離檀料の金額
           </h2>
-          <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-white/50" />
-          <p className="mt-4 text-sm text-white/80">
+          <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-[#1e3a5f]" />
+          <p className="mt-4 text-sm text-muted-foreground">
             墓じまい費用には墓石撤去費や離檀料などが含まれます。
             <br />
             ここでは、離檀料のみの金額について聞きました。
           </p>
-          <p className="mt-3 inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs text-white/90">
+          <p className="mt-3 inline-flex items-center rounded-full bg-[#1e3a5f]/10 px-3 py-1 text-xs text-[#1e3a5f]">
             対象：墓じまい経験者
           </p>
         </div>
