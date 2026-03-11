@@ -1,29 +1,25 @@
-import { CircleDollarSign, CircleCheck, CircleX } from "lucide-react"
+"use client"
+
+import {
+  Bar,
+  BarChart,
+  XAxis,
+  YAxis,
+  Cell,
+  LabelList,
+  ResponsiveContainer,
+} from "recharts"
 
 export function SurveyRidanryo() {
   const ridanryoData = [
-    {
-      label: "離檀料を支払った",
-      percentage: 62.8,
-      count: 49,
-      icon: CircleDollarSign,
-      color: "bg-[#1e3a5f]",
-    },
-    {
-      label: "離檀料は不要だった",
-      percentage: 29.5,
-      count: 23,
-      icon: CircleCheck,
-      color: "bg-[#4d8ac5]",
-    },
-    {
-      label: "わからない・覚えていない",
-      percentage: 7.7,
-      count: 6,
-      icon: CircleX,
-      color: "bg-[#94a3b8]",
-    },
+    { range: "5万円未満", value: 12.8 },
+    { range: "5〜10万円", value: 35.9 },
+    { range: "10〜20万円", value: 28.2 },
+    { range: "20〜30万円", value: 14.1 },
+    { range: "30万円以上", value: 9.0 },
   ]
+
+  const colors = ["#94a3b8", "#1e3a5f", "#2d5a87", "#4d8ac5", "#5d9ad5"]
 
   return (
     <section className="bg-[#1e3a5f] py-16 md:py-20">
@@ -31,52 +27,65 @@ export function SurveyRidanryo() {
         {/* Section Header */}
         <div className="mb-10 text-center">
           <h2 className="text-2xl font-bold text-white md:text-3xl">
-            離檀料
+            離檀料の金額
           </h2>
           <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-white/50" />
-          <p className="mt-4 text-sm text-white/70">経験者78人</p>
+          <p className="mt-4 text-sm text-white/70">
+            墓じまい経験者 n=78
+          </p>
         </div>
 
-        {/* Results */}
+        {/* Chart Card */}
         <div className="overflow-hidden rounded-2xl bg-white p-6 shadow-lg md:p-8">
-          <div className="grid gap-4 md:grid-cols-3">
-            {ridanryoData.map((item, index) => (
-              <div
-                key={index}
-                className="flex flex-col items-center rounded-xl bg-[#f8fafc] p-6 text-center"
+          {/* Bar Chart */}
+          <div className="h-72 w-full md:h-80">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart
+                data={ridanryoData}
+                layout="vertical"
+                margin={{ top: 10, right: 50, left: 20, bottom: 10 }}
               >
-                <div
-                  className={`mb-4 inline-flex h-14 w-14 items-center justify-center rounded-full ${item.color} text-white`}
-                >
-                  <item.icon className="h-7 w-7" />
-                </div>
-                <div className="mb-2 text-3xl font-bold text-[#1e3a5f]">
-                  {item.percentage}%
-                </div>
-                <div className="mb-1 text-sm font-medium text-foreground">
-                  {item.label}
-                </div>
-                <div className="text-xs text-muted-foreground">
-                  （{item.count}人）
-                </div>
-              </div>
-            ))}
+                <XAxis
+                  type="number"
+                  domain={[0, 50]}
+                  tickFormatter={(value) => `${value}%`}
+                  tick={{ fill: "#64748b", fontSize: 12 }}
+                  axisLine={{ stroke: "#e2e8f0" }}
+                  tickLine={false}
+                />
+                <YAxis
+                  type="category"
+                  dataKey="range"
+                  tick={{ fill: "#374151", fontSize: 13 }}
+                  axisLine={false}
+                  tickLine={false}
+                  width={90}
+                />
+                <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={32}>
+                  {ridanryoData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={colors[index]} />
+                  ))}
+                  <LabelList
+                    dataKey="value"
+                    position="right"
+                    formatter={(value: number) => `${value}%`}
+                    style={{ fill: "#1e3a5f", fontSize: 13, fontWeight: 600 }}
+                  />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
           </div>
 
-          {/* Additional info */}
-          <div className="mt-8 space-y-4">
-            <div className="rounded-xl border border-[#1e3a5f]/20 bg-[#1e3a5f]/5 p-4">
-              <h4 className="mb-2 text-sm font-semibold text-[#1e3a5f]">
-                離檀料の相場
-              </h4>
-              <p className="text-sm text-foreground">
-                離檀料を支払った方の中で最も多かった金額帯は
-                <span className="font-semibold text-[#1e3a5f]">
-                  5〜20万円
-                </span>
-                でした。ただし、お寺との関係性や地域によって大きく異なります。
-              </p>
-            </div>
+          {/* Description */}
+          <div className="mt-6 rounded-xl border border-[#1e3a5f]/20 bg-[#f8fafc] p-4">
+            <p className="text-sm leading-relaxed text-foreground">
+              離檀料は「<span className="font-semibold text-[#1e3a5f]">5〜10万円</span>」が最も多く、
+              次いで「<span className="font-semibold text-[#1e3a5f]">10〜20万円</span>」が多い結果となりました。
+              全体として、離檀料は<span className="font-semibold text-[#1e3a5f]">5〜20万円程度</span>がボリュームゾーンとなっています。
+            </p>
+            <p className="mt-2 text-xs text-muted-foreground">
+              ※回答対象：墓じまい経験者
+            </p>
           </div>
         </div>
       </div>
