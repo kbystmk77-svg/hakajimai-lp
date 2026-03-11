@@ -13,7 +13,7 @@ const destinationData = [
 
 export function SurveyDestination() {
   return (
-    <section className="bg-white py-16 md:py-20">
+    <section className="bg-[#f8fafc] py-16 md:py-20">
       <div className="mx-auto max-w-4xl px-6">
         {/* Section Header */}
         <div className="mb-10 text-center">
@@ -25,7 +25,7 @@ export function SurveyDestination() {
         </div>
 
         {/* Chart Card */}
-        <div className="overflow-hidden rounded-2xl bg-[#f8fafc] p-6 shadow-lg md:p-8">
+        <div className="overflow-hidden rounded-2xl bg-white p-6 shadow-lg md:p-8">
           <div className="flex flex-col items-center gap-8 lg:flex-row lg:justify-center">
             {/* Pie Chart */}
             <div className="h-[300px] w-full max-w-[300px]">

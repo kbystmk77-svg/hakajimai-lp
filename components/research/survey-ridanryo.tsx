@@ -26,15 +26,15 @@ export function SurveyRidanryo() {
   ]
 
   return (
-    <section className="bg-[#f8fafc] py-16 md:py-20">
+    <section className="bg-[#1e3a5f] py-16 md:py-20">
       <div className="mx-auto max-w-4xl px-6">
         {/* Section Header */}
         <div className="mb-10 text-center">
-          <h2 className="text-2xl font-bold text-foreground md:text-3xl">
+          <h2 className="text-2xl font-bold text-white md:text-3xl">
             離檀料
           </h2>
-          <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-[#1e3a5f]" />
-          <p className="mt-4 text-sm text-muted-foreground">経験者78人</p>
+          <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-white/50" />
+          <p className="mt-4 text-sm text-white/70">経験者78人</p>
         </div>
 
         {/* Results */}

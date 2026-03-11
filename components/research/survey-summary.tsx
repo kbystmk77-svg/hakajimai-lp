@@ -93,13 +93,38 @@ export function SurveySummary() {
           ))}
         </div>
 
-        {/* Survey Overview - Compact inline */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
-          <span>調査方法：インターネット調査</span>
-          <span className="hidden sm:inline">|</span>
-          <span>回答者数：230人（墓じまい経験者78人・検討者152人）</span>
-          <span className="hidden sm:inline">|</span>
-          <span>調査期間：2026年3月</span>
+        {/* Survey Overview - Compact table */}
+        <div className="mt-12 flex justify-center">
+          <table className="w-full max-w-md border-collapse text-sm">
+            <tbody>
+              <tr className="border-b border-border/50">
+                <th className="py-2.5 pr-4 text-left font-medium text-muted-foreground">
+                  調査主体
+                </th>
+                <td className="py-2.5 text-foreground">墓じまいパートナーズ</td>
+              </tr>
+              <tr className="border-b border-border/50">
+                <th className="py-2.5 pr-4 text-left font-medium text-muted-foreground">
+                  調査方法
+                </th>
+                <td className="py-2.5 text-foreground">インターネット調査</td>
+              </tr>
+              <tr className="border-b border-border/50">
+                <th className="py-2.5 pr-4 text-left font-medium text-muted-foreground">
+                  回答者数
+                </th>
+                <td className="py-2.5 text-foreground">
+                  230人（うち墓じまい経験者78人、検討者152人）
+                </td>
+              </tr>
+              <tr>
+                <th className="py-2.5 pr-4 text-left font-medium text-muted-foreground">
+                  調査期間
+                </th>
+                <td className="py-2.5 text-foreground">2026年3月</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>

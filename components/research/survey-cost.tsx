@@ -20,7 +20,7 @@ const costData = [
 
 export function SurveyCost() {
   return (
-    <section className="bg-white py-16 md:py-20">
+    <section className="bg-[#1e3a5f]/5 py-16 md:py-20">
       <div className="mx-auto max-w-4xl px-6">
         {/* Section Header */}
         <div className="mb-10 text-center">
@@ -34,7 +34,7 @@ export function SurveyCost() {
         </div>
 
         {/* Chart Card */}
-        <div className="overflow-hidden rounded-2xl bg-[#f8fafc] p-6 shadow-lg md:p-8">
+        <div className="overflow-hidden rounded-2xl bg-white p-6 shadow-lg md:p-8">
           <div className="h-[350px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
