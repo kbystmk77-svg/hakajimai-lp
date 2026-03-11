@@ -41,7 +41,7 @@ export function SurveyDifficulties() {
               <BarChart
                 data={difficultiesData}
                 layout="vertical"
-                margin={{ top: 10, right: 50, left: 0, bottom: 10 }}
+                margin={{ top: 10, right: 40, left: 0, bottom: 10 }}
               >
                 <XAxis
                   type="number"
