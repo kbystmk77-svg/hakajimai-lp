@@ -63,7 +63,7 @@ export function SurveyReasons() {
                   {reasonsData.map((_, index) => (
                     <Cell
                       key={`cell-${index}`}
-                      fill={index === 0 ? "#1e3a5f" : "#4d8ac5"}
+                      fill={index === 0 ? "#10b981" : "#4d8ac5"}
                     />
                   ))}
                   <LabelList

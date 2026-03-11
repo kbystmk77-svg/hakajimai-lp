@@ -75,7 +75,7 @@ export function SurveySummary() {
 
               {/* 1st Place Badge */}
               <div className="mb-2 flex items-center gap-2">
-                <span className="inline-flex items-center rounded-full bg-[#1e3a5f] px-2.5 py-0.5 text-xs font-bold text-white">
+                <span className="inline-flex items-center rounded-full bg-emerald-500 px-2.5 py-0.5 text-xs font-bold text-white">
                   1位
                 </span>
               </div>

@@ -63,7 +63,7 @@ export function SurveyDifficulties() {
                   {difficultiesData.map((entry, index) => (
                     <Cell
                       key={`cell-${index}`}
-                      fill={entry.rank === 1 ? "#1e3a5f" : "#4d8ac5"}
+                      fill={entry.rank === 1 ? "#f59e0b" : "#4d8ac5"}
                     />
                   ))}
                   <LabelList
@@ -78,9 +78,9 @@ export function SurveyDifficulties() {
           </div>
 
           {/* Highlight box */}
-          <div className="mt-6 rounded-xl bg-[#1e3a5f]/5 p-4 text-center">
+          <div className="mt-6 rounded-xl bg-amber-50 p-4 text-center">
             <p className="text-sm text-foreground">
-              <span className="font-semibold text-[#1e3a5f]">
+              <span className="font-semibold text-amber-600">
                 「お寺とのやり取り」
               </span>
               が最も大変だったと回答した方が最多でした
