@@ -40,6 +40,8 @@ export function SurveyDestination() {
                     paddingAngle={2}
                     dataKey="value"
                     labelLine={false}
+                    startAngle={90}
+                    endAngle={-270}
                   >
                     {destinationData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
