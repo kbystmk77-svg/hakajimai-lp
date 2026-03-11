@@ -17,7 +17,7 @@ export function SurveyCitation() {
   }
 
   return (
-    <section className="bg-[#f8fafc] py-16 md:py-20">
+    <section className="bg-white py-16 md:py-20">
       <div className="mx-auto max-w-3xl px-6">
         <div className="mb-8 text-center">
           <h2 className="text-2xl font-bold text-foreground md:text-3xl">
@@ -26,7 +26,7 @@ export function SurveyCitation() {
           <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-[#1e3a5f]" />
         </div>
 
-        <div className="rounded-2xl bg-white p-6 shadow-lg md:p-8">
+        <div className="rounded-2xl bg-[#f8fafc] p-6 shadow-lg md:p-8">
           {/* Usage terms */}
           <div className="mb-6">
             <h3 className="mb-3 text-base font-semibold text-foreground">

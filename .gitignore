@@ -9,3 +9,6 @@ node_modules/
 .env*.local
 .DS_Store
 .vercel
+
+# Survey raw data (personal info — do not commit)
+data/

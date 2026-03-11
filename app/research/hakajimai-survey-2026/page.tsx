@@ -10,7 +10,8 @@ import { SurveyDifficulties } from "@/components/research/survey-difficulties"
 import { SurveyDestination } from "@/components/research/survey-destination"
 import { SurveyRidanryo } from "@/components/research/survey-ridanryo"
 import { SurveySummaryText } from "@/components/research/survey-summary-text"
-import { SurveyCta } from "@/components/research/survey-cta"
+import { SurveyVoices } from "@/components/research/survey-voices"
+import { GuideCta } from "@/components/guide/guide-cta"
 import { SurveyCitation } from "@/components/research/survey-citation"
 import { SurveyPhotoBreak } from "@/components/research/survey-photo-break"
 
@@ -46,9 +47,10 @@ export default function HakajimaiSurvey2026Page() {
         />
         <SurveyDifficulties />
         <SurveyDestination />
+        <SurveyVoices />
         <SurveySummaryText />
         <SurveyCitation />
-        <SurveyCta />
+        <GuideCta variant="full" />
       </main>
       <Footer />
     </div>

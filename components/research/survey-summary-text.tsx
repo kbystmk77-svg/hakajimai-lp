@@ -2,7 +2,7 @@ import { FileText } from "lucide-react"
 
 export function SurveySummaryText() {
   return (
-    <section className="bg-white py-16 md:py-20">
+    <section className="bg-[#f8fafc] py-16 md:py-20">
       <div className="mx-auto max-w-3xl px-6">
         {/* Section Header */}
         <div className="mb-10 text-center">
@@ -13,7 +13,7 @@ export function SurveySummaryText() {
         </div>
 
         {/* Summary Card */}
-        <div className="overflow-hidden rounded-2xl border-2 border-[#1e3a5f]/20 bg-[#f8fafc] p-6 shadow-sm md:p-8">
+        <div className="overflow-hidden rounded-2xl bg-white p-6 shadow-lg md:p-8">
           <div className="flex items-start gap-4">
             <div className="hidden shrink-0 md:block">
               <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#1e3a5f] text-white">

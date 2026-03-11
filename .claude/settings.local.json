@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(jq -r .message.content[1].source.data)",
+      "Bash(sed -n '4p' \"C:\\\\Users\\\\user\\\\.claude\\\\projects\\\\c--dev-hakajimai-lp\\\\efaa4b81-1456-4847-9c8f-dc7a8f301194.jsonl\")",
+      "Read(//tmp/**)",
+      "Bash(gh repo:*)",
+      "Bash(node -e \":*)",
+      "Bash(xargs grep:*)"
+    ]
+  }
+}
