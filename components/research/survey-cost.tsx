@@ -11,16 +11,16 @@ import {
 } from "recharts"
 
 const costData = [
-  { range: "10万円未満", count: 5, percentage: 6.4 },
-  { range: "10〜30万円", count: 18, percentage: 23.1 },
-  { range: "30〜50万円", count: 26, percentage: 33.3 },
-  { range: "50〜100万円", count: 19, percentage: 24.4 },
-  { range: "100万円以上", count: 10, percentage: 12.8 },
+  { range: "10万円\n未満", count: 5, percentage: 6.4, isTop: false },
+  { range: "10〜\n30万円", count: 18, percentage: 23.1, isTop: false },
+  { range: "30〜\n50万円", count: 26, percentage: 33.3, isTop: true },
+  { range: "50〜\n100万円", count: 19, percentage: 24.4, isTop: false },
+  { range: "100万円\n以上", count: 10, percentage: 12.8, isTop: false },
 ]
 
 export function SurveyCost() {
   return (
-    <section className="bg-[#1e3a5f]/5 py-16 md:py-20">
+    <section id="cost" className="scroll-mt-20 bg-[#1e3a5f]/5 py-16 md:py-20">
       <div className="mx-auto max-w-4xl px-6">
         {/* Section Header */}
         <div className="mb-10 text-center">
@@ -34,39 +34,27 @@ export function SurveyCost() {
         </div>
 
         {/* Chart Card */}
-        <div className="overflow-hidden rounded-2xl bg-white p-6 shadow-lg md:p-8">
-          <div className="h-[350px] w-full">
+        <div className="overflow-hidden rounded-2xl bg-white px-2 py-6 shadow-lg md:p-8">
+          <div className="h-[320px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={costData}
-                margin={{ top: 30, right: 20, left: 20, bottom: 30 }}
+                margin={{ top: 25, right: 5, left: 5, bottom: 5 }}
               >
                 <XAxis
                   dataKey="range"
-                  tick={{ fontSize: 11, fill: "#334155" }}
+                  tick={{ fontSize: 10, fill: "#334155" }}
                   axisLine={{ stroke: "#e2e8f0" }}
-                  tickLine={{ stroke: "#e2e8f0" }}
+                  tickLine={false}
                   interval={0}
-                  angle={-15}
-                  textAnchor="end"
-                  height={60}
+                  height={40}
                 />
-                <YAxis
-                  tick={{ fontSize: 12, fill: "#64748b" }}
-                  axisLine={{ stroke: "#e2e8f0" }}
-                  tickLine={{ stroke: "#e2e8f0" }}
-                  label={{
-                    value: "人数",
-                    angle: -90,
-                    position: "insideLeft",
-                    style: { fontSize: 12, fill: "#64748b" },
-                  }}
-                />
-                <Bar dataKey="count" radius={[6, 6, 0, 0]} barSize={60}>
+                <YAxis hide />
+                <Bar dataKey="count" radius={[6, 6, 0, 0]} barSize={48}>
                   {costData.map((entry, index) => (
                     <Cell
                       key={`cell-${index}`}
-                      fill={entry.range === "30〜50万円" ? "#1e3a5f" : "#6b9fcf"}
+                      fill={entry.isTop ? "#1e3a5f" : "#6b9fcf"}
                     />
                   ))}
                   <LabelList

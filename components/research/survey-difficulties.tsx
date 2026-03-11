@@ -21,7 +21,7 @@ const difficultiesData = [
 
 export function SurveyDifficulties() {
   return (
-    <section className="bg-white py-16 md:py-20">
+    <section id="difficulties" className="scroll-mt-20 bg-white py-16 md:py-20">
       <div className="mx-auto max-w-4xl px-6">
         {/* Section Header */}
         <div className="mb-10 text-center">
@@ -35,27 +35,27 @@ export function SurveyDifficulties() {
         </div>
 
         {/* Chart Card */}
-        <div className="overflow-hidden rounded-2xl bg-[#f8fafc] p-6 shadow-lg md:p-8">
+        <div className="overflow-hidden rounded-2xl bg-[#f8fafc] px-3 py-6 shadow-lg md:p-8">
           <div className="h-[400px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={difficultiesData}
                 layout="vertical"
-                margin={{ top: 10, right: 60, left: 20, bottom: 10 }}
+                margin={{ top: 10, right: 40, left: 0, bottom: 10 }}
               >
                 <XAxis
                   type="number"
                   domain={[0, 50]}
                   tickFormatter={(value) => `${value}%`}
-                  tick={{ fontSize: 12, fill: "#64748b" }}
+                  tick={{ fontSize: 11, fill: "#64748b" }}
                   axisLine={{ stroke: "#e2e8f0" }}
                   tickLine={{ stroke: "#e2e8f0" }}
                 />
                 <YAxis
                   type="category"
                   dataKey="difficulty"
-                  width={120}
-                  tick={{ fontSize: 12, fill: "#334155" }}
+                  width={100}
+                  tick={{ fontSize: 11, fill: "#334155" }}
                   axisLine={false}
                   tickLine={false}
                 />

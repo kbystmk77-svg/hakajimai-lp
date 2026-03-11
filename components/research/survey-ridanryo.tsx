@@ -22,7 +22,7 @@ export function SurveyRidanryo() {
   const colors = ["#8bb8e8", "#1e3a5f", "#3d6a8f", "#5d9ad5", "#b3d4f0"]
 
   return (
-    <section className="bg-[#1e3a5f]/10 py-16 md:py-20">
+    <section id="ridanryo" className="scroll-mt-20 bg-[#1e3a5f]/10 py-16 md:py-20">
       <div className="mx-auto max-w-4xl px-6">
         {/* Section Header */}
         <div className="mb-10 text-center">
@@ -41,30 +41,30 @@ export function SurveyRidanryo() {
         </div>
 
         {/* Chart Card */}
-        <div className="overflow-hidden rounded-2xl bg-white p-6 shadow-lg md:p-8">
+        <div className="overflow-hidden rounded-2xl bg-white px-3 py-6 shadow-lg md:p-8">
           {/* Bar Chart */}
           <div className="h-72 w-full md:h-80">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={ridanryoData}
                 layout="vertical"
-                margin={{ top: 10, right: 50, left: 20, bottom: 10 }}
+                margin={{ top: 10, right: 40, left: 0, bottom: 10 }}
               >
                 <XAxis
                   type="number"
                   domain={[0, 50]}
                   tickFormatter={(value) => `${value}%`}
-                  tick={{ fill: "#64748b", fontSize: 12 }}
+                  tick={{ fill: "#64748b", fontSize: 11 }}
                   axisLine={{ stroke: "#e2e8f0" }}
                   tickLine={false}
                 />
                 <YAxis
                   type="category"
                   dataKey="range"
-                  tick={{ fill: "#374151", fontSize: 13 }}
+                  tick={{ fill: "#374151", fontSize: 11 }}
                   axisLine={false}
                   tickLine={false}
-                  width={90}
+                  width={75}
                 />
                 <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={32}>
                   {ridanryoData.map((entry, index) => (
