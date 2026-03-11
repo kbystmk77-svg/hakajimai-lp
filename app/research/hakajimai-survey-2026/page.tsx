@@ -3,7 +3,7 @@ import { SimpleHeader } from "@/components/sections/simple-header"
 import { Footer } from "@/components/sections/footer"
 import { SurveyHero } from "@/components/research/survey-hero"
 import { SurveySummary } from "@/components/research/survey-summary"
-import { SurveyOverview } from "@/components/research/survey-overview"
+
 import { SurveyReasons } from "@/components/research/survey-reasons"
 import { SurveyCost } from "@/components/research/survey-cost"
 import { SurveyDifficulties } from "@/components/research/survey-difficulties"
@@ -31,7 +31,6 @@ export default function HakajimaiSurvey2026Page() {
       <main>
         <SurveyHero />
         <SurveySummary />
-        <SurveyOverview />
         <SurveyReasons />
         <SurveyCost />
         <SurveyDifficulties />

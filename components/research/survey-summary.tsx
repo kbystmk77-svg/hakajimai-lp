@@ -92,6 +92,15 @@ export function SurveySummary() {
             </div>
           ))}
         </div>
+
+        {/* Survey Overview - Compact inline */}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
+          <span>調査方法：インターネット調査</span>
+          <span className="hidden sm:inline">|</span>
+          <span>回答者数：230人（墓じまい経験者78人・検討者152人）</span>
+          <span className="hidden sm:inline">|</span>
+          <span>調査期間：2026年3月</span>
+        </div>
       </div>
     </section>
   )
