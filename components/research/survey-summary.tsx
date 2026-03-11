@@ -128,58 +128,56 @@ export function SurveySummary() {
         </div>
 
         {/* Survey Items - Anchor Links */}
-        <div className="mt-10 flex justify-center">
-          <div className="w-full max-w-md">
-            <h3 className="mb-4 text-center text-sm font-semibold text-foreground">
-              調査項目
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#reasons"
-                  className="flex items-center gap-2 rounded-lg border border-border/50 bg-white px-4 py-2.5 text-sm text-foreground transition-colors hover:bg-[#1e3a5f]/5"
-                >
-                  <span className="text-[#1e3a5f]">1.</span>
-                  墓じまいの理由
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#cost"
-                  className="flex items-center gap-2 rounded-lg border border-border/50 bg-white px-4 py-2.5 text-sm text-foreground transition-colors hover:bg-[#1e3a5f]/5"
-                >
-                  <span className="text-[#1e3a5f]">2.</span>
-                  墓じまい費用の総額
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#ridanryo"
-                  className="flex items-center gap-2 rounded-lg border border-border/50 bg-white px-4 py-2.5 text-sm text-foreground transition-colors hover:bg-[#1e3a5f]/5"
-                >
-                  <span className="text-[#1e3a5f]">3.</span>
-                  離檀料の金額
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#difficulties"
-                  className="flex items-center gap-2 rounded-lg border border-border/50 bg-white px-4 py-2.5 text-sm text-foreground transition-colors hover:bg-[#1e3a5f]/5"
-                >
-                  <span className="text-[#1e3a5f]">4.</span>
-                  墓じまいで大変だったこと
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#destination"
-                  className="flex items-center gap-2 rounded-lg border border-border/50 bg-white px-4 py-2.5 text-sm text-foreground transition-colors hover:bg-[#1e3a5f]/5"
-                >
-                  <span className="text-[#1e3a5f]">5.</span>
-                  墓じまい後の供養先
-                </a>
-              </li>
-            </ul>
+        <div className="mt-10">
+          <h3 className="mb-5 text-center text-sm font-semibold text-muted-foreground">
+            調査項目
+          </h3>
+          <div className="flex flex-wrap justify-center gap-2">
+            <a
+              href="#reasons"
+              className="group inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-medium text-[#1e3a5f] shadow-sm ring-1 ring-[#1e3a5f]/10 transition-all hover:bg-[#1e3a5f] hover:text-white hover:shadow-md"
+            >
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1e3a5f]/10 text-xs font-bold group-hover:bg-white/20">
+                1
+              </span>
+              墓じまいの理由
+            </a>
+            <a
+              href="#cost"
+              className="group inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-medium text-[#1e3a5f] shadow-sm ring-1 ring-[#1e3a5f]/10 transition-all hover:bg-[#1e3a5f] hover:text-white hover:shadow-md"
+            >
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1e3a5f]/10 text-xs font-bold group-hover:bg-white/20">
+                2
+              </span>
+              費用の総額
+            </a>
+            <a
+              href="#ridanryo"
+              className="group inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-medium text-[#1e3a5f] shadow-sm ring-1 ring-[#1e3a5f]/10 transition-all hover:bg-[#1e3a5f] hover:text-white hover:shadow-md"
+            >
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1e3a5f]/10 text-xs font-bold group-hover:bg-white/20">
+                3
+              </span>
+              離檀料
+            </a>
+            <a
+              href="#difficulties"
+              className="group inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-medium text-[#1e3a5f] shadow-sm ring-1 ring-[#1e3a5f]/10 transition-all hover:bg-[#1e3a5f] hover:text-white hover:shadow-md"
+            >
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1e3a5f]/10 text-xs font-bold group-hover:bg-white/20">
+                4
+              </span>
+              大変だったこと
+            </a>
+            <a
+              href="#destination"
+              className="group inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-medium text-[#1e3a5f] shadow-sm ring-1 ring-[#1e3a5f]/10 transition-all hover:bg-[#1e3a5f] hover:text-white hover:shadow-md"
+            >
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1e3a5f]/10 text-xs font-bold group-hover:bg-white/20">
+                5
+              </span>
+              供養先
+            </a>
           </div>
         </div>
       </div>
