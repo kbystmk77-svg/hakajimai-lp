@@ -66,7 +66,7 @@ export function SurveyCost() {
                   {costData.map((entry, index) => (
                     <Cell
                       key={`cell-${index}`}
-                      fill={entry.range === "30〜50万円" ? "#10b981" : "#4d8ac5"}
+                      fill={entry.range === "30〜50万円" ? "#1e3a5f" : "#6b9fcf"}
                     />
                   ))}
                   <LabelList
@@ -81,9 +81,9 @@ export function SurveyCost() {
           </div>
 
           {/* Highlight box */}
-          <div className="mt-6 rounded-xl bg-emerald-50 p-4 text-center">
+          <div className="mt-6 rounded-xl bg-[#1e3a5f]/5 p-4 text-center">
             <p className="text-sm text-foreground">
-              <span className="font-semibold text-emerald-600">30〜50万円</span>
+              <span className="font-semibold text-[#1e3a5f]">30〜50万円</span>
               が最も多く、全体の約3分の1を占めています
             </p>
           </div>

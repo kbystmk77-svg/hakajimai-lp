@@ -19,7 +19,7 @@ export function SurveyRidanryo() {
     { range: "30万円以上", value: 9.0 },
   ]
 
-  const colors = ["#94a3b8", "#10b981", "#34d399", "#4d8ac5", "#5d9ad5"]
+  const colors = ["#8bb8e8", "#1e3a5f", "#3d6a8f", "#5d9ad5", "#b3d4f0"]
 
   return (
     <section className="bg-[#1e3a5f] py-16 md:py-20">
@@ -77,11 +77,11 @@ export function SurveyRidanryo() {
           </div>
 
           {/* Description */}
-          <div className="mt-6 rounded-xl border border-emerald-200 bg-emerald-50 p-4">
+          <div className="mt-6 rounded-xl border border-[#1e3a5f]/20 bg-[#f8fafc] p-4">
             <p className="text-sm leading-relaxed text-foreground">
-              離檀料は「<span className="font-semibold text-emerald-600">5〜10万円</span>」が最も多く、
-              次いで「<span className="font-semibold text-emerald-600">10〜20万円</span>」が多い結果となりました。
-              全体として、離檀料は<span className="font-semibold text-emerald-600">5〜20万円程度</span>がボリュームゾーンとなっています。
+              離檀料は「<span className="font-semibold text-[#1e3a5f]">5〜10万円</span>」が最も多く、
+              次いで「<span className="font-semibold text-[#1e3a5f]">10〜20万円</span>」が多い結果となりました。
+              全体として、離檀料は<span className="font-semibold text-[#1e3a5f]">5〜20万円程度</span>がボリュームゾーンとなっています。
             </p>
             <p className="mt-2 text-xs text-muted-foreground">
               ※回答対象：墓じまい経験者

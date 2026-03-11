@@ -16,7 +16,7 @@ export function SurveyHero() {
       <div className="relative mx-auto max-w-4xl px-6 py-16 md:py-24">
         <div className="text-center">
           {/* Badge */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-emerald-400/20 px-4 py-2 text-sm text-emerald-200 backdrop-blur-sm">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm text-white/90 backdrop-blur-sm">
             <FileText className="h-4 w-4" />
             <span>調査レポート</span>
           </div>

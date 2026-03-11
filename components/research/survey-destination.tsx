@@ -3,12 +3,12 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend } from "recharts"
 
 const destinationData = [
-  { name: "永代供養墓", value: 48.7, color: "#10b981" },
-  { name: "納骨堂", value: 23.1, color: "#3d7ab5" },
-  { name: "樹木葬", value: 15.4, color: "#34d399" },
-  { name: "散骨", value: 7.7, color: "#5d9ad5" },
-  { name: "手元供養", value: 3.8, color: "#93c5fd" },
-  { name: "その他", value: 1.3, color: "#d1d5db" },
+  { name: "永代供養墓", value: 48.7, color: "#1e3a5f" },
+  { name: "納骨堂", value: 23.1, color: "#3d6a8f" },
+  { name: "樹木葬", value: 15.4, color: "#5d9ad5" },
+  { name: "散骨", value: 7.7, color: "#8bb8e8" },
+  { name: "手元供養", value: 3.8, color: "#b3d4f0" },
+  { name: "その他", value: 1.3, color: "#d9e9f7" },
 ]
 
 export function SurveyDestination() {
@@ -76,9 +76,9 @@ export function SurveyDestination() {
           </div>
 
           {/* Highlight box */}
-          <div className="mt-8 rounded-xl bg-emerald-50 p-4 text-center">
+          <div className="mt-8 rounded-xl bg-[#1e3a5f]/5 p-4 text-center">
             <p className="text-sm text-foreground">
-              <span className="font-semibold text-emerald-600">永代供養墓</span>
+              <span className="font-semibold text-[#1e3a5f]">永代供養墓</span>
               が約半数を占め、最も選ばれている供養先です
             </p>
           </div>
