@@ -11,6 +11,7 @@ import { SurveyDestination } from "@/components/research/survey-destination"
 import { SurveyRidanryo } from "@/components/research/survey-ridanryo"
 import { SurveySummaryText } from "@/components/research/survey-summary-text"
 import { SurveyCta } from "@/components/research/survey-cta"
+import { SurveyPhotoBreak } from "@/components/research/survey-photo-break"
 
 export const metadata: Metadata = {
   title: "墓じまい実態調査2026 | 経験者・検討者230人アンケート",
@@ -31,10 +32,18 @@ export default function HakajimaiSurvey2026Page() {
       <main>
         <SurveyHero />
         <SurveySummary />
+        <SurveyPhotoBreak
+          src="/images/research/eyecatch.png"
+          alt="墓参りをする家族"
+        />
         <SurveyReasons />
         <SurveyCost />
         <SurveyRidanryo />
         <SurveyDifficulties />
+        <SurveyPhotoBreak
+          src="/images/research/hakajimai-after-nature.jpg"
+          alt="樹木葬墓地の風景"
+        />
         <SurveyDestination />
         <SurveySummaryText />
         <SurveyCta />
