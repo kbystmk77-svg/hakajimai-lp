@@ -15,15 +15,14 @@ const summaryCards: SummaryCard[] = [
   {
     icon: MapPin,
     theme: "墓じまいの理由",
-    answer: "墓が遠方にある",
+    answer: "遠方のため",
     percentage: "47.8%",
   },
   {
     icon: Wallet,
     theme: "墓じまい費用",
-    subtitle: "経験者78人",
     answer: "30〜50万円",
-    percentage: "33.3%",
+    percentage: "19.2%",
   },
   {
     icon: Building2,
@@ -35,7 +34,7 @@ const summaryCards: SummaryCard[] = [
     icon: MessageSquare,
     theme: "墓じまいで大変だったこと",
     answer: "お寺とのやり取り",
-    percentage: "42.3%",
+    percentage: "38.5%",
   },
 ]
 
@@ -116,7 +115,7 @@ export function SurveySummary() {
                   回答者数
                 </th>
                 <td className="py-2.5 text-foreground">
-                  230人（うち墓じまい経験者78人、検討者152人）
+                  230人（うち墓じまい経験者52人、検討者178人）
                 </td>
               </tr>
               <tr>

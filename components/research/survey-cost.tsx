@@ -11,11 +11,13 @@ import {
 } from "recharts"
 
 const costData = [
-  { range: "10万円\n未満", count: 5, percentage: 6.4, isTop: false },
-  { range: "10〜\n30万円", count: 18, percentage: 23.1, isTop: false },
-  { range: "30〜\n50万円", count: 26, percentage: 33.3, isTop: true },
-  { range: "50〜\n100万円", count: 19, percentage: 24.4, isTop: false },
-  { range: "100万円\n以上", count: 10, percentage: 12.8, isTop: false },
+  { range: "10万円\n未満", count: 10, percentage: 19.2, isTop: false },
+  { range: "10〜\n20万円", count: 7, percentage: 13.5, isTop: false },
+  { range: "20〜\n30万円", count: 9, percentage: 17.3, isTop: false },
+  { range: "30〜\n50万円", count: 10, percentage: 19.2, isTop: true },
+  { range: "50〜\n70万円", count: 7, percentage: 13.5, isTop: false },
+  { range: "70〜\n100万円", count: 6, percentage: 11.5, isTop: false },
+  { range: "100万円\n以上", count: 3, percentage: 5.8, isTop: false },
 ]
 
 export function SurveyCost() {
@@ -29,12 +31,15 @@ export function SurveyCost() {
           </h2>
           <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-[#1e3a5f]" />
           <p className="mt-4 text-sm text-muted-foreground">
-            経験者78人
+            墓じまい経験者のみの回答（n=52）
           </p>
         </div>
 
         {/* Chart Card */}
         <div className="overflow-hidden rounded-2xl bg-white px-2 py-6 shadow-lg md:p-8">
+          <p className="mb-3 text-right text-xs text-muted-foreground/70">
+            墓じまいパートナーズ「墓じまい実態調査2026」より
+          </p>
           <div className="h-[320px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
@@ -70,9 +75,21 @@ export function SurveyCost() {
 
           {/* Highlight box */}
           <div className="mt-6 rounded-xl bg-[#1e3a5f]/5 p-4 text-center">
-            <p className="text-sm text-foreground">
+            <p className="text-base text-foreground">
+              <span className="font-semibold text-[#1e3a5f]">10万円未満</span>
+              と
               <span className="font-semibold text-[#1e3a5f]">30〜50万円</span>
-              が最も多く、全体の約3分の1を占めています
+              が同率1位（各19.2%）。費用は幅広く分布しています
+            </p>
+          </div>
+
+          {/* Explanation */}
+          <div className="mt-6 border-t border-border/40 pt-5 text-base leading-relaxed text-muted-foreground">
+            <p>
+              墓じまいの費用総額は「10万円未満」と「30〜50万円」が各19.2%で同率1位となりました。次いで「20〜30万円」が17.3%、「50〜70万円」が13.5%と続きます。
+            </p>
+            <p className="mt-3">
+              費用は撤去する墓石の規模や墓地の種類、移転先の供養方法によって大きく異なり、10万円以下で済む場合から100万円以上かかる場合まで幅広く分布しています。墓石の撤去だけでなく、離檀料や移転先の費用も含まれるため、事前に複数の業者から見積もりを取り、比較検討することが重要です。
             </p>
           </div>
         </div>

@@ -11,6 +11,7 @@ import { SurveyDestination } from "@/components/research/survey-destination"
 import { SurveyRidanryo } from "@/components/research/survey-ridanryo"
 import { SurveySummaryText } from "@/components/research/survey-summary-text"
 import { SurveyCta } from "@/components/research/survey-cta"
+import { SurveyCitation } from "@/components/research/survey-citation"
 import { SurveyPhotoBreak } from "@/components/research/survey-photo-break"
 
 export const metadata: Metadata = {
@@ -46,6 +47,7 @@ export default function HakajimaiSurvey2026Page() {
         <SurveyDifficulties />
         <SurveyDestination />
         <SurveySummaryText />
+        <SurveyCitation />
         <SurveyCta />
       </main>
       <Footer />

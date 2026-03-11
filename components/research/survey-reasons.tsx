@@ -11,12 +11,12 @@ import {
 } from "recharts"
 
 const reasonsData = [
-  { reason: "墓が遠方にある", percentage: 47.8 },
-  { reason: "管理・維持が難しい", percentage: 35.2 },
-  { reason: "後継者がいない", percentage: 28.7 },
-  { reason: "経済的な負担", percentage: 18.3 },
-  { reason: "お墓を継ぐ人がいない", percentage: 15.7 },
-  { reason: "その他", percentage: 8.4 },
+  { reason: "遠方のため", percentage: 47.8 },
+  { reason: "墓参りが難しくなった", percentage: 37.8 },
+  { reason: "管理費が負担", percentage: 31.7 },
+  { reason: "子どもに迷惑をかけたくない", percentage: 22.2 },
+  { reason: "親が亡くなった", percentage: 19.1 },
+  { reason: "その他", percentage: 4.8 },
 ]
 
 export function SurveyReasons() {
@@ -36,6 +36,9 @@ export function SurveyReasons() {
 
         {/* Chart Card */}
         <div className="overflow-hidden rounded-2xl bg-[#f8fafc] px-3 py-6 shadow-lg md:p-8">
+          <p className="mb-3 text-right text-xs text-muted-foreground/70">
+            墓じまいパートナーズ「墓じまい実態調査2026」より
+          </p>
           <div className="h-[400px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
@@ -54,7 +57,7 @@ export function SurveyReasons() {
                 <YAxis
                   type="category"
                   dataKey="reason"
-                  width={110}
+                  width={150}
                   tick={{ fontSize: 11, fill: "#334155" }}
                   axisLine={false}
                   tickLine={false}
@@ -75,6 +78,27 @@ export function SurveyReasons() {
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
+          </div>
+
+          {/* Highlight box */}
+          <div className="mt-6 rounded-xl bg-[#1e3a5f]/5 p-4 text-center">
+            <p className="text-base text-foreground">
+              <span className="font-semibold text-[#1e3a5f]">「遠方のため」</span>
+              が最多（47.8%）。距離・管理・費用など複合的な理由が重なっています
+            </p>
+          </div>
+
+          {/* Explanation */}
+          <div className="mt-6 border-t border-border/40 pt-5 text-base leading-relaxed text-muted-foreground">
+            <p>
+              「遠方のため」が47.8%と最多で、約半数の方が距離的な問題を抱えていることがわかります。次いで「墓参りが難しくなった」が37.8%と続き、高齢化や身体的な理由から墓の管理が困難になっているケースも多く見られます。
+            </p>
+            <p className="mt-3">
+              「管理費が負担」も31.7%と3割以上が経済的な問題を抱えており、継続的な費用負担が墓じまいを検討するきっかけになっていることがわかります。「子どもに迷惑をかけたくない」は22.2%と、次世代への配慮から墓じまいを考える方も相当数います。
+            </p>
+            <p className="mt-3">
+              「親が亡くなった」をきっかけとした方も19.1%おり、身近な方の逝去が墓の継承問題を考えるタイミングになっています。
+            </p>
           </div>
         </div>
       </div>

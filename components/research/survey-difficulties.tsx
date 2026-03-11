@@ -11,12 +11,12 @@ import {
 } from "recharts"
 
 const difficultiesData = [
-  { difficulty: "お寺とのやり取り", percentage: 42.3, rank: 1 },
-  { difficulty: "費用の確保", percentage: 35.9, rank: 2 },
-  { difficulty: "親族との調整", percentage: 32.1, rank: 3 },
-  { difficulty: "業者選び", percentage: 26.9, rank: 4 },
-  { difficulty: "行政手続き", percentage: 21.8, rank: 5 },
-  { difficulty: "供養先の選定", percentage: 17.9, rank: 6 },
+  { difficulty: "お寺とのやり取り", percentage: 38.5, rank: 1 },
+  { difficulty: "手続き・書類", percentage: 23.1, rank: 2 },
+  { difficulty: "親族との話し合い", percentage: 17.3, rank: 3 },
+  { difficulty: "費用", percentage: 13.5, rank: 4 },
+  { difficulty: "石材店とのやりとり", percentage: 3.8, rank: 5 },
+  { difficulty: "移転先の選定", percentage: 1.9, rank: 6 },
 ]
 
 export function SurveyDifficulties() {
@@ -30,13 +30,16 @@ export function SurveyDifficulties() {
           </h2>
           <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-[#1e3a5f]" />
           <p className="mt-4 text-sm text-muted-foreground">
-            複数回答可（n=78）
+            墓じまい経験者のみの回答（n=52）
           </p>
         </div>
 
         {/* Chart Card */}
         <div className="overflow-hidden rounded-2xl bg-[#f8fafc] px-3 py-6 shadow-lg md:p-8">
-          <div className="h-[400px] w-full">
+          <p className="mb-3 text-right text-xs text-muted-foreground/70">
+            墓じまいパートナーズ「墓じまい実態調査2026」より
+          </p>
+          <div className="h-[380px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart
                 data={difficultiesData}
@@ -54,7 +57,7 @@ export function SurveyDifficulties() {
                 <YAxis
                   type="category"
                   dataKey="difficulty"
-                  width={100}
+                  width={120}
                   tick={{ fontSize: 11, fill: "#334155" }}
                   axisLine={false}
                   tickLine={false}
@@ -79,11 +82,24 @@ export function SurveyDifficulties() {
 
           {/* Highlight box */}
           <div className="mt-6 rounded-xl bg-[#1e3a5f]/5 p-4 text-center">
-            <p className="text-sm text-foreground">
+            <p className="text-base text-foreground">
               <span className="font-semibold text-[#1e3a5f]">
                 「お寺とのやり取り」
               </span>
               が最も大変だったと回答した方が最多でした
+            </p>
+          </div>
+
+          {/* Explanation */}
+          <div className="mt-6 border-t border-border/40 pt-5 text-base leading-relaxed text-muted-foreground">
+            <p>
+              「お寺（住職）とのやり取り」が38.5%で最多でした。離檀の意向を伝える際に住職との関係性が難しかったという声が多く、精神的な負担を感じる方も多いようです。
+            </p>
+            <p className="mt-3">
+              次いで「手続き・書類」が23.1%と、書類作成や行政手続きの煩雑さに苦労したとの声も目立ちます。「親族との話し合い」は17.3%で、家族・親族間での意見調整も課題となっています。
+            </p>
+            <p className="mt-3">
+              「費用」を挙げた方も13.5%おり、予想外の費用発生や金額交渉に苦労するケースもあります。墓じまいには多方面での調整が必要で、時間的な余裕を持ったスケジュールで取り組むことが大切です。
             </p>
           </div>
         </div>
