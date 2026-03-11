@@ -150,7 +150,7 @@ export function SurveySummary() {
                     el.scrollIntoView({ behavior: "smooth", block: "start" })
                   }
                 }}
-                className="group inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-medium text-[#1e3a5f] shadow-sm ring-1 ring-[#1e3a5f]/10 transition-all hover:bg-[#1e3a5f] hover:text-white hover:shadow-md"
+                className="group inline-flex cursor-pointer items-center gap-1.5 rounded-full bg-white px-4 py-2 text-sm font-medium text-[#1e3a5f] shadow-sm ring-1 ring-[#1e3a5f]/10 transition-all hover:bg-[#1e3a5f] hover:text-white hover:shadow-md"
               >
                 <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#1e3a5f]/10 text-xs font-bold group-hover:bg-white/20">
                   {item.num}
