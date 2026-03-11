@@ -30,8 +30,13 @@ export function SurveyRidanryo() {
             離檀料の金額
           </h2>
           <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-white/50" />
-          <p className="mt-4 text-sm text-white/70">
-            墓じまい経験者 n=78
+          <p className="mt-4 text-sm text-white/80">
+            墓じまい費用には墓石撤去費や離檀料などが含まれます。
+            <br />
+            ここでは、離檀料のみの金額について聞きました。
+          </p>
+          <p className="mt-3 inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-xs text-white/90">
+            対象：墓じまい経験者
           </p>
         </div>
 

@@ -33,9 +33,9 @@ export default function HakajimaiSurvey2026Page() {
         <SurveySummary />
         <SurveyReasons />
         <SurveyCost />
+        <SurveyRidanryo />
         <SurveyDifficulties />
         <SurveyDestination />
-        <SurveyRidanryo />
         <SurveySummaryText />
         <SurveyCta />
       </main>
