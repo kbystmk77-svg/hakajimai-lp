@@ -73,6 +73,13 @@ export function SurveySummary() {
                 </div>
               </div>
 
+              {/* 1st Place Badge */}
+              <div className="mb-2 flex items-center gap-2">
+                <span className="inline-flex items-center rounded-full bg-[#1e3a5f] px-2.5 py-0.5 text-xs font-bold text-white">
+                  1位
+                </span>
+              </div>
+
               {/* Answer - Most prominent */}
               <p className="mb-3 text-xl font-bold text-[#1e3a5f] leading-snug md:text-2xl">
                 {card.answer}
