@@ -21,7 +21,7 @@ const difficultiesData = [
 
 export function SurveyDifficulties() {
   return (
-    <section className="bg-white py-16 md:py-20">
+    <section id="difficulties" className="scroll-mt-20 bg-white py-16 md:py-20">
       <div className="mx-auto max-w-4xl px-6">
         {/* Section Header */}
         <div className="mb-10 text-center">

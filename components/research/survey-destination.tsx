@@ -13,7 +13,7 @@ const destinationData = [
 
 export function SurveyDestination() {
   return (
-    <section className="bg-[#f8fafc] py-16 md:py-20">
+    <section id="destination" className="scroll-mt-20 bg-[#f8fafc] py-16 md:py-20">
       <div className="mx-auto max-w-4xl px-6">
         {/* Section Header */}
         <div className="mb-10 text-center">

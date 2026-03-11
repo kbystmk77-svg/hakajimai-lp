@@ -20,7 +20,7 @@ const costData = [
 
 export function SurveyCost() {
   return (
-    <section className="bg-[#1e3a5f]/5 py-16 md:py-20">
+    <section id="cost" className="scroll-mt-20 bg-[#1e3a5f]/5 py-16 md:py-20">
       <div className="mx-auto max-w-4xl px-6">
         {/* Section Header */}
         <div className="mb-10 text-center">

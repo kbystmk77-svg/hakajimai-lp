@@ -22,7 +22,7 @@ export function SurveyRidanryo() {
   const colors = ["#8bb8e8", "#1e3a5f", "#3d6a8f", "#5d9ad5", "#b3d4f0"]
 
   return (
-    <section className="bg-[#1e3a5f]/10 py-16 md:py-20">
+    <section id="ridanryo" className="scroll-mt-20 bg-[#1e3a5f]/10 py-16 md:py-20">
       <div className="mx-auto max-w-4xl px-6">
         {/* Section Header */}
         <div className="mb-10 text-center">

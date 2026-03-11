@@ -126,6 +126,62 @@ export function SurveySummary() {
             </tbody>
           </table>
         </div>
+
+        {/* Survey Items - Anchor Links */}
+        <div className="mt-10 flex justify-center">
+          <div className="w-full max-w-md">
+            <h3 className="mb-4 text-center text-sm font-semibold text-foreground">
+              調査項目
+            </h3>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href="#reasons"
+                  className="flex items-center gap-2 rounded-lg border border-border/50 bg-white px-4 py-2.5 text-sm text-foreground transition-colors hover:bg-[#1e3a5f]/5"
+                >
+                  <span className="text-[#1e3a5f]">1.</span>
+                  墓じまいの理由
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#cost"
+                  className="flex items-center gap-2 rounded-lg border border-border/50 bg-white px-4 py-2.5 text-sm text-foreground transition-colors hover:bg-[#1e3a5f]/5"
+                >
+                  <span className="text-[#1e3a5f]">2.</span>
+                  墓じまい費用の総額
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#ridanryo"
+                  className="flex items-center gap-2 rounded-lg border border-border/50 bg-white px-4 py-2.5 text-sm text-foreground transition-colors hover:bg-[#1e3a5f]/5"
+                >
+                  <span className="text-[#1e3a5f]">3.</span>
+                  離檀料の金額
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#difficulties"
+                  className="flex items-center gap-2 rounded-lg border border-border/50 bg-white px-4 py-2.5 text-sm text-foreground transition-colors hover:bg-[#1e3a5f]/5"
+                >
+                  <span className="text-[#1e3a5f]">4.</span>
+                  墓じまいで大変だったこと
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#destination"
+                  className="flex items-center gap-2 rounded-lg border border-border/50 bg-white px-4 py-2.5 text-sm text-foreground transition-colors hover:bg-[#1e3a5f]/5"
+                >
+                  <span className="text-[#1e3a5f]">5.</span>
+                  墓じまい後の供養先
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   )
