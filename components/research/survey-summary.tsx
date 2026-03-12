@@ -137,7 +137,7 @@ export function SurveySummary() {
             {[
               { id: "reasons", num: 1, label: "墓じまいの理由" },
               { id: "cost", num: 2, label: "費用の総額" },
-              { id: "ridanryo", num: 3, label: "離檀料" },
+              { id: "ridanryo", num: 3, label: "お布施" },
               { id: "difficulties", num: 4, label: "大変だったこと" },
               { id: "destination", num: 5, label: "供養先" },
             ].map((item) => (

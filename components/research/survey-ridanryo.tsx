@@ -12,16 +12,15 @@ import {
 
 export function SurveyRidanryo() {
   const ridanryoData = [
-    { range: "支払っていない", value: 19.2 },
-    { range: "5万円未満", value: 15.4 },
-    { range: "5〜10万円", value: 19.2 },
-    { range: "10〜20万円", value: 13.5 },
-    { range: "20〜30万円", value: 17.3 },
-    { range: "30万円以上", value: 5.8 },
-    { range: "覚えていない", value: 9.6 },
+    { range: "5万円未満", value: 19.0 },
+    { range: "5〜10万円", value: 23.8 },
+    { range: "10〜20万円", value: 16.7 },
+    { range: "20〜30万円", value: 21.4 },
+    { range: "30万円以上", value: 7.1 },
+    { range: "覚えていない", value: 11.9 },
   ]
 
-  const colors = ["#8bb8e8", "#6b9fcf", "#1e3a5f", "#3d6a8f", "#5d9ad5", "#b3d4f0", "#c8dff5"]
+  const colors = ["#6b9fcf", "#1e3a5f", "#3d6a8f", "#5d9ad5", "#b3d4f0", "#c8dff5"]
 
   return (
     <section id="ridanryo" className="scroll-mt-20 bg-[#1e3a5f]/10 py-16 md:py-20">
@@ -29,11 +28,11 @@ export function SurveyRidanryo() {
         {/* Section Header */}
         <div className="mb-10 text-center">
           <h2 className="text-2xl font-bold text-foreground md:text-3xl">
-            離檀料の金額
+            お布施の金額
           </h2>
           <div className="mx-auto mt-3 h-1 w-16 rounded-full bg-[#1e3a5f]" />
           <p className="mt-4 text-sm text-muted-foreground">
-            墓じまい経験者のみの回答（n=52）
+            お布施を支払った経験者のみの回答（n=42）
           </p>
         </div>
 
@@ -84,23 +83,23 @@ export function SurveyRidanryo() {
           {/* Description */}
           <div className="mt-6 rounded-xl bg-[#1e3a5f]/5 p-4 text-center">
             <p className="text-base text-foreground">
-              <span className="font-semibold text-[#1e3a5f]">「支払っていない」</span>
-              と
               <span className="font-semibold text-[#1e3a5f]">「5〜10万円」</span>
-              が同率1位（各19.2%）。
+              が最多（23.8%）、次いで
+              <span className="font-semibold text-[#1e3a5f]">「20〜30万円」</span>
+              （21.4%）。
             </p>
           </div>
 
           {/* Explanation */}
           <div className="mt-6 border-t border-border/40 pt-5 text-base leading-relaxed text-muted-foreground">
             <p>
-              離檀料については「支払っていない（予定なし）」と「5〜10万円」がそれぞれ19.2%と並んで最多でした。お寺によって離檀料の有無や金額は大きく異なり、全体の約2割は離檀料なしで墓じまいを実現しています。
+              ここでのお布施は、墓じまいの際にお寺に納めた金額全体を指します。「離檀料」という名目で請求されることもありますが、多くの場合は離檀のご挨拶としてのお布施として渡されており、本調査でもその総称として「お布施」と表記しています。
             </p>
             <p className="mt-3">
-              「20〜30万円」が17.3%、「5万円未満」が15.4%と続き、10万円以内での離檀が多いことがわかります。一方「30万円以上」を支払ったケースも5.8%あり、高額な離檀料を求められる場合も一部存在します。
+              実際に支払った経験者（n=42）のうち、「5〜10万円」が23.8%で最多となりました。次いで「20〜30万円」が21.4%、「5万円未満」が19.0%と続きます。10万円以内が全体の約4割を占める一方、「20万円以上」支払ったケースも約3割あり、金額にはばらつきが見られます。
             </p>
             <p className="mt-3">
-              離檀料に法的な義務はなく、一般的な目安は3〜10万円程度とされていますが、寺院との関係性や地域の慣習によって異なるため、事前に丁寧な話し合いをすることが大切です。
+              お布施（離檀料）に法的な支払い義務はなく、一般的な目安は3〜10万円程度とされていますが、寺院との関係性や地域の慣習によって異なるため、事前に丁寧な話し合いをすることが大切です。
             </p>
           </div>
         </div>
