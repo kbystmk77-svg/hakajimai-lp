@@ -296,4 +296,68 @@
   @apply my-8 w-full rounded-xl;
 }
 
+/* ===== 墓じまい実態調査2026 回答者の声 ===== */
+.voice-quote {
+  border: 2px solid #dbe8dd;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 24px 0;
+  background: #fff;
+}
+
+.voice-quote .quote-label {
+  font-size: 11px;
+  font-weight: bold;
+  color: #4a7c59;
+  letter-spacing: 0.08em;
+  margin: 0 0 6px;
+}
+
+.voice-quote .quote-label a {
+  color: #4a7c59;
+  text-decoration: none;
+}
+
+.voice-quote .quote-label a:hover {
+  text-decoration: underline;
+}
+
+.voice-quote .quote-text {
+  font-size: 15px;
+  color: #333;
+  margin: 0 0 10px;
+  border-bottom: 1px dashed #ddd;
+  padding-bottom: 10px;
+}
+
+.voice-quote .quote-text::before {
+  content: '「';
+  color: #4a7c59;
+  font-weight: bold;
+}
+
+.voice-quote .quote-text::after {
+  content: '」';
+  color: #4a7c59;
+  font-weight: bold;
+}
+
+.voice-quote .quote-attr {
+  font-size: 13px;
+  color: #888;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.voice-quote .quote-attr span {
+  background: #eaf3ec;
+  color: #4a7c59;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
 
