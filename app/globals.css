@@ -231,12 +231,41 @@
 }
 
 .prose-guide blockquote {
-  @apply my-8 rounded-xl border-l-4 border-primary bg-primary/5;
-  @apply px-6 py-5 text-foreground;
+  background: #f0f7ff;
+  border: 1px solid #d0e8f5;
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin: 24px 0;
 }
-
-.prose-guide blockquote p {
-  @apply my-0;
+.prose-guide blockquote p:first-child {
+  font-size: 0.8em;
+  font-weight: 600;
+  color: #4a90e2;
+  margin-bottom: 10px;
+}
+.prose-guide blockquote p:first-child a {
+  color: #4a90e2;
+  text-decoration: none;
+}
+.prose-guide blockquote p:nth-child(2) {
+  font-size: 1em;
+  color: #333;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #ccc;
+  margin-bottom: 10px;
+}
+.prose-guide blockquote p:last-child {
+  font-size: 0.85em;
+  color: #555;
+  margin-bottom: 0;
+}
+.prose-guide blockquote p:last-child strong {
+  background: #2e7d32;
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.85em;
+  margin-right: 8px;
 }
 
 .prose-guide hr {
@@ -296,68 +325,43 @@
   @apply my-8 w-full rounded-xl;
 }
 
-/* ===== 墓じまい実態調査2026 回答者の声 ===== */
-.voice-quote {
-  border: 2px solid #dbe8dd;
-  border-radius: 8px;
+/* 回答者の声ボックス */
+.article-body blockquote {   /* ← コンテンツ領域のクラス名に変更 */
+  background: #f0f7ff;
+  border: 1px solid #d0e8f5;
+  border-radius: 6px;
   padding: 16px 20px;
   margin: 24px 0;
-  background: #fff;
 }
-
-.voice-quote .quote-label {
-  font-size: 11px;
-  font-weight: bold;
-  color: #4a7c59;
-  letter-spacing: 0.08em;
-  margin: 0 0 6px;
+.article-body blockquote p:first-child {
+  font-size: 0.8em;
+  font-weight: 600;
+  color: #4a90e2;
+  margin-bottom: 10px;
 }
-
-.voice-quote .quote-label a {
-  color: #4a7c59;
+.article-body blockquote p:first-child a {
+  color: #4a90e2;
   text-decoration: none;
 }
-
-.voice-quote .quote-label a:hover {
-  text-decoration: underline;
-}
-
-.voice-quote .quote-text {
-  font-size: 15px;
+.article-body blockquote p:nth-child(2) {
+  font-size: 1em;
   color: #333;
-  margin: 0 0 10px;
-  border-bottom: 1px dashed #ddd;
   padding-bottom: 10px;
+  border-bottom: 1px dashed #ccc;
+  margin-bottom: 10px;
 }
-
-.voice-quote .quote-text::before {
-  content: '「';
-  color: #4a7c59;
-  font-weight: bold;
+.article-body blockquote p:last-child {
+  font-size: 0.85em;
+  color: #555;
+  margin-bottom: 0;
 }
-
-.voice-quote .quote-text::after {
-  content: '」';
-  color: #4a7c59;
-  font-weight: bold;
-}
-
-.voice-quote .quote-attr {
-  font-size: 13px;
-  color: #888;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.voice-quote .quote-attr span {
-  background: #eaf3ec;
-  color: #4a7c59;
-  font-size: 11px;
+.article-body blockquote p:last-child strong {
+  background: #2e7d32;
+  color: #fff;
   padding: 2px 8px;
-  border-radius: 12px;
-  white-space: nowrap;
+  border-radius: 10px;
+  font-size: 0.85em;
+  margin-right: 8px;
 }
 
 
