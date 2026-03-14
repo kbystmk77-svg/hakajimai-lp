@@ -44,7 +44,7 @@ export function Pricing() {
             </div>
             <p className="text-lg font-semibold text-foreground">基本代行料</p>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              書類整理・進行管理・寺院や霊園との調整など、
+              寺院や霊園との調整・行政書類のサポート・石材店への見積など、
               すべての代行業務を含みます。
             </p>
             <p className="mt-auto pt-3 text-sm font-medium text-foreground">13.2万円</p>
