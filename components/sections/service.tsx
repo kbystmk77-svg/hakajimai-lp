@@ -4,7 +4,7 @@ const services = [
   {
     title: "行政手続きのサポート",
     description:
-      "改葬許可申請をはじめとする各種書類の作成・提出を代行いたします。",
+      "改葬許可申請をはじめとする各種書類の準備・提出をサポートします（申請書はご本人に記入いただきます）。",
     image: "/images/service1.png",
     imageAlt: "窓口で書類の説明を受ける様子",
     imagePosition: "center 35%",
