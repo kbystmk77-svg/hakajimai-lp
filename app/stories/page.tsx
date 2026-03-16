@@ -15,25 +15,25 @@ export default function StoriesPage() {
     <>
       <Header />
       <main className="bg-background min-h-screen">
-        {/* Hero Section - More sophisticated design */}
-        <section className="relative bg-foreground py-20 md:py-28 overflow-hidden">
+        {/* Hero Section - Warm and approachable design */}
+        <section className="relative bg-gradient-to-b from-primary/10 via-primary/5 to-background py-20 md:py-28 overflow-hidden">
           {/* Decorative background elements */}
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute top-10 left-10 w-64 h-64 border border-white rounded-full" />
-            <div className="absolute bottom-10 right-10 w-96 h-96 border border-white rounded-full" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-white rounded-full" />
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute top-10 left-10 w-64 h-64 border border-primary/20 rounded-full" />
+            <div className="absolute bottom-10 right-10 w-96 h-96 border border-primary/10 rounded-full" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-primary/10 rounded-full" />
           </div>
           
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white/80 text-sm mb-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
                 <Users className="w-4 h-4" />
                 <span>{stories.length}名の方の体験談</span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight">
                 墓じまい体験談
               </h1>
-              <p className="text-white/70 text-lg md:text-xl leading-relaxed">
+              <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
                 実際に墓じまいを経験された方々のリアルな声。
                 <br className="hidden md:block" />
                 あなたと同じ悩みを抱えていた方の事例が、きっと見つかります。
