@@ -2,7 +2,7 @@ import { Newspaper } from "lucide-react"
 
 export function Media() {
   return (
-    <section className="bg-white py-10 md:py-14">
+    <section className="bg-linen py-10 md:py-14">
       <div className="mx-auto max-w-4xl px-6">
         {/* Header */}
         <div className="flex items-center justify-center gap-2 text-primary">
