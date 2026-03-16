@@ -112,27 +112,45 @@ export default async function StoryDetailPage({ params }: PageProps) {
                   </div>
                 </div>
 
-                {/* Info Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                  <div className="flex items-start gap-3 p-4 bg-secondary/50 rounded-lg">
-                    <User className="w-5 h-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">お住まい</p>
-                      <p className="font-medium text-foreground">{story.address}</p>
-                    </div>
+                {/* Residence Info */}
+                <div className="flex items-start gap-3 p-4 bg-secondary/50 rounded-lg mb-6">
+                  <User className="w-5 h-5 text-primary mt-0.5" />
+                  <div>
+                    <p className="text-xs text-muted-foreground">お住まい</p>
+                    <p className="font-medium text-foreground">{story.address}</p>
                   </div>
-                  <div className="flex items-start gap-3 p-4 bg-secondary/50 rounded-lg">
-                    <MapPin className="w-5 h-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">お墓の場所</p>
-                      <p className="font-medium text-foreground">{story.graveLocation}</p>
+                </div>
+
+                {/* Migration Flow - Before → After */}
+                <div className="mb-6">
+                  <p className="text-xs text-muted-foreground mb-3">改葬の流れ</p>
+                  <div className="flex flex-col md:flex-row items-stretch gap-4">
+                    {/* Before (Original Grave) */}
+                    <div className="flex-1 p-5 bg-secondary/50 rounded-lg border-2 border-secondary">
+                      <p className="text-xs text-muted-foreground mb-2 flex items-center gap-1">
+                        <MapPin className="w-3.5 h-3.5" />
+                        元のお墓
+                      </p>
+                      <p className="text-lg font-bold text-foreground">{story.graveLocation}</p>
+                      <p className="text-sm text-muted-foreground mt-1">{story.cemeteryType}</p>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-3 p-4 bg-secondary/50 rounded-lg">
-                    <Building2 className="w-5 h-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">墓地種類</p>
-                      <p className="font-medium text-foreground">{story.cemeteryType}</p>
+
+                    {/* Arrow */}
+                    <div className="flex items-center justify-center md:py-0 py-2">
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white">
+                        <ArrowRight className="w-5 h-5 md:rotate-0 rotate-90" />
+                      </div>
+                    </div>
+
+                    {/* After (Destination) */}
+                    <div className="flex-1 p-5 bg-primary/10 rounded-lg border-2 border-primary/30">
+                      <p className="text-xs text-primary mb-2 flex items-center gap-1">
+                        <Building2 className="w-3.5 h-3.5" />
+                        移転先
+                      </p>
+                      <p className="text-lg font-bold text-foreground">{story.destination}</p>
+                      <p className="text-sm text-primary font-medium mt-1">{story.destinationType}</p>
+                      <p className="text-xs text-muted-foreground mt-2">費用: {story.destinationCost}</p>
                     </div>
                   </div>
                 </div>
@@ -149,28 +167,6 @@ export default async function StoryDetailPage({ params }: PageProps) {
                         {reason}
                       </span>
                     ))}
-                  </div>
-                </div>
-              </div>
-
-              {/* Migration Info */}
-              <div className="bg-white rounded-lg shadow-sm p-6 md:p-8 mb-6 border border-border">
-                <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
-                  <ArrowRight className="w-5 h-5 text-primary" />
-                  改葬について
-                </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div className="p-4 bg-secondary/30 rounded-lg text-center">
-                    <p className="text-xs text-muted-foreground mb-1">移転先</p>
-                    <p className="font-semibold text-foreground">{story.destination}</p>
-                  </div>
-                  <div className="p-4 bg-secondary/30 rounded-lg text-center">
-                    <p className="text-xs text-muted-foreground mb-1">移転先種類</p>
-                    <p className="font-semibold text-foreground">{story.destinationType}</p>
-                  </div>
-                  <div className="p-4 bg-secondary/30 rounded-lg text-center">
-                    <p className="text-xs text-muted-foreground mb-1">移転先費用</p>
-                    <p className="font-semibold text-foreground">{story.destinationCost}</p>
                   </div>
                 </div>
               </div>
