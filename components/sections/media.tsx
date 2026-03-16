@@ -5,7 +5,7 @@ export function Media() {
     <section className="bg-linen py-10 md:py-14">
       <div className="mx-auto max-w-4xl px-6">
         {/* Header */}
-        <div className="flex items-center justify-center gap-2 text-primary">
+        <div className="flex items-center justify-center gap-2 text-foreground">
           <Newspaper className="h-5 w-5" />
           <span className="text-sm font-semibold tracking-wide">メディア掲載</span>
         </div>
