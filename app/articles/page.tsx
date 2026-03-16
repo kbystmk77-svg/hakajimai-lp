@@ -3,10 +3,24 @@
 import Image from "next/image"
 import Link from "next/link"
 import { getArticles } from "@/lib/microcms"
+import Pagination from "@/components/Pagination"
 
-export default async function ArticlesPage() {
-  const data = await getArticles()
+const PER_PAGE = 30
+
+type SearchParams = Promise<{ page?: string }>
+
+export default async function ArticlesPage({
+  searchParams,
+}: {
+  searchParams: SearchParams
+}) {
+  const { page } = await searchParams
+  const currentPage = Math.max(1, parseInt(page || "1", 10))
+  const offset = (currentPage - 1) * PER_PAGE
+
+  const data = await getArticles({ limit: PER_PAGE, offset })
   const articles = (data.contents || []).filter((article: any) => article.slug !== "hakajimai")
+  const totalCount: number = data.totalCount || 0
 
   return (
     <main className="max-w-5xl mx-auto py-16 px-4">
@@ -62,6 +76,13 @@ export default async function ArticlesPage() {
           )
         })}
       </ul>
+
+      <Pagination
+        currentPage={currentPage}
+        totalCount={totalCount}
+        perPage={PER_PAGE}
+        basePath="/articles"
+      />
     </main>
   )
 }

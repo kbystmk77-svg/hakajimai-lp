@@ -2,15 +2,19 @@
 import Image from "next/image"
 import Link from "next/link"
 import { getArticlesByCategory } from "@/lib/microcms"
+import Pagination from "@/components/Pagination"
 import type { Metadata } from "next"
+
+const PER_PAGE = 30
 
 type PageProps = {
   params: Promise<{ slug: string }>
+  searchParams: Promise<{ page?: string }>
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const data = await getArticlesByCategory(slug)
+  const data = await getArticlesByCategory(slug, { limit: 1 })
 
   const categoryName = data.category?.name || "カテゴリー"
 
@@ -20,12 +24,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 }
 
-export default async function CategoryPage({ params }: PageProps) {
+export default async function CategoryPage({ params, searchParams }: PageProps) {
   const { slug } = await params
-  const data = await getArticlesByCategory(slug)
+  const { page } = await searchParams
+  const currentPage = Math.max(1, parseInt(page || "1", 10))
+  const offset = (currentPage - 1) * PER_PAGE
+
+  const data = await getArticlesByCategory(slug, { limit: PER_PAGE, offset })
 
   const categoryName = data.category?.name || "カテゴリー"
   const articles = (data.contents || []).filter((article: any) => article.slug !== "hakajimai")
+  const totalCount: number = data.totalCount || 0
 
   return (
     <main className="max-w-5xl mx-auto py-16 px-4">
@@ -87,6 +96,13 @@ export default async function CategoryPage({ params }: PageProps) {
           )
         })}
       </ul>
+
+      <Pagination
+        currentPage={currentPage}
+        totalCount={totalCount}
+        perPage={PER_PAGE}
+        basePath={`/category/${slug}`}
+      />
     </main>
   )
 }

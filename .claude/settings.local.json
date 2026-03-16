@@ -6,7 +6,9 @@
       "Read(//tmp/**)",
       "Bash(gh repo:*)",
       "Bash(node -e \":*)",
-      "Bash(xargs grep:*)"
+      "Bash(xargs grep:*)",
+      "Bash(ls c:/dev/hakajimai-lp/app/category/[slug])",
+      "Bash(ls c:/dev/hakajimai-lp/app/tag/[slug])"
     ]
   }
 }

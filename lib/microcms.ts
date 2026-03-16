@@ -15,9 +15,11 @@ async function microcmsFetch(path: string) {
   return res.json()
 }
 
-export async function getArticles() {
+export async function getArticles(options?: { limit?: number; offset?: number }) {
+  const limit = options?.limit ?? 30
+  const offset = options?.offset ?? 0
   return microcmsFetch(
-    `/articles?fields=id,title,slug,description,thumbnail,publishedAt,category,tag`
+    `/articles?fields=id,title,slug,description,thumbnail,publishedAt,category,tag&limit=${limit}&offset=${offset}`
   )
 }
 
@@ -73,21 +75,25 @@ export async function getCategoryBySlug(slug: string) {
   return data.contents[0]
 }
 
-export async function getArticlesByTag(slug: string) {
+export async function getArticlesByTag(slug: string, options?: { limit?: number; offset?: number }) {
   const tag = await getTagBySlug(slug)
+  const limit = options?.limit ?? 30
+  const offset = options?.offset ?? 0
 
   const data = await microcmsFetch(
-    `/articles?filters=tag[contains]${tag.id}&limit=100&fields=id,title,slug,description,thumbnail,publishedAt,updatedAt,category,tag`
+    `/articles?filters=tag[contains]${tag.id}&limit=${limit}&offset=${offset}&fields=id,title,slug,description,thumbnail,publishedAt,updatedAt,category,tag`
   )
 
   return { tag, ...data }
 }
 
-export async function getArticlesByCategory(slug: string) {
+export async function getArticlesByCategory(slug: string, options?: { limit?: number; offset?: number }) {
   const category = await getCategoryBySlug(slug)
+  const limit = options?.limit ?? 30
+  const offset = options?.offset ?? 0
 
   const data = await microcmsFetch(
-    `/articles?filters=category[equals]${category.id}&limit=100&fields=id,title,slug,description,thumbnail,publishedAt,updatedAt,category,tag`
+    `/articles?filters=category[equals]${category.id}&limit=${limit}&offset=${offset}&fields=id,title,slug,description,thumbnail,publishedAt,updatedAt,category,tag`
   )
 
   return { category, ...data }

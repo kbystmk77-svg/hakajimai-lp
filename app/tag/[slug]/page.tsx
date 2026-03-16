@@ -2,17 +2,26 @@
 import Image from "next/image"
 import Link from "next/link"
 import { getArticlesByTag } from "@/lib/microcms"
+import Pagination from "@/components/Pagination"
+
+const PER_PAGE = 30
 
 type PageProps = {
   params: Promise<{ slug: string }>
+  searchParams: Promise<{ page?: string }>
 }
 
-export default async function TagPage({ params }: PageProps) {
+export default async function TagPage({ params, searchParams }: PageProps) {
   const { slug } = await params
-  const data = await getArticlesByTag(slug)
+  const { page } = await searchParams
+  const currentPage = Math.max(1, parseInt(page || "1", 10))
+  const offset = (currentPage - 1) * PER_PAGE
+
+  const data = await getArticlesByTag(slug, { limit: PER_PAGE, offset })
 
   const tagName = data.tag?.name || slug
   const articles = data.contents || []
+  const totalCount: number = data.totalCount || 0
 
   return (
     <main className="max-w-5xl mx-auto py-16 px-4">
@@ -74,6 +83,13 @@ export default async function TagPage({ params }: PageProps) {
           )
         })}
       </ul>
+
+      <Pagination
+        currentPage={currentPage}
+        totalCount={totalCount}
+        perPage={PER_PAGE}
+        basePath={`/tag/${slug}`}
+      />
     </main>
   )
 }
