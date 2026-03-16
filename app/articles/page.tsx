@@ -4,6 +4,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { getArticles } from "@/lib/microcms"
 import Pagination from "@/components/Pagination"
+import { SimpleHeader } from "@/components/sections/simple-header"
+import { Footer } from "@/components/sections/footer"
 
 const PER_PAGE = 30
 
@@ -23,6 +25,8 @@ export default async function ArticlesPage({
   const totalCount: number = data.totalCount || 0
 
   return (
+    <div className="min-h-screen bg-background">
+      <SimpleHeader />
     <main className="max-w-5xl mx-auto py-16 px-4">
       <h1 className="text-3xl font-bold mb-8">記事一覧</h1>
 
@@ -84,5 +88,7 @@ export default async function ArticlesPage({
         basePath="/articles"
       />
     </main>
+      <Footer />
+    </div>
   )
 }

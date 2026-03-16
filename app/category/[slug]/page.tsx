@@ -3,6 +3,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { getArticlesByCategory } from "@/lib/microcms"
 import Pagination from "@/components/Pagination"
+import { SimpleHeader } from "@/components/sections/simple-header"
+import { Footer } from "@/components/sections/footer"
 import type { Metadata } from "next"
 
 const PER_PAGE = 30
@@ -37,6 +39,8 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
   const totalCount: number = data.totalCount || 0
 
   return (
+    <div className="min-h-screen bg-background">
+      <SimpleHeader />
     <main className="max-w-5xl mx-auto py-16 px-4">
       <header className="mb-10">
         <h1 className="text-3xl font-bold mb-3">{categoryName}</h1>
@@ -104,5 +108,7 @@ export default async function CategoryPage({ params, searchParams }: PageProps) 
         basePath={`/category/${slug}`}
       />
     </main>
+      <Footer />
+    </div>
   )
 }
