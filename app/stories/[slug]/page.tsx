@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { stories, getStoryBySlug, getAllStorySlugs } from "@/lib/stories"
@@ -79,6 +80,20 @@ export default async function StoryDetailPage({ params }: PageProps) {
             </nav>
           </div>
         </div>
+
+        {/* Hero Image */}
+        {story.heroImage && (
+          <div className="relative w-full h-64 md:h-80 lg:h-96 overflow-hidden">
+            <Image
+              src={story.heroImage}
+              alt={`${story.age}${story.gender}の墓じまい体験談`}
+              fill
+              className="object-cover"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          </div>
+        )}
 
         {/* Story Content */}
         <article className="py-12 md:py-16">

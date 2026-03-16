@@ -1,6 +1,7 @@
 export interface Story {
   id: number
   slug: string
+  heroImage?: string
   age: string
   gender: string
   address: string
@@ -29,6 +30,7 @@ export const stories: Story[] = [
   {
     id: 1,
     slug: "story-01",
+    heroImage: "/placeholder.svg?height=400&width=1200",
     age: "50代",
     gender: "男性",
     address: "東京都",
