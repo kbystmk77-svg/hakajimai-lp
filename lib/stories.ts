@@ -8,7 +8,6 @@ export interface Story {
   graveLocation: string
   destination: string
   cemeteryType: string
-  templeName: string
   reasons: string[]
   triggerEpisode: string
   familyDiscussion: string
@@ -37,7 +36,6 @@ export const stories: Story[] = [
     graveLocation: "富山県",
     destination: "東京都",
     cemeteryType: "公営霊園",
-    templeName: "富山霊園",
     reasons: ["遠方", "子供世代に負担をかけたくない"],
     triggerEpisode: "きっかけは、毎年のお盆や法事の際に、富山の実家にあるお墓の手入れをしていた時です。年々、周りの雑草が増えてきて、墓石にも小さなひび割れが目立つようになってきました。私は現在東京で生活しており、富山まで数時間かけて行くのは、年々体力的にも時間的にも負担が大きくなってきました。自分が元気なうちはまだ良いのですが、将来、足腰が弱くなった時や、子供たちにこの負担を引き継がせるわけにはいかないと思い、墓じまいを決意しました。",
     familyDiscussion: "親族の中には墓じまいに慎重な意見を持つ人もいました。特に母の兄である叔父は、先祖代々受け継いできた土地やお墓を守るべきだという伝統的な考えを持っており、最初は強く反対されました。私は感情的に反論するのではなく、将来的にかかる維持管理費の具体的な試算や、更地にするための高額な費用、また、このままだと無縁仏になるリスクがあることを丁寧に説明しました。何度も電話や直接会って話し合いを重ねた結果、最終的には私の負担を理解してもらい、納得してもらいました。",

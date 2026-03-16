@@ -8,13 +8,10 @@ import { Footer } from "@/components/sections/footer"
 import { 
   MapPin, 
   User, 
-  Home, 
   ChevronLeft, 
   ChevronRight,
   Building2,
   ArrowRight,
-  Clock,
-  FileText,
   Wallet,
   MessageSquare,
   Users,
@@ -136,13 +133,6 @@ export default async function StoryDetailPage({ params }: PageProps) {
                     <div>
                       <p className="text-xs text-muted-foreground">墓地種類</p>
                       <p className="font-medium text-foreground">{story.cemeteryType}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3 p-4 bg-secondary/50 rounded-lg">
-                    <Home className="w-5 h-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="text-xs text-muted-foreground">お寺・霊園</p>
-                      <p className="font-medium text-foreground">{story.templeName}</p>
                     </div>
                   </div>
                 </div>
