@@ -35,7 +35,7 @@ export function Media() {
             >
               「墓じまい実態調査2026」
             </a>
-            についてご紹介をいただきました。
+            が紹介されました。
             <a
               href="https://news.yahoo.co.jp/articles/121f6bec48e9324b964eab5a75c7a904f8fb3e75"
               target="_blank"
