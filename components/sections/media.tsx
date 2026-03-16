@@ -17,20 +17,21 @@ export function Media() {
 
           {/* Main Text */}
           <p className="mt-3 text-sm leading-relaxed text-foreground md:text-base">
+            THE GOLD ONLINE
             <a
               href="https://gentosha-go.com/articles/-/76693"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-primary underline underline-offset-2 hover:text-primary/80"
+              className="font-semibold text-primary hover:text-primary/80"
             >
-              THE GOLD ONLINE
+              「墓じまい『年間16万件』の衝撃…寺院経営にも深刻な影響、日本の墓『2,600万基』のゆくえ」
             </a>
-            「墓じまい『年間16万件』の衝撃…寺院経営にも深刻な影響、日本の墓『2,600万基』のゆくえ」のニュース記事内で、当サイトが実施した
+            のニュース記事内で、当サイトが実施した
             <a
               href="https://hakajimai-partners.jp/research/hakajimai-survey-2026"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-primary underline underline-offset-2 hover:text-primary/80"
+              className="font-semibold text-primary hover:text-primary/80"
             >
               「墓じまい実態調査2026」
             </a>
@@ -39,7 +40,7 @@ export function Media() {
               href="https://news.yahoo.co.jp/articles/121f6bec48e9324b964eab5a75c7a904f8fb3e75"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold text-primary underline underline-offset-2 hover:text-primary/80"
+              className="font-semibold text-primary hover:text-primary/80"
             >
               YAHOO!ニュース
             </a>
