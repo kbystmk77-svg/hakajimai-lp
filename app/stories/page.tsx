@@ -3,7 +3,7 @@ import Link from "next/link"
 import { stories } from "@/lib/stories"
 import { Header } from "@/components/sections/header"
 import { Footer } from "@/components/sections/footer"
-import { MapPin, User, ChevronRight } from "lucide-react"
+import { MapPin, ArrowRight, Quote, Users } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "墓じまい体験談 | 墓じまいパートナーズ",
@@ -14,66 +14,101 @@ export default function StoriesPage() {
   return (
     <>
       <Header />
-      <main className="bg-linen min-h-screen">
-        {/* Hero Section */}
-        <section className="bg-primary py-16 md:py-20">
-          <div className="container mx-auto px-4 text-center">
-            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              墓じまい体験談
-            </h1>
-            <p className="text-white/90 text-lg max-w-2xl mx-auto">
-              実際に墓じまいを検討・経験された方々の声をご紹介します。
-              <br className="hidden md:block" />
-              様々な理由や状況での事例を参考にしてください。
-            </p>
+      <main className="bg-background min-h-screen">
+        {/* Hero Section - More sophisticated design */}
+        <section className="relative bg-foreground py-20 md:py-28 overflow-hidden">
+          {/* Decorative background elements */}
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute top-10 left-10 w-64 h-64 border border-white rounded-full" />
+            <div className="absolute bottom-10 right-10 w-96 h-96 border border-white rounded-full" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-white rounded-full" />
+          </div>
+          
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="max-w-3xl mx-auto text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-white/80 text-sm mb-6">
+                <Users className="w-4 h-4" />
+                <span>{stories.length}名の方の体験談</span>
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
+                墓じまい体験談
+              </h1>
+              <p className="text-white/70 text-lg md:text-xl leading-relaxed">
+                実際に墓じまいを経験された方々のリアルな声。
+                <br className="hidden md:block" />
+                あなたと同じ悩みを抱えていた方の事例が、きっと見つかります。
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* Stories List */}
-        <section className="py-12 md:py-16">
+        {/* Stories List - Card redesign */}
+        <section className="py-16 md:py-24">
           <div className="container mx-auto px-4">
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {stories.map((story) => (
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {stories.map((story, index) => (
                 <Link
                   key={story.id}
                   href={`/stories/${story.slug}`}
-                  className="group bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-6 border border-border"
+                  className="group relative bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-border hover:border-primary/20"
                 >
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary text-sm font-semibold">
-                      {story.id}
-                    </span>
-                    <span className="text-sm text-muted-foreground">
-                      {story.age} {story.gender}
-                    </span>
-                  </div>
+                  {/* Top accent bar */}
+                  <div className="h-1.5 bg-gradient-to-r from-primary to-primary/60" />
                   
-                  <div className="mb-3 flex flex-wrap gap-1">
-                    {story.reasons.map((reason, index) => (
-                      <span key={index} className="inline-block px-3 py-1 bg-secondary text-secondary-foreground text-sm rounded-full">
-                        {reason}
+                  <div className="p-6 md:p-8">
+                    {/* Header with number and demographics */}
+                    <div className="flex items-center justify-between mb-5">
+                      <div className="flex items-center gap-3">
+                        <span className="text-4xl font-bold text-primary/20">
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                        <div className="flex flex-col">
+                          <span className="text-lg font-semibold text-foreground">
+                            {story.age}
+                          </span>
+                          <span className="text-sm text-muted-foreground">
+                            {story.gender}
+                          </span>
+                        </div>
+                      </div>
+                      <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                    </div>
+
+                    {/* Location info with visual flow */}
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-5 p-3 bg-secondary/50 rounded-lg">
+                      <MapPin className="w-4 h-4 text-primary shrink-0" />
+                      <span className="font-medium text-foreground">{story.graveLocation}</span>
+                      <ArrowRight className="w-3 h-3 shrink-0" />
+                      <span className="font-medium text-primary">{story.destination}</span>
+                    </div>
+
+                    {/* Reason tags */}
+                    <div className="flex flex-wrap gap-2 mb-5">
+                      {story.reasons.map((reason, idx) => (
+                        <span 
+                          key={idx} 
+                          className="inline-block px-3 py-1.5 bg-primary/5 text-primary text-xs font-medium rounded-full border border-primary/10"
+                        >
+                          {reason}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Episode excerpt with quote styling */}
+                    <div className="relative">
+                      <Quote className="absolute -top-1 -left-1 w-6 h-6 text-primary/10" />
+                      <p className="text-foreground/80 text-sm leading-relaxed line-clamp-3 pl-4">
+                        {story.triggerEpisode}
+                      </p>
+                    </div>
+
+                    {/* Read more hint */}
+                    <div className="mt-6 pt-5 border-t border-border">
+                      <span className="text-primary font-medium text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+                        体験談を読む
+                        <ArrowRight className="w-4 h-4" />
                       </span>
-                    ))}
-                  </div>
-
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-                    <span className="flex items-center gap-1">
-                      <User className="w-4 h-4" />
-                      {story.address}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <MapPin className="w-4 h-4" />
-                      {story.graveLocation}
-                    </span>
-                  </div>
-
-                  <p className="text-foreground text-sm leading-relaxed line-clamp-3 mb-4">
-                    {story.triggerEpisode}
-                  </p>
-
-                  <div className="flex items-center text-primary font-medium text-sm group-hover:underline">
-                    続きを読む
-                    <ChevronRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
                 </Link>
               ))}
@@ -81,22 +116,44 @@ export default function StoriesPage() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <section className="py-12 md:py-16 bg-white">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-              墓じまいについてお悩みですか？
-            </h2>
-            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-              墓じまいパートナーズでは、専門スタッフが無料でご相談を承っております。
-              お気軽にお問い合わせください。
-            </p>
-            <Link
-              href="/#contact"
-              className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-colors"
-            >
-              無料相談はこちら
-            </Link>
+        {/* CTA Section - More impactful design */}
+        <section className="py-16 md:py-24 bg-linen">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-lg overflow-hidden">
+              <div className="grid md:grid-cols-2">
+                <div className="p-8 md:p-12 flex flex-col justify-center">
+                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-balance">
+                    あなたの墓じまいも
+                    <br />
+                    私たちにご相談ください
+                  </h2>
+                  <p className="text-muted-foreground mb-8 leading-relaxed">
+                    専門スタッフが無料でご相談を承っております。
+                    まずはお気軽にお問い合わせください。
+                  </p>
+                  <Link
+                    href="/#contact"
+                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary/90 transition-colors w-fit"
+                  >
+                    無料相談はこちら
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                </div>
+                <div className="hidden md:block bg-primary/5 p-12 relative">
+                  <div className="absolute inset-0 flex items-center justify-center opacity-10">
+                    <Quote className="w-48 h-48 text-primary" />
+                  </div>
+                  <div className="relative z-10 h-full flex flex-col justify-center">
+                    <p className="text-lg text-foreground/80 italic leading-relaxed">
+                      「体験談を読んで、自分と同じ悩みを持つ方がいることがわかり、勇気をもらいました。」
+                    </p>
+                    <p className="mt-4 text-sm text-muted-foreground">
+                      - 60代女性のお客様より
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>
