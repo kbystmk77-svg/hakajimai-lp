@@ -1,5 +1,6 @@
 import { Header } from "@/components/sections/header"
 import { Hero } from "@/components/sections/hero"
+import { Media } from "@/components/sections/media"
 import { Empathy } from "@/components/sections/empathy"
 import { Position } from "@/components/sections/position"
 import { Comparison } from "@/components/sections/comparison"
@@ -72,9 +73,14 @@ export default function Page() {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        {/* 1. Hero (white) → wave → linen */}
-        <BottomShape fill={COLORS.linen} shape="wave">
+        {/* 1. Hero (white) → wave → white (media) */}
+        <BottomShape fill={COLORS.white} shape="wave">
           <Hero />
+        </BottomShape>
+
+        {/* 1.5 Media (white) → slant → linen */}
+        <BottomShape fill={COLORS.linen} shape="slant">
+          <Media />
         </BottomShape>
 
         {/* 2. Empathy (linen) → slant → white */}
