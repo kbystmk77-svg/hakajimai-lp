@@ -73,19 +73,15 @@ export default function Page() {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        {/* 1. Hero (white) → wave → white (media) */}
-        <BottomShape fill={COLORS.white} shape="wave">
+        {/* 1. Hero (white) → wave → linen */}
+        <BottomShape fill={COLORS.linen} shape="wave">
           <Hero />
         </BottomShape>
 
-        {/* 1.5 Media (white) → slant → linen */}
-        <BottomShape fill={COLORS.linen} shape="slant">
-          <Media />
-        </BottomShape>
-
-        {/* 2. Empathy (linen) → slant → white */}
+        {/* 2. Media + Empathy (linen) → slant → white */}
         <BottomShape fill={COLORS.white} shape="slant">
           <div className="bg-linen">
+            <Media />
             <Empathy />
           </div>
         </BottomShape>
