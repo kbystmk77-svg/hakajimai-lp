@@ -26,7 +26,7 @@ export function Media() {
             >
               「墓じまい『年間16万件』の衝撃…寺院経営にも深刻な影響、日本の墓『2,600万基』のゆくえ」
             </a>
-            のニュース記事内で、当サイトが実施した
+            の記事内で、当サイトの
             <a
               href="https://hakajimai-partners.jp/research/hakajimai-survey-2026"
               target="_blank"
