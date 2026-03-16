@@ -47,7 +47,7 @@ export function Comparison() {
       <div className="mx-auto max-w-5xl px-6 py-20 md:py-28">
         <div className="text-center">
           <h2 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl text-balance">
-            サービスの特徴
+            サポートの特徴
           </h2>
           <div className="mx-auto mt-3 h-0.5 w-12 rounded-full bg-primary" />
           <p className="mt-5 text-sm leading-relaxed text-muted-foreground md:text-base">
