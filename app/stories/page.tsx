@@ -48,10 +48,12 @@ export default function StoriesPage() {
                     </span>
                   </div>
                   
-                  <div className="mb-3">
-                    <span className="inline-block px-3 py-1 bg-secondary text-secondary-foreground text-sm rounded-full">
-                      {story.reason}
-                    </span>
+                  <div className="mb-3 flex flex-wrap gap-1">
+                    {story.reasons.map((reason, index) => (
+                      <span key={index} className="inline-block px-3 py-1 bg-secondary text-secondary-foreground text-sm rounded-full">
+                        {reason}
+                      </span>
+                    ))}
                   </div>
 
                   <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
@@ -66,7 +68,7 @@ export default function StoriesPage() {
                   </div>
 
                   <p className="text-foreground text-sm leading-relaxed line-clamp-3 mb-4">
-                    {story.episode}
+                    {story.triggerEpisode}
                   </p>
 
                   <div className="flex items-center text-primary font-medium text-sm group-hover:underline">

@@ -4,7 +4,24 @@ import { notFound } from "next/navigation"
 import { stories, getStoryBySlug, getAllStorySlugs } from "@/lib/stories"
 import { Header } from "@/components/sections/header"
 import { Footer } from "@/components/sections/footer"
-import { MapPin, User, Calendar, Home, ChevronLeft, ChevronRight } from "lucide-react"
+import { 
+  MapPin, 
+  User, 
+  Home, 
+  ChevronLeft, 
+  ChevronRight,
+  Building2,
+  ArrowRight,
+  Clock,
+  FileText,
+  Wallet,
+  MessageSquare,
+  Users,
+  Phone,
+  Heart,
+  Lightbulb,
+  AlertCircle
+} from "lucide-react"
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -25,8 +42,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   return {
-    title: `${story.age}${story.gender}の墓じまい体験談 - ${story.reason} | 墓じまいパートナーズ`,
-    description: story.episode.substring(0, 160),
+    title: `${story.age}${story.gender}の墓じまい体験談 - ${story.reasons.join("・")} | 墓じまいパートナーズ`,
+    description: story.triggerEpisode.substring(0, 160),
   }
 }
 
@@ -66,61 +83,191 @@ export default async function StoryDetailPage({ params }: PageProps) {
         {/* Story Content */}
         <article className="py-12 md:py-16">
           <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto">
-              {/* Header */}
-              <div className="bg-white rounded-lg shadow-sm p-6 md:p-8 mb-8 border border-border">
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white text-xl font-bold">
+            <div className="max-w-4xl mx-auto">
+              {/* Header Card */}
+              <div className="bg-white rounded-lg shadow-sm p-6 md:p-8 mb-6 border border-border">
+                <div className="flex items-center gap-4 mb-6">
+                  <span className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-primary text-white text-2xl font-bold">
                     {story.id}
                   </span>
                   <div>
-                    <p className="text-lg font-semibold text-foreground">
+                    <p className="text-xl font-bold text-foreground">
                       体験談 {story.id}
                     </p>
-                    <p className="text-muted-foreground text-sm">
+                    <p className="text-muted-foreground">
                       {story.age} {story.gender}
                     </p>
                   </div>
                 </div>
 
                 {/* Info Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                  <div className="flex items-center gap-3 p-4 bg-secondary/50 rounded-lg">
-                    <User className="w-5 h-5 text-primary" />
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                  <div className="flex items-start gap-3 p-4 bg-secondary/50 rounded-lg">
+                    <User className="w-5 h-5 text-primary mt-0.5" />
                     <div>
                       <p className="text-xs text-muted-foreground">お住まい</p>
                       <p className="font-medium text-foreground">{story.address}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3 p-4 bg-secondary/50 rounded-lg">
-                    <MapPin className="w-5 h-5 text-primary" />
+                  <div className="flex items-start gap-3 p-4 bg-secondary/50 rounded-lg">
+                    <MapPin className="w-5 h-5 text-primary mt-0.5" />
                     <div>
                       <p className="text-xs text-muted-foreground">お墓の場所</p>
                       <p className="font-medium text-foreground">{story.graveLocation}</p>
                     </div>
                   </div>
+                  <div className="flex items-start gap-3 p-4 bg-secondary/50 rounded-lg">
+                    <Building2 className="w-5 h-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="text-xs text-muted-foreground">墓地種類</p>
+                      <p className="font-medium text-foreground">{story.cemeteryType}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3 p-4 bg-secondary/50 rounded-lg">
+                    <Home className="w-5 h-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="text-xs text-muted-foreground">お寺・霊園</p>
+                      <p className="font-medium text-foreground">{story.templeName}</p>
+                    </div>
+                  </div>
                 </div>
 
-                {/* Reason Tag */}
-                <div className="mb-6">
+                {/* Reason Tags */}
+                <div>
                   <p className="text-xs text-muted-foreground mb-2">墓じまいを検討した理由</p>
-                  <span className="inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-lg">
-                    {story.reason}
-                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {story.reasons.map((reason, index) => (
+                      <span
+                        key={index}
+                        className="inline-block px-4 py-2 bg-primary/10 text-primary font-semibold rounded-lg text-sm"
+                      >
+                        {reason}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Episode */}
-              <div className="bg-white rounded-lg shadow-sm p-6 md:p-8 mb-8 border border-border">
-                <h2 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-                  <Home className="w-5 h-5 text-primary" />
-                  エピソード
+              {/* Migration Info */}
+              <div className="bg-white rounded-lg shadow-sm p-6 md:p-8 mb-6 border border-border">
+                <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                  <ArrowRight className="w-5 h-5 text-primary" />
+                  改葬について
                 </h2>
-                <div className="prose prose-gray max-w-none">
-                  <p className="text-foreground leading-relaxed whitespace-pre-line">
-                    {story.episode}
-                  </p>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div className="p-4 bg-secondary/30 rounded-lg text-center">
+                    <p className="text-xs text-muted-foreground mb-1">移転先</p>
+                    <p className="font-semibold text-foreground">{story.destination}</p>
+                  </div>
+                  <div className="p-4 bg-secondary/30 rounded-lg text-center">
+                    <p className="text-xs text-muted-foreground mb-1">移転先種類</p>
+                    <p className="font-semibold text-foreground">{story.destinationType}</p>
+                  </div>
+                  <div className="p-4 bg-secondary/30 rounded-lg text-center">
+                    <p className="text-xs text-muted-foreground mb-1">移転先費用</p>
+                    <p className="font-semibold text-foreground">{story.destinationCost}</p>
+                  </div>
                 </div>
+              </div>
+
+              {/* Trigger Episode */}
+              <div className="bg-white rounded-lg shadow-sm p-6 md:p-8 mb-6 border border-border">
+                <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                  <MessageSquare className="w-5 h-5 text-primary" />
+                  墓じまいを考え始めたきっかけ
+                </h2>
+                <p className="text-foreground leading-relaxed whitespace-pre-line">
+                  {story.triggerEpisode}
+                </p>
+              </div>
+
+              {/* Family Discussion */}
+              <div className="bg-white rounded-lg shadow-sm p-6 md:p-8 mb-6 border border-border">
+                <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                  <Users className="w-5 h-5 text-primary" />
+                  親族との話し合い
+                </h2>
+                <p className="text-foreground leading-relaxed whitespace-pre-line">
+                  {story.familyDiscussion}
+                </p>
+              </div>
+
+              {/* Temple Reaction */}
+              <div className="bg-white rounded-lg shadow-sm p-6 md:p-8 mb-6 border border-border">
+                <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                  <Phone className="w-5 h-5 text-primary" />
+                  お寺・霊園への連絡
+                </h2>
+                <p className="text-foreground leading-relaxed whitespace-pre-line">
+                  {story.templeReaction}
+                </p>
+              </div>
+
+              {/* Cost & Process Info */}
+              <div className="bg-white rounded-lg shadow-sm p-6 md:p-8 mb-6 border border-border">
+                <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                  <Wallet className="w-5 h-5 text-primary" />
+                  費用・手続きについて
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                  <div className="p-4 bg-secondary/30 rounded-lg text-center">
+                    <p className="text-xs text-muted-foreground mb-1">離檀料</p>
+                    <p className="font-semibold text-foreground text-sm">{story.ridanFee}</p>
+                  </div>
+                  <div className="p-4 bg-secondary/30 rounded-lg text-center">
+                    <p className="text-xs text-muted-foreground mb-1">お布施</p>
+                    <p className="font-semibold text-foreground text-sm">{story.ofuse}</p>
+                  </div>
+                  <div className="p-4 bg-secondary/30 rounded-lg text-center">
+                    <p className="text-xs text-muted-foreground mb-1">石材店費用</p>
+                    <p className="font-semibold text-foreground text-sm">{story.stoneShopCost}</p>
+                  </div>
+                  <div className="p-4 bg-secondary/30 rounded-lg text-center">
+                    <p className="text-xs text-muted-foreground mb-1">見積件数</p>
+                    <p className="font-semibold text-foreground text-sm">{story.estimateCount}</p>
+                  </div>
+                  <div className="p-4 bg-secondary/30 rounded-lg text-center">
+                    <p className="text-xs text-muted-foreground mb-1">行政手続</p>
+                    <p className="font-semibold text-foreground text-sm">{story.paperwork}</p>
+                  </div>
+                  <div className="p-4 bg-secondary/30 rounded-lg text-center">
+                    <p className="text-xs text-muted-foreground mb-1">期間</p>
+                    <p className="font-semibold text-foreground text-sm">{story.duration}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Hardest Part */}
+              <div className="bg-white rounded-lg shadow-sm p-6 md:p-8 mb-6 border border-border">
+                <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                  <AlertCircle className="w-5 h-5 text-orange-500" />
+                  一番大変だったこと
+                </h2>
+                <p className="text-foreground leading-relaxed whitespace-pre-line">
+                  {story.hardestPart}
+                </p>
+              </div>
+
+              {/* Good Points */}
+              <div className="bg-white rounded-lg shadow-sm p-6 md:p-8 mb-6 border border-border">
+                <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                  <Heart className="w-5 h-5 text-red-500" />
+                  墓じまいを終えて良かった点
+                </h2>
+                <p className="text-foreground leading-relaxed whitespace-pre-line">
+                  {story.goodPoints}
+                </p>
+              </div>
+
+              {/* If Redo Again */}
+              <div className="bg-white rounded-lg shadow-sm p-6 md:p-8 mb-8 border border-border">
+                <h2 className="text-lg font-bold text-foreground mb-4 flex items-center gap-2">
+                  <Lightbulb className="w-5 h-5 text-yellow-500" />
+                  もしやり直すなら変えたいこと
+                </h2>
+                <p className="text-foreground leading-relaxed whitespace-pre-line">
+                  {story.ifRedoAgain}
+                </p>
               </div>
 
               {/* Navigation */}
