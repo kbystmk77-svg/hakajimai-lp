@@ -15,11 +15,12 @@ async function microcmsFetch(path: string) {
   return res.json()
 }
 
-export async function getArticles(options?: { limit?: number; offset?: number }) {
+export async function getArticles(options?: { limit?: number; offset?: number; orders?: string }) {
   const limit = options?.limit ?? 30
   const offset = options?.offset ?? 0
+  const orders = options?.orders ? `&orders=${options.orders}` : ""
   return microcmsFetch(
-    `/articles?fields=id,title,slug,description,thumbnail,publishedAt,category,tag&limit=${limit}&offset=${offset}`
+    `/articles?fields=id,title,slug,description,thumbnail,publishedAt,category,tag&limit=${limit}&offset=${offset}${orders}`
   )
 }
 

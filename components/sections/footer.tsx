@@ -21,6 +21,12 @@ export function Footer() {
               墓じまい完全ガイド
             </Link>
             <Link
+              href="/stories"
+              className="text-xs text-muted-foreground transition-colors hover:text-foreground"
+            >
+              墓じまい体験談
+            </Link>
+            <Link
               href="/research/hakajimai-survey-2026"
               className="text-xs text-muted-foreground transition-colors hover:text-foreground"
             >

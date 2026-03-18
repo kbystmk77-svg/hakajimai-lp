@@ -1,12 +1,13 @@
 import { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { stories } from "@/lib/stories"
 import { Header } from "@/components/sections/header"
 import { Footer } from "@/components/sections/footer"
-import { MapPin, ArrowRight, Quote, Users } from "lucide-react"
+import { MapPin, ArrowRight, Mail } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "墓じまい体験談 | 墓じまいパートナーズ",
+  title: "墓じまい体験談",
   description: "実際に墓じまいを検討・経験された方々の体験談をご紹介します。様々な理由や状況での墓じまいの事例をご覧ください。",
 }
 
@@ -15,147 +16,192 @@ export default function StoriesPage() {
     <>
       <Header />
       <main className="bg-background min-h-screen">
-        {/* Hero Section - Warm and approachable design */}
-        <section className="relative bg-gradient-to-b from-primary/10 via-primary/5 to-background py-20 md:py-28 overflow-hidden">
-          {/* Decorative background elements */}
-          <div className="absolute inset-0 opacity-30">
-            <div className="absolute top-10 left-10 w-64 h-64 border border-primary/20 rounded-full" />
-            <div className="absolute bottom-10 right-10 w-96 h-96 border border-primary/10 rounded-full" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-primary/10 rounded-full" />
-          </div>
-          
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-3xl mx-auto text-center">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full text-primary text-sm font-medium mb-6">
-                <Users className="w-4 h-4" />
-                <span>{stories.length}名の方の体験談</span>
+        {/* Hero — フルモザイク */}
+        <section className="relative overflow-hidden border-b border-border">
+          {/* 全面モザイク */}
+          <div
+            className="absolute inset-0 grid pointer-events-none select-none"
+            style={{ gridTemplateColumns: "repeat(6, 1fr)", gridTemplateRows: "repeat(3, 1fr)" }}
+          >
+            {[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19].map((n) => (
+              <div key={n} className="relative overflow-hidden">
+                <Image
+                  src={`/images/story-${String(n).padStart(2, "0")}.jpg`}
+                  alt="" fill className="object-cover" sizes="200px"
+                />
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 tracking-tight">
-                墓じまい体験談
+            ))}
+          </div>
+          {/* オーバーレイ */}
+          <div className="absolute inset-0 bg-foreground/72" />
+          {/* テキスト */}
+          <div className="relative z-10 mx-auto max-w-6xl px-6 py-14 md:py-20">
+            <div className="max-w-2xl">
+              <p className="text-xs font-bold text-white/60 uppercase tracking-widest mb-4">墓じまい体験談</p>
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-5 leading-tight">
+                実際に墓じまいを経験した方々の、<br className="hidden md:block" />
+                リアルな声をお届けします。
               </h1>
-              <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
-                実際に墓じまいを経験された方々のリアルな声。
-                <br className="hidden md:block" />
-                あなたと同じ悩みを抱えていた方の事例が、きっと見つかります。
+              <p className="text-white/75 text-sm leading-relaxed">
+                遠方のお墓の管理、後継者問題、費用の不安…<br />
+                同じ悩みを乗り越えた方々の体験談をご覧ください。
               </p>
             </div>
           </div>
         </section>
 
-        {/* Stories List - Card redesign */}
+        {/* Stories List — 案11: 横スクロール＋リスト（PC2列） */}
         <section className="py-16 md:py-24">
-          <div className="container mx-auto px-4">
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {stories.map((story, index) => (
-                <Link
-                  key={story.id}
-                  href={`/stories/${story.slug}`}
-                  className="group relative bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-border hover:border-primary/20"
-                >
-                  {/* Top accent bar */}
-                  <div className="h-1.5 bg-gradient-to-r from-primary to-primary/60" />
-                  
-                  <div className="p-6 md:p-8">
-                    {/* Header with number and demographics */}
-                    <div className="flex items-center justify-between mb-5">
-                      <div className="flex items-center gap-3">
-                        <span className="text-4xl font-bold text-primary/20">
-                          {String(index + 1).padStart(2, '0')}
-                        </span>
-                        <div className="flex flex-col">
-                          <span className="text-lg font-semibold text-foreground">
-                            {story.age}
-                          </span>
-                          <span className="text-sm text-muted-foreground">
-                            {story.gender}
+          <div className="mx-auto max-w-6xl px-6">
+
+            {/* ピックアップ横スクロール */}
+            {(() => {
+              const pickupSlugs = ["story-09", "story-10", "story-08", "story-17", "story-19"]
+              const pickupStories = pickupSlugs.map(slug => stories.find(s => s.slug === slug)).filter(Boolean) as typeof stories
+              return pickupStories.length > 0 && (
+              <div className="mb-12">
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">ピックアップ</p>
+                <div className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory" style={{ scrollbarWidth: "thin" }}>
+                  {pickupStories.map((story) => (
+                    <Link
+                      key={story.id}
+                      href={`/stories/${story.slug}`}
+                      className="group shrink-0 w-80 snap-start bg-white rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow"
+                    >
+                      {story.heroImage && (
+                        <div className="relative h-52 overflow-hidden">
+                          <Image
+                            src={story.heroImage}
+                            alt=""
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/65 to-transparent" />
+                          <div className="absolute bottom-0 left-0 right-0 p-4">
+                            <p className="text-amber-400 text-xs font-bold mb-1">
+                              {story.age} · {story.gender} · {story.address}在住
+                            </p>
+                            <p className="text-white text-sm font-bold leading-snug line-clamp-2">
+                              {story.catchphrase}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                      <div className="p-4">
+                        <div className="flex flex-wrap gap-1.5 mb-2">
+                          {story.reasons.map((r) => (
+                            <span key={r} className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">{r}</span>
+                          ))}
+                        </div>
+                        <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                          <MapPin className="w-3.5 h-3.5 shrink-0" />
+                          <span>
+                            {story.graveLocation}
+                            <ArrowRight className="w-3 h-3 inline mx-1 opacity-50" />
+                            {story.destination}
                           </span>
                         </div>
                       </div>
-                      <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                    </div>
-
-                    {/* Location info with visual flow */}
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-5 p-3 bg-secondary/50 rounded-lg">
-                      <MapPin className="w-4 h-4 text-primary shrink-0" />
-                      <span className="font-medium text-foreground">{story.graveLocation}</span>
-                      <ArrowRight className="w-3 h-3 shrink-0" />
-                      <span className="font-medium text-primary">{story.destination}</span>
-                    </div>
-
-                    {/* Reason tags */}
-                    <div className="flex flex-wrap gap-2 mb-5">
-                      {story.reasons.map((reason, idx) => (
-                        <span 
-                          key={idx} 
-                          className="inline-block px-3 py-1.5 bg-primary/5 text-primary text-xs font-medium rounded-full border border-primary/10"
-                        >
-                          {reason}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Episode excerpt with quote styling */}
-                    <div className="relative">
-                      <Quote className="absolute -top-1 -left-1 w-6 h-6 text-primary/10" />
-                      <p className="text-foreground/80 text-sm leading-relaxed line-clamp-3 pl-4">
-                        {story.triggerEpisode}
-                      </p>
-                    </div>
-
-                    {/* Read more hint */}
-                    <div className="mt-6 pt-5 border-t border-border">
-                      <span className="text-primary font-medium text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-                        体験談を読む
-                        <ArrowRight className="w-4 h-4" />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* CTA Section - More impactful design */}
-        <section className="py-16 md:py-24 bg-linen">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto bg-white rounded-3xl shadow-lg overflow-hidden">
-              <div className="grid md:grid-cols-2">
-                <div className="p-8 md:p-12 flex flex-col justify-center">
-                  <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 text-balance">
-                    あなたの墓じまいも
-                    <br />
-                    私たちにご相談ください
-                  </h2>
-                  <p className="text-muted-foreground mb-8 leading-relaxed">
-                    専門スタッフが無料でご相談を承っております。
-                    まずはお気軽にお問い合わせください。
-                  </p>
-                  <Link
-                    href="/#contact"
-                    className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white font-semibold rounded-xl hover:bg-primary/90 transition-colors w-fit"
-                  >
-                    無料相談はこちら
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
-                </div>
-                <div className="hidden md:block bg-primary/5 p-12 relative">
-                  <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                    <Quote className="w-48 h-48 text-primary" />
-                  </div>
-                  <div className="relative z-10 h-full flex flex-col justify-center">
-                    <p className="text-lg text-foreground/80 italic leading-relaxed">
-                      「体験談を読んで、自分と同じ悩みを持つ方がいることがわかり、勇気をもらいました。」
-                    </p>
-                    <p className="mt-4 text-sm text-muted-foreground">
-                      - 60代女性のお客様より
-                    </p>
-                  </div>
+                    </Link>
+                  ))}
                 </div>
               </div>
+            )
+            })()}
+
+            {/* 全件リスト（PC2列・スマホ1列） */}
+            {(() => {
+              const pickupSlugs = ["story-09", "story-10", "story-08", "story-17", "story-19"]
+              const remainingStories = stories.filter(s => !pickupSlugs.includes(s.slug))
+              return remainingStories.length > 0 && (
+              <div>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest mb-4">すべての体験談</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {remainingStories.map((story) => (
+                    <Link
+                      key={story.id}
+                      href={`/stories/${story.slug}`}
+                      className="group bg-white rounded-xl overflow-hidden border border-border shadow-sm hover:shadow-md transition-shadow flex"
+                    >
+                      {story.heroImage && (
+                        <div className="relative w-36 shrink-0 overflow-hidden">
+                          <Image
+                            src={story.heroImage}
+                            alt=""
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                      )}
+                      <div className="flex-1 p-4 min-w-0">
+                        <p className="text-xs text-muted-foreground mb-1">
+                          {story.age} · {story.gender} · {story.address}在住
+                        </p>
+                        <p className="text-sm font-bold text-foreground leading-snug mb-2 line-clamp-2">
+                          {story.catchphrase}
+                        </p>
+                        <div className="flex flex-wrap gap-1 mb-2">
+                          {story.reasons.map((r) => (
+                            <span key={r} className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded-full">{r}</span>
+                          ))}
+                        </div>
+                        <div className="flex items-center gap-1 text-[11px] text-muted-foreground">
+                          <MapPin className="w-3 h-3 shrink-0" />
+                          <span>
+                            {story.graveLocation}
+                            <ArrowRight className="w-2.5 h-2.5 inline mx-1 opacity-50" />
+                            {story.destination}
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )
+            })()}
+
+          </div>
+        </section>
+
+        {/* 調査注記 */}
+        <div className="mx-auto max-w-6xl px-6 pb-6">
+          <p className="text-xs text-muted-foreground leading-relaxed">
+            本ページの体験談は、当サイト（墓じまいパートナーズ）が墓じまい経験者を対象に実施したアンケート調査の回答をもとに掲載しています。<br />
+            ※個人が特定されないよう一部内容の編集や、明らかな誤字・表現の修正を行っています。
+          </p>
+        </div>
+
+        {/* CTA */}
+        <section className="py-16 md:py-20 bg-primary">
+          <div className="container mx-auto px-4 text-center">
+            <p className="text-white/70 text-xs font-semibold tracking-widest uppercase mb-4">墓じまいパートナーズ</p>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4 leading-tight">
+              墓じまいの悩み、相談してください
+            </h2>
+            <p className="text-white/80 text-sm md:text-base mb-8 max-w-xl mx-auto leading-relaxed">
+              自身で対応するのは難しいけど、お寺と良好な関係のまま墓じまいをしたい。<br />
+              そんなご家族のお手伝いをいたします。
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link
+                href="/"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/10 text-white font-semibold rounded-xl hover:bg-white/20 transition-colors border border-white/20"
+              >
+                サービスについて詳しく
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/#contact"
+                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-primary font-bold rounded-xl hover:bg-white/90 transition-colors shadow-lg"
+              >
+                <Mail className="w-4 h-4" />
+                無料相談はこちら
+              </Link>
             </div>
           </div>
         </section>
+
       </main>
       <Footer />
     </>
