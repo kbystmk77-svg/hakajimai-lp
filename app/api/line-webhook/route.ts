@@ -1,4 +1,5 @@
 import { createHmac } from "crypto"
+import { createClient } from "redis"
 import { NextResponse } from "next/server"
 
 function verifySignature(body: string, signature: string): boolean {
@@ -33,13 +34,29 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: false }, { status: 401 })
   }
 
-  const payload = JSON.parse(body) as { events?: { type: string }[] }
-  for (const event of payload.events ?? []) {
-    if (event.type === "follow") {
-      await sendGA4Event("line_friend_add")
-    } else if (event.type === "message") {
-      await sendGA4Event("line_message_received")
+  const payload = JSON.parse(body) as { events?: { type: string; source?: { userId?: string } }[] }
+
+  const redis = createClient({ url: process.env.REDIS_URL })
+  await redis.connect()
+
+  try {
+    for (const event of payload.events ?? []) {
+      if (event.type === "follow") {
+        await sendGA4Event("line_friend_add")
+      } else if (event.type === "message") {
+        const userId = event.source?.userId
+        if (userId) {
+          const key = `line_first_message:${userId}`
+          const alreadyCounted = await redis.get(key)
+          if (!alreadyCounted) {
+            await redis.set(key, "1")
+            await sendGA4Event("line_message_received")
+          }
+        }
+      }
     }
+  } finally {
+    await redis.disconnect()
   }
 
   return NextResponse.json({ ok: true })
