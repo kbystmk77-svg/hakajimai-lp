@@ -16,8 +16,19 @@ function trackLineClick() {
   }
 }
 
+const CALL_TIMES = ["午前（10時〜12時）", "午後（13時〜17時）", "夕方以降（17時〜19時）", "いつでも可"]
+
 export function Cta() {
   const [methodError, setMethodError] = useState(false)
+  const [selectedMethods, setSelectedMethods] = useState<string[]>([])
+  const phoneSelected = selectedMethods.includes("電話")
+
+  function toggleMethod(method: string) {
+    setSelectedMethods((prev) =>
+      prev.includes(method) ? prev.filter((m) => m !== method) : [...prev, method]
+    )
+    setMethodError(false)
+  }
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     const form = e.currentTarget
@@ -172,8 +183,9 @@ export function Cta() {
                         type="checkbox"
                         name="methods"
                         value={method}
+                        checked={selectedMethods.includes(method)}
                         className="h-4 w-4 rounded border-border text-primary accent-primary"
-                        onChange={() => setMethodError(false)}
+                        onChange={() => toggleMethod(method)}
                       />
                       <span className="text-sm text-foreground">{method}</span>
                     </label>
@@ -181,6 +193,26 @@ export function Cta() {
                 </div>
                 {methodError && (
                   <p className="text-xs text-red-500">1つ以上選択してください。</p>
+                )}
+                {phoneSelected && (
+                  <div className="mt-1 rounded-lg border border-primary/20 bg-primary/[0.04] px-5 py-4">
+                    <p className="mb-3 text-sm font-medium text-foreground">
+                      電話がつながりやすい時間帯を教えてください
+                    </p>
+                    <div className="flex flex-wrap gap-x-5 gap-y-2.5">
+                      {CALL_TIMES.map((t) => (
+                        <label key={t} className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="radio"
+                            name="callTime"
+                            value={t}
+                            className="h-4 w-4 border-border text-primary accent-primary"
+                          />
+                          <span className="text-sm text-foreground">{t}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
                 )}
               </div>
 
