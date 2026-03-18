@@ -3,6 +3,19 @@
 import { ArrowRight } from "lucide-react"
 import { type FormEvent, useState } from "react"
 
+// TODO: LINE公式アカウント取得後にURLを差し替えてください
+const LINE_URL = "https://lin.ee/ULJ8EIO"
+
+function trackLineClick() {
+  if (typeof window !== "undefined" && "gtag" in window) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ;(window as any).gtag("event", "line_button_click", {
+      event_category: "engagement",
+      event_label: "CTA LINE button",
+    })
+  }
+}
+
 export function Cta() {
   const [methodError, setMethodError] = useState(false)
 
@@ -195,6 +208,29 @@ export function Cta() {
                 </button>
               </div>
             </form>
+
+            {/* LINE alternative */}
+            <div className="mt-8 flex items-center gap-4">
+              <div className="h-px flex-1 bg-border" />
+              <span className="text-xs text-foreground/40">または</span>
+              <div className="h-px flex-1 bg-border" />
+            </div>
+            <div className="mt-6 text-center">
+              <a
+                href={LINE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={trackLineClick}
+                className="inline-flex cursor-pointer items-center gap-2.5 rounded-lg px-10 py-4 text-sm font-semibold text-white shadow-md transition-all hover:brightness-110"
+                style={{ backgroundColor: "#06C755" }}
+              >
+                <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current" aria-hidden="true">
+                  <path d="M12 2C6.477 2 2 6.145 2 11.243c0 3.066 1.614 5.792 4.138 7.572V22l3.779-2.076A10.87 10.87 0 0 0 12 20.486c5.523 0 10-4.145 10-9.243S17.523 2 12 2zm1.087 12.47-2.698-2.877-5.267 2.877 5.8-6.154 2.763 2.877 5.202-2.877-5.8 6.154z"/>
+                </svg>
+                LINEで相談する
+              </a>
+              <p className="mt-2 text-xs text-foreground/50">気軽にメッセージを送れます</p>
+            </div>
           </div>
         </div>
       </div>

@@ -37,6 +37,8 @@ export async function POST(req: Request) {
   for (const event of payload.events ?? []) {
     if (event.type === "follow") {
       await sendGA4Event("line_friend_add")
+    } else if (event.type === "message") {
+      await sendGA4Event("line_message_received")
     }
   }
 
