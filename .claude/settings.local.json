@@ -18,7 +18,10 @@
       "Bash(cat c:/dev/hakajimai-lp/app/articles/[slug]/page.tsx)",
       "Bash(npm install:*)",
       "Bash(pnpm add:*)",
-      "Bash(npx pnpm:*)"
+      "Bash(npx pnpm:*)",
+      "Bash(sort -k5 -rh)",
+      "Bash(magick -version)",
+      "Bash(node -e \"require\\(''sharp''\\)\")"
     ]
   }
 }
