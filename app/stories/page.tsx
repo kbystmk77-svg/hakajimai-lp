@@ -2,7 +2,7 @@ import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { stories } from "@/lib/stories"
-import { Header } from "@/components/sections/header"
+import { SimpleHeader } from "@/components/sections/simple-header"
 import { Footer } from "@/components/sections/footer"
 import { MapPin, ArrowRight, Mail } from "lucide-react"
 
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function StoriesPage() {
   return (
     <>
-      <Header />
+      <SimpleHeader />
       <main className="bg-background min-h-screen">
         {/* Hero — フルモザイク */}
         <section className="relative overflow-hidden border-b border-border">

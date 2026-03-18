@@ -4,7 +4,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { stories, getStoryBySlug, getAllStorySlugs } from "@/lib/stories"
 import { getArticles } from "@/lib/microcms"
-import { Header } from "@/components/sections/header"
+import { SimpleHeader } from "@/components/sections/simple-header"
 import { Footer } from "@/components/sections/footer"
 import {
   MapPin,
@@ -103,7 +103,7 @@ export default async function StoryDetailPage({ params }: PageProps) {
 
   return (
     <>
-      <Header />
+      <SimpleHeader />
       <main className="bg-linen min-h-screen">
 
         {/* Breadcrumb */}
