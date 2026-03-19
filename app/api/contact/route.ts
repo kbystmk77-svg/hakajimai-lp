@@ -8,6 +8,8 @@ type ContactPayload = {
   message?: string;
   methods?: string[];
   callTime?: string;
+  source?: string;
+  diagnosis_summary?: string;
 };
 
 async function postmarkSendEmail(params: {
@@ -65,6 +67,8 @@ export async function POST(req: Request) {
         message: asString(raw?.message),
         methods: normalizeMethods(raw?.methods),
         callTime: asString(raw?.callTime),
+        source: asString(raw?.source),
+        diagnosis_summary: asString(raw?.diagnosis_summary),
       };
     } else {
       // 通常の<form>送信（multipart/form-data / application/x-www-form-urlencoded）
@@ -82,6 +86,8 @@ export async function POST(req: Request) {
         message: asString(base.message),
         methods,
         callTime: asString(base.callTime),
+        source: asString(base.source),
+        diagnosis_summary: asString(base.diagnosis_summary),
       };
     }
 
@@ -116,6 +122,7 @@ export async function POST(req: Request) {
 
     const subjectAdmin = `【墓じまいパートナーズ】無料相談フォーム：${data.name} 様`;
     const callTimeNote = data.callTime ? `電話折り返し希望時間帯：${data.callTime}` : null;
+    const diagnosisNote = data.diagnosis_summary ? `費用シミュレーター結果：${data.diagnosis_summary}` : null;
     const textAdmin =
       [
         "無料相談フォームの送信がありました。",
@@ -126,6 +133,7 @@ export async function POST(req: Request) {
         `お墓の所在地（都道府県）：${data.prefecture}`,
         `希望のご相談方法：${(data.methods || []).join(" / ")}`,
         ...(callTimeNote ? [callTimeNote] : []),
+        ...(diagnosisNote ? ["", diagnosisNote] : []),
         "",
         "ご相談内容：",
         data.message || "",

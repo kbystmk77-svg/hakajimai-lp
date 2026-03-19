@@ -10,8 +10,6 @@ export function Pricing() {
           <div className="mx-auto mt-3 h-0.5 w-12 rounded-full bg-primary" />
           <p className="mt-5 text-sm leading-relaxed text-muted-foreground md:text-base">
             {'費用は主に「工事費」と「代行料」に分かれます。'}
-            <br className="hidden md:block" />
-            {'一般的な規模の場合、総額は25万〜50万円前後が目安です。'}
           </p>
         </div>
 

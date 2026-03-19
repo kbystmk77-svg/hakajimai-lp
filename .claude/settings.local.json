@@ -24,7 +24,8 @@
       "Bash(node -e \"require\\(''sharp''\\)\")",
       "Bash(xargs ls:*)",
       "Bash(cp c:/dev/hakajimai-lp/public/images/story-hero.jpg c:/dev/hakajimai-lp/public/images/position*.png c:/dev/hakajimai-lp/public/images/worried-man.png c:/dev/hakajimai-lp/public/images/service*.png c:/dev/hakajimai-lp/public/images/flow-step*.png c:/dev/hakajimai-lp/public/images/operator.png c:/dev/hakajimai-lp/public/images/hero-family.png c:/dev/hakajimai-lp/public/images/hero-family.jpg c:/dev/hakajimai-lp/public/images/kobayashi.png c:/dev/hakajimai-lp/public/images/kobayashi.jpg c:/dev/hakajimai-lp/public/images/_backup/)",
-      "Bash(cp c:/dev/hakajimai-lp/public/images/research/*.png c:/dev/hakajimai-lp/public/images/research/*.jpg c:/dev/hakajimai-lp/public/images/_backup/research/)"
+      "Bash(cp c:/dev/hakajimai-lp/public/images/research/*.png c:/dev/hakajimai-lp/public/images/research/*.jpg c:/dev/hakajimai-lp/public/images/_backup/research/)",
+      "Bash(grep -E \"\\\\.\\(tsx|ts|json\\)$\")"
     ]
   }
 }

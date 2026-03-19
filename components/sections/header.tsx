@@ -13,9 +13,10 @@ const navLinks = [
 
 interface HeaderProps {
   showNavLinks?: boolean
+  simulatorHref?: string
 }
 
-export function Header({ showNavLinks = true }: HeaderProps) {
+export function Header({ showNavLinks = true, simulatorHref }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -40,6 +41,15 @@ export function Header({ showNavLinks = true }: HeaderProps) {
               {link.label}
             </a>
           ))}
+          {simulatorHref && (
+            <a
+              href={simulatorHref}
+              onClick={(e) => simulatorHref.startsWith("#") ? smoothScrollTo(e, simulatorHref) : undefined}
+              className="rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+            >
+              10秒見積
+            </a>
+          )}
           <a
             href="#contact"
             onClick={(e) => smoothScrollTo(e, "#contact")}
@@ -78,6 +88,15 @@ export function Header({ showNavLinks = true }: HeaderProps) {
                 {link.label}
               </a>
             ))}
+            {simulatorHref && (
+              <a
+                href={simulatorHref}
+                className="mt-2 inline-flex items-center justify-center rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-white transition-opacity hover:opacity-90"
+                onClick={(e) => { if (simulatorHref.startsWith("#")) smoothScrollTo(e, simulatorHref); setIsOpen(false) }}
+              >
+                10秒見積
+              </a>
+            )}
             <a
               href="#contact"
               className="mt-2 inline-flex items-center justify-center rounded-lg bg-cta px-5 py-2.5 text-sm font-medium text-cta-foreground transition-opacity hover:opacity-90"

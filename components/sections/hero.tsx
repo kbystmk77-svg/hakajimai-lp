@@ -4,7 +4,17 @@ import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { smoothScrollTo } from "@/lib/smooth-scroll"
 
-export function Hero() {
+export function Hero({
+  ctaHref = "#contact",
+  ctaLabel = "まずは無料で相談する",
+  ctaNote = "相談は何度でも無料です",
+  ctaVariant = "cta",
+}: {
+  ctaHref?: string
+  ctaLabel?: string
+  ctaNote?: string
+  ctaVariant?: "cta" | "primary"
+} = {}) {
   return (
     <section className="relative">
       {/* Full-bleed photo */}
@@ -49,16 +59,14 @@ export function Hero() {
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
               <a
-                href="#contact"
-                onClick={(e) => smoothScrollTo(e, "#contact")}
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-cta px-8 py-4 text-base font-semibold text-cta-foreground shadow-lg transition-all hover:brightness-110"
+                href={ctaHref}
+                onClick={(e) => smoothScrollTo(e, ctaHref)}
+                className={`inline-flex items-center justify-center gap-2 rounded-lg px-8 py-4 text-base font-semibold shadow-lg transition-all hover:brightness-110 ${ctaVariant === "primary" ? "bg-primary text-primary-foreground" : "bg-cta text-cta-foreground"}`}
               >
-                まずは無料で相談する
+                {ctaLabel}
                 <ArrowRight className="h-4 w-4" />
               </a>
-              <span className="text-sm text-white/70">
-                相談は何度でも無料です
-              </span>
+              <span className="text-sm text-white/70">{ctaNote}</span>
             </div>
           </div>
         </div>
